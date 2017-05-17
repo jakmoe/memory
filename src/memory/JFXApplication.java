@@ -30,7 +30,6 @@ public class JFXApplication extends Application {
             System.out.println("File exists");
             System.out.println(f.getAbsoluteFile());
             
-            
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("FXMLDoc.fxml"));
             Parent root = loader.load();
