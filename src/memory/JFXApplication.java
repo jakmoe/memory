@@ -22,7 +22,10 @@ public class JFXApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+<<<<<<< HEAD
+=======
             
+>>>>>>> refs/remotes/origin/master
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("FXMLDoc.fxml"));
             Parent root = loader.load();
