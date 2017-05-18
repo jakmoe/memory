@@ -9,8 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="memory.FXMLDocumentController">
+<AnchorPane id="Background" prefHeight="600.0" prefWidth="1000.0" stylesheets="@Test.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="memory.FXMLDocumentController">
    <children>
       <Separator layoutX="491.0" layoutY="23.0" orientation="VERTICAL" prefHeight="577.0" prefWidth="19.0" />
       <Canvas fx:id="canvas" height="200.0" layoutX="58.0" layoutY="59.0" width="398.0" AnchorPane.bottomAnchor="341.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="544.0" AnchorPane.topAnchor="59.0" />
@@ -22,7 +21,7 @@
             <DropShadow />
          </effect>
       </Text>
-      <Button layoutX="510.0" layoutY="67.0" mnemonicParsing="false" onAction="#handlecanvas" prefHeight="92.0" prefWidth="191.0" text="Button" />
+      <Button id="Button" layoutX="510.0" layoutY="67.0" mnemonicParsing="false" onAction="#handlecanvas" prefHeight="92.0" prefWidth="191.0" stylesheets="@Test.css" text="Button" />
       <AnchorPane layoutX="140.0" layoutY="330.0" prefHeight="200.0" prefWidth="200.0">
          <children>
             <Group fx:id="group" />
