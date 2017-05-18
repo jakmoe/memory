@@ -22,13 +22,6 @@ public class JFXApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-    	
-        String filePathString = "H:\\EclipseGit\\Memory\\memory\\src\\memory\\FXMLDoc.fxml";
-        System.out.println("Test");
-        File f = new File(filePathString);
-        if(f.exists()) { 
-            System.out.println("File exists");
-            System.out.println(f.getAbsoluteFile());
             
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("FXMLDoc.fxml"));
@@ -38,7 +31,6 @@ public class JFXApplication extends Application {
             
             stage.setScene(scene);
             stage.show();
-        }
     }
 
     /**
