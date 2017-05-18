@@ -5,9 +5,6 @@ package memory;
  * and open the template in the editor.
  */
 
-
-import java.io.File;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,10 +19,6 @@ public class JFXApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-<<<<<<< HEAD
-=======
-            
->>>>>>> refs/remotes/origin/master
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("FXMLDoc.fxml"));
             Parent root = loader.load();
