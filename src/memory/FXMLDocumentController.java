@@ -6,16 +6,28 @@ package memory;
  */
 
 
+import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import gameLogic.Board;
+import javafx.embed.swing.JFXPanel;
+import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 /**
@@ -27,39 +39,38 @@ public class FXMLDocumentController implements Initializable {
 	
     @FXML
     private Canvas canvas;
+    
+    @FXML
+    private StackPane stackp;
 	
     @FXML
     private Label label;
     
     @FXML
+    private SwingNode swingnode;
+    
+    @FXML
     private void handlecanvas(ActionEvent event) {
     	canvas.setRotate(canvas.getRotate()+10);
     }
+
+    @FXML
+    private void gamestart(ActionEvent event) {
+        JPanel panel = new JPanel();
+        Board b = new Board();
+        b.setPreferredSize(new Dimension(1000, 1000)); //need to use this instead of setSize
+        b.setLocation(500, 250);
+        b.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        b.pack();
+        b.setVisible(true);
+        b.setIconImage(new ImageIcon("C:\\Users\\D067928\\workspace\\Memory\\src\\Media\\1.jpg").getImage());
     
+        panel.add(b);
+        swingnode.setContent(panel);
+    }
+    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	GraphicsContext gc = canvas.getGraphicsContext2D();
-    	drawShapes(gc);
     }    
-
-    private void drawShapes(GraphicsContext gc) {
-        
-        gc.setFill(Color.CADETBLUE);
-        gc.fillOval(30, 30, 50, 50);
-        
-        gc.setFill(Color.DARKRED);
-        gc.fillOval(110, 30, 50, 50);
-        
-        gc.setFill(Color.STEELBLUE);
-        gc.fillOval(190, 30, 50, 50);    
-        
-        gc.setFill(Color.BURLYWOOD);
-        gc.fillOval(30, 110, 50, 50); 
-        
-        gc.setFill(Color.LIGHTSEAGREEN);
-        gc.fillOval(110, 110, 50, 50);  
-        
-        gc.setFill(Color.CHOCOLATE);
-        gc.fillOval(190, 110, 50, 50);          
-    }
 }
