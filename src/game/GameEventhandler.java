@@ -15,11 +15,11 @@ public class GameEventhandler {
 		
 		//turn Card Animation here
 		c.setFill(Color.RED);
-		
+		//c.setTranslateZ(value);
 		c.setMatched(true);
 	}
 	
-	public static void match(Card c1, Card c2){
+	private static void match(Card c1, Card c2){
 		System.out.println("Greyed out with c1 and c2");
 		c1.setMatched(true);
 		c2.setMatched(true);

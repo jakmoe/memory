@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -27,6 +28,10 @@ public class JFXApplication extends Application {
             
             stage.setScene(scene);
             stage.setFullScreen(true);
+            stage.setFullScreenExitHint("Test");
+            stage.setResizable(false);
+            stage.setMaximized(true);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
     }
 

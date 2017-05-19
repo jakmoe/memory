@@ -16,7 +16,7 @@ public class XMLhandler {
 	public static PlayerSave readplayerinfo(String player){
 	    PlayerSave ps = new PlayerSave();
 	    try {
-	    File SaveFile = new File("Save.xml");
+	    File SaveFile = new File("C:\\Users\\D067928\\git\\memory\\src\\XML\\Save.xml");
 	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	    Document doc = dBuilder.parse(SaveFile);

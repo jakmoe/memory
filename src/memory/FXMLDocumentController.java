@@ -6,29 +6,18 @@ package memory;
  */
 
 
-import java.awt.Dimension;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import gameLogic.Board;
-import javafx.embed.swing.JFXPanel;
+import game.Board;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 /**
  *
@@ -41,7 +30,7 @@ public class FXMLDocumentController implements Initializable {
     private Canvas canvas;
     
     @FXML
-    private StackPane stackp;
+    private Board gamepane;
 	
     @FXML
     private Label label;
@@ -56,21 +45,14 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void gamestart(ActionEvent event) {
-        JPanel panel = new JPanel();
-        Board b = new Board();
-        b.setPreferredSize(new Dimension(1000, 1000)); //need to use this instead of setSize
-        b.setLocation(500, 250);
-        b.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        b.pack();
-        b.setVisible(true);
-        b.setIconImage(new ImageIcon("C:\\Users\\D067928\\workspace\\Memory\\src\\Media\\1.jpg").getImage());
-    
-        panel.add(b);
-        swingnode.setContent(panel);
+    	System.exit(0);
     }
     
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    	gamepane.Initialize(1);
+    	//gamepane.layoutXProperty().bind(pane.widthProperty().subtract(results.widthProperty()).divide(2))
+    	//gamepane.Test();
     }    
 }

@@ -2,6 +2,7 @@ package game;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Card extends Rectangle{
@@ -11,6 +12,18 @@ public class Card extends Rectangle{
 	
 	public Card() {
 		super();
+	}
+
+	public Card(double x, double y, double width, double height) {
+		super(x, y, width, height);
+	}
+
+	public Card(double width, double height, Paint fill) {
+		super(width, height, fill);
+	}
+
+	public Card(double width, double height) {
+		super(width, height);
 	}
 
 	public boolean isTurned() {
