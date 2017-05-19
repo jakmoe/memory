@@ -2,7 +2,7 @@ package game;
 
 import javafx.scene.paint.Color;
 
-public class Eventhandler {
+public class GameEventhandler {
 	public static void cardturn(Card c, Board b){
 		if (b.getSelCard() == c) {
 			match(c, b.getSelCard());
@@ -12,6 +12,8 @@ public class Eventhandler {
 		else if (b.getSelCard() == null) {
 			b.setSelCard(c);
 		}
+		
+		//turn Card Animation here
 		c.setFill(Color.RED);
 		
 		c.setMatched(true);
