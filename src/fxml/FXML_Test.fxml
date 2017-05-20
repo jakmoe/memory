@@ -6,7 +6,7 @@
 
 <?import game.BoardVBOX?>
 
-<AnchorPane id="Background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Test.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="start_MEMORY.TestController">
+<AnchorPane id="Background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Test.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_controller.TestController">
    <children>
       <Button layoutX="87.0" layoutY="981.0" mnemonicParsing="false" onAction="#gamestart" text="Button" />
       <Button fx:id="turnbutton" layoutX="87.0" layoutY="981.0" mnemonicParsing="false" onAction="#gamestart" text="Turn" />

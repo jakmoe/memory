@@ -1,4 +1,4 @@
-package start_MEMORY;
+package fxml_controller;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +9,7 @@ package start_MEMORY;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import game.Board;
+//import game.Board;
 import game.BoardVBOX;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
@@ -51,8 +51,7 @@ public class TestController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	gamepane.Initialize(1);
-    	//gamepane.layoutXProperty().bind(pane.widthProperty().subtract(results.widthProperty()).divide(2))
+    	gamepane.Initialize(1, 16);
     	//gamepane.Test();
     }    
 }

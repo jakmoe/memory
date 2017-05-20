@@ -15,7 +15,6 @@ public class GameEventhandler {
 	public static void cardturn(Card c, BoardVBOX internalBoard) {
 		if (internalBoard.getSelCard() == c) {
 			match(c, internalBoard.getSelCard());
-
 			internalBoard.setSelCard(null);
 		} else if (internalBoard.getSelCard() == null) {
 			internalBoard.setSelCard(c);
@@ -27,7 +26,6 @@ public class GameEventhandler {
 		// Play Sound
 		MP3handler.play(1);
 		
-		// c.setTranslateZ(value);
 		c.setMatched(true);
 	}
 

@@ -32,8 +32,8 @@ public class BoardVBOX extends FlowPane {
 		return selCard;
 	}
 
-	public void Initialize(int PlayerCount) {
-
+	public void Initialize(int PlayerCount, int BoardSize) {
+		cardPairs = BoardSize;
 		for (int i = 0; i < board.getCardcount(); i++) {
 			cardValues.add(i);
 			cardValues.add(i);
@@ -62,7 +62,6 @@ public class BoardVBOX extends FlowPane {
 			cardList.add(c);
 		}
 		board.getChildren().addAll(cardList);
-//		row.getChildren().addAll(cardList);
 	}
 
 	public void setCardcount(int cardcount) {

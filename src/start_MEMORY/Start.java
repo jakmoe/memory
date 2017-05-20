@@ -7,7 +7,6 @@ package start_MEMORY;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -23,7 +22,7 @@ public class Start extends Application {
     @Override
     public void start(Stage stage) throws Exception {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("FXML_Test.fxml"));
+            loader.setLocation(getClass().getResource("/FXML/FXML_Test.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);

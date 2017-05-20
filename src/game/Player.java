@@ -12,18 +12,21 @@ public class Player {
 	
 	public Player(int id) {
 		super();
-		
-		String dynString = "Player_" + id;
-		PlayerSafegame = XMLhandler.readplayerinfo(dynString);
-		
-		if (PlayerSafegame == null) {
-			//XMLhanlder.writeplayerinfo(id);
-		}
-		
+		PlayerSafegame = XMLhandler.readplayerinfo(id);
 		this.id = id;
 		this.maxtime   = PlayerSafegame.maxtime;
 		this.highscore = PlayerSafegame.highscore;
 		this.name      = PlayerSafegame.name;
+		XMLhandler.writeplayerinfo(PlayerSafegame, id);
+	}
+	
+	public void CommitSafe(){
+		PlayerSafegame = null;
+		PlayerSafegame.maxtime = this.maxtime;
+		PlayerSafegame.highscore = this.highscore;
+		PlayerSafegame.name = this.name;
+		PlayerSafegame.id = this.id;
+		XMLhandler.writeplayerinfo(PlayerSafegame, this.id);
 	}
 	
 	public int getId() {
