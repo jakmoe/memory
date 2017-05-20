@@ -1,4 +1,4 @@
-package memory;
+package start_MEMORY;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +10,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import game.Board;
+import game.BoardVBOX;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
@@ -23,14 +23,14 @@ import javafx.scene.control.Label;
  *
  * @author D067928
  */
-public class FXMLDocumentController implements Initializable {
+public class TestController implements Initializable {
 	@FXML Group group;
 	
     @FXML
     private Canvas canvas;
     
     @FXML
-    private Board gamepane;
+    private BoardVBOX gamepane;
 	
     @FXML
     private Label label;

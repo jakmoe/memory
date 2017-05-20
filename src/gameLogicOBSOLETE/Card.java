@@ -1,4 +1,4 @@
-package gameLogic;
+package gameLogicOBSOLETE;
 
 import javax.swing.*;
 import java.awt.*;

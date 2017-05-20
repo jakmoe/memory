@@ -1,4 +1,4 @@
-package memory;
+package start_MEMORY;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,21 +7,23 @@ package memory;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sound.MP3handler;
 
 /**
  *
  * @author D067928
  */
-public class JFXApplication extends Application {
+public class Start extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("FXMLDoc.fxml"));
+            loader.setLocation(getClass().getResource("FXML_Test.fxml"));
             Parent root = loader.load();
             
             Scene scene = new Scene(root);
@@ -33,6 +35,9 @@ public class JFXApplication extends Application {
             stage.setMaximized(true);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
+            
+            //initialize MP3Handler 
+            MP3handler.play(0);
     }
 
     /**
