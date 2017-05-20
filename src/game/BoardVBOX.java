@@ -38,9 +38,11 @@ public class BoardVBOX extends FlowPane {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
-		board.setVgap(50);
-		board.setHgap(50);
-		board.setAlignment(Pos.CENTER);
+		//for testing the border is made visible
+		board.setStyle("-fx-border-color: Blue");
+		board.setVgap(40);
+		board.setHgap(40);
+		board.setAlignment(Pos.TOP_CENTER);
 		offset = 0;
 		GameMaster.shuffleCards(cardValues);
 		

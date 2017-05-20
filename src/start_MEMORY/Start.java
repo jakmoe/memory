@@ -35,6 +35,7 @@ public class Start extends Application {
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
             
+            
             //initialize MP3Handler 
             MP3handler.play(0);
     }
