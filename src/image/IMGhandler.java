@@ -10,8 +10,8 @@ public class IMGhandler {
 			img = new Image("/image/1.jpg");
 			break;
 		case 2:
+			img = new Image("/image/2.jpg");
 			break;
-
 		default:
 			img = new Image("/image/1.jpg");
 			break;

@@ -96,7 +96,7 @@ public class XMLhandler {
 		}
 
 	    } catch (Exception e) {
-	    System.out.println("There was an error loading the Save File");
+	    System.out.println("There was an error writing the Save File");
 	    e.printStackTrace();
 	    }
 	}

@@ -1,7 +1,7 @@
 package game;
 
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -14,17 +14,27 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 
 public class BoardVBOX extends FlowPane {
-	private int cardPairs = 36;
+	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 120);
 	private Card selCard;
 	private BoardVBOX board = this;
 	private double offset;
-	
+
 	ObservableList<Node> workingCollection;
 	List<Card> cardList = new ArrayList<Card>();
 	List<Integer> cardValues = new ArrayList<Integer>();
+
 	
-	public int getCardcount() {
+	public BoardVBOX() {
+		super();
+		board.setStyle("-fx-border-color: Blue");
+		board.setVgap(40);
+		board.setHgap(40);
+		board.setAlignment(Pos.TOP_CENTER);
+		offset = 0;
+	}
+
+	public int getCardPairs() {
 		return cardPairs;
 	}
 
@@ -32,20 +42,13 @@ public class BoardVBOX extends FlowPane {
 		return selCard;
 	}
 
-	public void Initialize(int PlayerCount, int BoardSize) {
-		cardPairs = BoardSize;
-		for (int i = 0; i < board.getCardcount(); i++) {
+	public void Initialize(int cardPairs) {
+		board.cardPairs = cardPairs;
+		for (int i = 0; i < board.getCardPairs(); i++) {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
-		//for testing the border is made visible
-		board.setStyle("-fx-border-color: Blue");
-		board.setVgap(40);
-		board.setHgap(40);
-		board.setAlignment(Pos.TOP_CENTER);
-		offset = 0;
-		GameMaster.shuffleCards(cardValues);
-		
+		Collections.shuffle(cardValues);
 		for (int val : cardValues) {
 			Card c = new Card(offset, offset, picSize, picSize);
 			// coordinates must be adapted
@@ -56,7 +59,7 @@ public class BoardVBOX extends FlowPane {
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
-					if (!c.isMatched()) {
+					if (!c.isMatched() && !c.isTurned()) {
 						GameEventhandler.cardturn(c, board);
 					}
 				}
