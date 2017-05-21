@@ -6,7 +6,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class MP3handler {
-	public static void play(int SoundID){
+	public static void play(int SoundID) {
 		String musicFile = "src\\sound\\";
 		switch (SoundID) {
 		case 1:
@@ -17,7 +17,7 @@ public class MP3handler {
 			break;
 		}
 		musicFile += ".mp3";
-		
+
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();

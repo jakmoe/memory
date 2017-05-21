@@ -3,7 +3,7 @@ package image;
 import javafx.scene.image.Image;
 
 public class IMGhandler {
-	public static Image getImage_card(int id){
+	public static Image getImage_card(int id) {
 		Image img = null;
 		switch (id) {
 		case 1:

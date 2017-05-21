@@ -5,11 +5,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-public class Card extends Rectangle{
+public class Card extends Rectangle {
 	private boolean turned;
 	private boolean matched;
 	private int card_id;
-	
+
 	public Card() {
 		super();
 	}
@@ -41,7 +41,7 @@ public class Card extends Rectangle{
 	public void setCard_Id(int card_id) {
 		this.card_id = card_id;
 	}
-	
+
 	public boolean isMatched() {
 		return matched;
 	}
@@ -50,8 +50,8 @@ public class Card extends Rectangle{
 		this.matched = matched;
 	}
 
-	public void fillCard(Image img){
+	public void fillCard(Image img) {
 		this.setFill(new ImagePattern(img));
 	}
-	
+
 }

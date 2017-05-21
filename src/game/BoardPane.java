@@ -1,29 +1,39 @@
 package game;
 
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 
-public class Board extends Pane {
-	private int xPointer = 0;
-	private int yPointer = 0;
-	private int cardPairs = 16;
+public class BoardPane extends FlowPane {
+	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 120);
 	private Card selCard;
-	private Board InternalBoard = this;
-	private int index = 0;
+	private BoardPane board = this;
 	private double offset;
 
+	ObservableList<Node> workingCollection;
 	List<Card> cardList = new ArrayList<Card>();
 	List<Integer> cardValues = new ArrayList<Integer>();
 
-	public int getCardcount() {
+	public BoardPane() {
+		super();
+		board.setStyle("-fx-border-color: Blue");
+		board.setVgap(40);
+		board.setHgap(40);
+		board.setAlignment(Pos.TOP_CENTER);
+		offset = 0;
+	}
+
+	public int getCardPairs() {
 		return cardPairs;
 	}
 
@@ -31,47 +41,31 @@ public class Board extends Pane {
 		return selCard;
 	}
 
-	public void Initialize(int PlayerCount) {
-		
-		for (int i = 0; i < InternalBoard.getCardcount(); i++) {
+	public void Initialize(int cardPairs) {
+		board.cardPairs = cardPairs;
+		for (int i = 0; i < board.getCardPairs(); i++) {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
-		
-		offset = 0;
-		
-		GameMaster.shuffleCards(cardValues);
-		
+		Collections.shuffle(cardValues);
 		for (int val : cardValues) {
-			index++;
-			Card c = new Card(xPointer + offset, yPointer, picSize, picSize);
+			Card c = new Card(offset, offset, picSize, picSize);
 			// coordinates must be adapted
-			xPointer += (picSize + 10);
-			if (index % 9 == 0) {
-				xPointer = 0;
-				yPointer += (picSize + 10);
-			}
-			
 			c.setFill(Color.BLUE);
 			c.setCard_Id(val);
 			c.setArcHeight(10);
 			c.setArcWidth(10);
-			
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
-					if (!c.isMatched()) {
-						//cardturn method either implemented for BoardVBOX or Board - BoardVBOX is EXPERIMENTAL
-						GameEventhandler.cardturn(c, InternalBoard);
+					if (!c.isMatched() && !c.isTurned()) {
+						GameEventhandler.cardturn(c, board);
 					}
 				}
 			});
-			
 			cardList.add(c);
 		}
-		
-		InternalBoard.getChildren().clear();
-		InternalBoard.getChildren().addAll(cardList);
+		board.getChildren().addAll(cardList);
 	}
 
 	public void setCardcount(int cardcount) {

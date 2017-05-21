@@ -1,6 +1,7 @@
 package game;
 
 import image.IMGhandler;
+import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
@@ -10,24 +11,33 @@ import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.geometry.Point3D;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.util.Duration;
 import sound.MP3handler;
 
 public class GameEventhandler {
-	public static void cardturn(Card c, BoardVBOX internalBoard) {
+
+	public static void fadein(Node n) {
+		FadeTransition ft = new FadeTransition(Duration.millis(4000), n);
+		ft.setFromValue(0);
+		ft.setToValue(1);
+		ft.play();
+	}
+
+	public static void cardturn(Card c, BoardPane internalBoard) {
 		// if a match is made
 		if (internalBoard.getSelCard() == c) {
 			match(c, internalBoard.getSelCard());
 			internalBoard.setSelCard(null);
-		//if no card is selected - first card is then selected
+			// if no card is selected - first card is then selected
 		} else if (internalBoard.getSelCard() == null) {
 			// turn Card Animation here
 			flipCard(c).play();
 			c.setTurned(true);
 			internalBoard.setSelCard(c);
-		// if no match was made
+			// if no match was made
 		} else {
 			flipBack(internalBoard.getSelCard(), c).play();
 			internalBoard.getSelCard().setTurned(false);

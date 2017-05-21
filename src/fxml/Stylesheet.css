@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 .anchor {
-    -fx-background-image:url('Background.jpg');
+    -fx-background-image:url('/image/bg.jpg');
     -fx-background-size: cover;
 }
 .button {
