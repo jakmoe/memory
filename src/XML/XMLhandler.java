@@ -2,10 +2,14 @@ package XML;
 
 import java.io.File;
 
+import javax.swing.filechooser.FileSystemView;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -24,13 +28,46 @@ public class XMLhandler {
 	private static File SaveFile;
 	private static NodeList nList;
 	private static Node nNode;
+	private static final String s = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
+			+ "\\Memory\\MemorySave.xml";
+
+	public static void createdoc() {
+		File XMLFile = new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Memory");
+		if (!(XMLFile.exists())) {
+			XMLFile.mkdirs();
+			reset();
+			dbFactory = DocumentBuilderFactory.newInstance();
+			try {
+				dBuilder = dbFactory.newDocumentBuilder();
+				doc = dBuilder.newDocument();
+				Element rootElement = doc.createElement("Game");
+				doc.appendChild(rootElement);
+				TransformerFactory transformerFactory = TransformerFactory.newInstance();
+				try {
+					Transformer transformer = transformerFactory.newTransformer();
+					DOMSource source = new DOMSource(doc);
+					StreamResult result = new StreamResult(new File(s));
+					transformer.transform(source, result);
+				} catch (TransformerConfigurationException e) {
+					System.out.println("There was an Error configuring the Transformer.");
+					e.printStackTrace();
+				}
+			} catch (TransformerException tfe) {
+				System.out.println("There was an Error setting up the Transformer.");
+				tfe.printStackTrace();
+			} catch (ParserConfigurationException e1) {
+				System.out.println("There was an Error while configuring the Parser.");
+				e1.printStackTrace();
+			}
+		}
+	}
 
 	public static PlayerSave readplayerinfo(int id) {
 		String player = "Player_" + id;
 		reset();
 		ps = new PlayerSave();
 		try {
-			SaveFile = new File("C:\\Users\\Jakob Neu\\git\\memory\\src\\XML\\Save.xml");
+			SaveFile = new File(s);
 			dbFactory = DocumentBuilderFactory.newInstance();
 			dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(SaveFile);
@@ -57,7 +94,7 @@ public class XMLhandler {
 		String player = "Player_" + id;
 		reset();
 		try {
-			SaveFile = new File("C:\\Users\\Jakob Neu\\git\\memory\\src\\XML\\Save.xml");
+			SaveFile = new File(s);
 			dbFactory = DocumentBuilderFactory.newInstance();
 			dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(SaveFile);
@@ -90,13 +127,12 @@ public class XMLhandler {
 					}
 				}
 			}
-
 		} catch (Exception e) {
 			System.out.println("There was an error writing the Save File");
 			e.printStackTrace();
 		}
 	}
-
+	
 	private static void reset() {
 		dbFactory = null;
 		dBuilder = null;

@@ -5,6 +5,7 @@ package start_MEMORY;
  * and open the template in the editor.
  */
 
+import XML.XMLhandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,7 @@ import sound.MP3handler;
 
 /**
  * Changes are reported to Slack as well - This is still under Testing
- * @author D067928
+ * @author Gruppe 6 - Memory DHBW Mannheim
  */
 public class Start extends Application {
 	@Override
@@ -25,7 +26,8 @@ public class Start extends Application {
 		Parent root = loader.load();
 
 		Scene scene = new Scene(root);
-
+		
+		
 		stage.setScene(scene);
 		stage.setFullScreen(true);
 		stage.setFullScreenExitHint("Test");
@@ -39,6 +41,7 @@ public class Start extends Application {
 	}
 
 	public static void main(String[] args) {
+		XMLhandler.createdoc();
 		launch(args);
 	}
 }
