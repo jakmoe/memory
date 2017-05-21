@@ -14,7 +14,7 @@ import javafx.stage.StageStyle;
 import sound.MP3handler;
 
 /**
- *
+ * Changes are reported to Slack as well
  * @author D067928
  */
 public class Start extends Application {
