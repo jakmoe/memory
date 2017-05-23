@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 
 public class GameMaster {
-	private ArrayList<Player> playerAL = new ArrayList<Player>();
-	private Player PlayerInTurn;
-	private int EndCheck;
+	private static ArrayList<Player> playerAL = new ArrayList<Player>();
+	private static Player PlayerInTurn;
+	private static int EndCheck;
 
-	public void startGame(int playercount, int boardsize, BoardPane gamepane) {
+	public static void startGame(int playercount, int boardsize, BoardPane gamepane) {
 		// add players
 		for (int i = 1; i <= playercount; i++) {
 			playerAL.add(new Player(i));
@@ -34,7 +34,7 @@ public class GameMaster {
 		timer.start();
 	}
 
-	public void doTurn(boolean scored, double newtime) {
+	public static void doTurn(boolean scored, double newtime) {
 		if (scored) {
 			PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 2);
 			PlayerInTurn.setCurrenttime(PlayerInTurn.getCurrenttime() + newtime);
@@ -51,7 +51,7 @@ public class GameMaster {
 		}
 	}
 
-	public void GameOver() {
+	public static void GameOver() {
 		// still implementation for the final game with boardsize 9 needed
 
 		for (int i = 1; i < playerAL.size(); i++) {

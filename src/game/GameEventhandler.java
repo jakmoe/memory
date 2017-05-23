@@ -43,7 +43,6 @@ public class GameEventhandler {
 	}
 	
 	public static void cardturn(Card c, BoardPane internalBoard) {
-		GameMaster GM = new GameMaster();
 		CustomAnimationTimer timer = new CustomAnimationTimer();
 		// if a match is made
 		if (internalBoard.getSelCard() == null) {
@@ -55,7 +54,7 @@ public class GameEventhandler {
 			// if no match was made
 		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
 			//Turn handling here
-			GM.doTurn(true, time);
+			GameMaster.doTurn(true, time);
 			timer.stop();
 			timer.reset();
 			//could go into a pool of cards for each player

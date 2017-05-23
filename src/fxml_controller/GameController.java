@@ -58,9 +58,7 @@ public class GameController implements Initializable {
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
-		GameMaster GM = new GameMaster();
-		GM.startGame(1, 16, gamepane);
+		GameMaster.startGame(1, 16, gamepane);
 		// gamepane.Test();
 		GameEventhandler.fadein(gamepane);
         
