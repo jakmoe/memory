@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 
 public class BoardPane extends FlowPane {
-	
+
 	public TransitionRun TR = new TransitionRun();
 	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 120);
@@ -46,7 +46,7 @@ public class BoardPane extends FlowPane {
 
 	public void Initialize(int cardPairs) {
 		BoardPane.this.cardPairs = cardPairs;
-		for (int i = 1; i < BoardPane.this.getCardPairs()+1; i++) {
+		for (int i = 1; i < BoardPane.this.getCardPairs() + 1; i++) {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
@@ -65,7 +65,7 @@ public class BoardPane extends FlowPane {
 					if (!c.isMatched() && !c.isTurned()) {
 						c.setCacheHint(CacheHint.QUALITY);
 						GameEventhandler.cardturn(c, BoardPane.this);
-						
+
 					}
 				}
 			});
@@ -81,6 +81,5 @@ public class BoardPane extends FlowPane {
 	public void setSelCard(Card selCard) {
 		this.selCard = selCard;
 	}
-	
 
 }

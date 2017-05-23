@@ -18,6 +18,7 @@ import sound.MP3handler;
 
 /**
  * Changes are reported to Slack as well - This is still under Testing
+ * 
  * @author Gruppe 6 - Memory DHBW Mannheim
  */
 public class Start extends Application {
@@ -28,7 +29,6 @@ public class Start extends Application {
 		Parent root = loader.load();
 
 		Scene scene = new Scene(root);
-		
 		stage.setScene(scene);
 		stage.setFullScreen(true);
 		stage.setFullScreenExitHint("Test");
@@ -39,7 +39,7 @@ public class Start extends Application {
 
 		// initialize MP3Handler
 		MP3handler.play(0);
-		
+
 		Task<Void> tk = IMGhandler.initialize(16);
 		Thread th = new Thread(tk);
 		th.setDaemon(true);

@@ -132,7 +132,7 @@ public class XMLhandler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static void reset() {
 		dbFactory = null;
 		dBuilder = null;

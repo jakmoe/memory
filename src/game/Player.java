@@ -38,7 +38,7 @@ public class Player {
 	public void setCurrenttime(double currenttime) {
 		this.currenttime = currenttime;
 	}
-	
+
 	public int getId() {
 		return id;
 	}

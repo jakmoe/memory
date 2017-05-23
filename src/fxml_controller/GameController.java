@@ -26,12 +26,12 @@ import javafx.scene.control.Button;
  * @author D067928
  */
 public class GameController implements Initializable {
-	
+
 	FXMLLoader loader = new FXMLLoader();
 
 	@FXML
 	private Button button;
-	
+
 	@FXML
 	private Button button2;
 
@@ -54,17 +54,15 @@ public class GameController implements Initializable {
 		gamepane.setCacheHint(CacheHint.SCALE_AND_ROTATE);
 	}
 
-
-	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		GameMaster.startGame(1, 16, gamepane);
 		// gamepane.Test();
 		GameEventhandler.fadein(gamepane);
-        
+
 	}
-	
+
 	@FXML
-	private void startbackground(ActionEvent event){
+	private void startbackground(ActionEvent event) {
 	}
 }

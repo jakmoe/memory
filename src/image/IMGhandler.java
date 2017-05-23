@@ -1,6 +1,7 @@
 package image;
 
 import java.util.ArrayList;
+
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -8,7 +9,7 @@ import javafx.scene.paint.ImagePattern;
 public class IMGhandler {
 
 	private static ArrayList<ImagePattern> images = new ArrayList<ImagePattern>();
-	
+
 	public static Task<Void> initialize(int cardcount) {
 		Task<Void> task = new Task<Void>() {
 			@Override

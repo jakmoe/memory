@@ -1,6 +1,5 @@
 package game;
 
-
 import image.IMGhandler;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
@@ -10,14 +9,15 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
-import javafx.geometry.Point3D;
 import javafx.event.EventHandler;
+import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import sound.MP3handler;
 
 public class GameEventhandler {
 	private static double time;
+
 	public static Transition fadein(Node n) {
 		TransitionRun TR = new TransitionRun();
 		FadeTransition ft = new FadeTransition(Duration.millis(4000), n);
@@ -27,7 +27,7 @@ public class GameEventhandler {
 		TR.run();
 		return ft;
 	}
-	
+
 	public static Transition fadeout(Node n) {
 		TransitionRun TR = new TransitionRun();
 		FadeTransition ft = new FadeTransition(Duration.millis(2000), n);
@@ -38,10 +38,10 @@ public class GameEventhandler {
 		return ft;
 	}
 
-	public static void time(){
-		
+	public static void time() {
+
 	}
-	
+
 	public static void cardturn(Card c, BoardPane internalBoard) {
 		CustomAnimationTimer timer = new CustomAnimationTimer();
 		// if a match is made
@@ -53,11 +53,11 @@ public class GameEventhandler {
 			internalBoard.setSelCard(c);
 			// if no match was made
 		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
-			//Turn handling here
+			// Turn handling here
 			GameMaster.doTurn(true, time);
 			timer.stop();
 			timer.reset();
-			//could go into a pool of cards for each player
+			// could go into a pool of cards for each player
 			Transition greyanim = flipGrey(internalBoard.getSelCard(), c);
 			greyanim.play();
 			match(c, internalBoard.getSelCard());
@@ -82,9 +82,9 @@ public class GameEventhandler {
 	}
 
 	static Transition flipCard(Card c) {
-		
+
 		TransitionRun TR = new TransitionRun();
-		
+
 		ScaleTransition ScaleUp = new ScaleTransition(Duration.seconds(0.3), c);
 		ScaleUp.setByX(0.6);
 		ScaleUp.setByY(0.6);
@@ -157,7 +157,7 @@ public class GameEventhandler {
 		SequentialTransition Seq = new SequentialTransition(flipCard(c2), parallel);
 		return Seq;
 	}
-	
+
 	static Transition flipGrey(Card c1, Card c2) {
 		TransitionRun TR = new TransitionRun();
 
@@ -196,10 +196,10 @@ public class GameEventhandler {
 		});
 		ParallelTransition parallel = new ParallelTransition();
 		SequentialTransition Seq = new SequentialTransition(flipCard(c2), parallel);
-		
+
 		Seq.setOnFinished(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {			
+			public void handle(ActionEvent event) {
 				fadeout(c2).play();
 				fadeout(c1).play();
 			}

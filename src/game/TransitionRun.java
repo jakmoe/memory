@@ -5,7 +5,7 @@ import javafx.animation.Transition;
 
 public class TransitionRun implements Runnable {
 	private Transition anim;
-	
+
 	public Transition getAnim() {
 		return anim;
 	}
