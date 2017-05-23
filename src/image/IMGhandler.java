@@ -15,14 +15,14 @@ public class IMGhandler {
 			protected Void call() throws Exception {
 				// Background work
 				int i;
-				for (i = 0; i < cardcount + 1; i++) {
+				for (i = 0; i < 38; i++) {
 					if (isCancelled()) {
 						break;
 					}
 					Image img = new Image("/image/" + i + ".jpg", 200, 200, true, true);
 					ImagePattern imgp = new ImagePattern(img);
 					images.add(imgp);
-					updateProgress(i, cardcount + 1);
+					updateProgress(i, cardcount);
 
 				}
 				// Keep with the background work

@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+.anchor {
+    -fx-background-image:url('/image/bg.jpg');
+    -fx-background-size: cover;
+}
+.button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Raleway", Helvetica, Arial, sans-serif;
+    -fx-font-size: 20px; /* 12 */
+    -fx-text-fill: black;
+}
+.button:pressed {
+    -fx-background-color: grey;
+    -fx-text-fill: #828282;
+}
+.button:hover {
+    -fx-opacity: 0.5;
+    -fx-background-color:rgba(0, 0, 0, 0.5);
+}

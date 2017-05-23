@@ -1,8 +1,8 @@
 package game;
 
+
 import image.IMGhandler;
 import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
@@ -17,34 +17,47 @@ import javafx.util.Duration;
 import sound.MP3handler;
 
 public class GameEventhandler {
-	public static TransitionRun TR = new TransitionRun();
-	
+	private static double time;
 	public static Transition fadein(Node n) {
+		TransitionRun TR = new TransitionRun();
 		FadeTransition ft = new FadeTransition(Duration.millis(4000), n);
 		ft.setFromValue(0);
 		ft.setToValue(1);
-		ft.setInterpolator(Interpolator.EASE_BOTH);
+		TR.setAnim(ft);
+		TR.run();
 		return ft;
 	}
 	
 	public static Transition fadeout(Node n) {
+		TransitionRun TR = new TransitionRun();
 		FadeTransition ft = new FadeTransition(Duration.millis(2000), n);
 		ft.setFromValue(1);
 		ft.setToValue(0.4);
-		ft.setInterpolator(Interpolator.EASE_BOTH);
+		TR.setAnim(ft);
+		TR.run();
 		return ft;
 	}
 
+	public static void time(){
+		
+	}
+	
 	public static void cardturn(Card c, BoardPane internalBoard) {
-		internalBoard.getSelCard();
+		GameMaster GM = new GameMaster();
+		CustomAnimationTimer timer = new CustomAnimationTimer();
 		// if a match is made
 		if (internalBoard.getSelCard() == null) {
 			// turn Card Animation here
 			flipCard(c).play();
+			timer.start();
 			c.setTurned(true);
 			internalBoard.setSelCard(c);
 			// if no match was made
 		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
+			//Turn handling here
+			GM.doTurn(true, time);
+			timer.stop();
+			timer.reset();
 			//could go into a pool of cards for each player
 			Transition greyanim = flipGrey(internalBoard.getSelCard(), c);
 			greyanim.play();
@@ -52,6 +65,7 @@ public class GameEventhandler {
 			internalBoard.setSelCard(null);
 			// if no card is selected - first card is then selected
 		} else {
+			timer.stop();
 			flipBack(internalBoard.getSelCard(), c).play();
 			internalBoard.getSelCard().setTurned(false);
 			c.setTurned(false);
@@ -69,6 +83,9 @@ public class GameEventhandler {
 	}
 
 	static Transition flipCard(Card c) {
+		
+		TransitionRun TR = new TransitionRun();
+		
 		ScaleTransition ScaleUp = new ScaleTransition(Duration.seconds(0.3), c);
 		ScaleUp.setByX(0.6);
 		ScaleUp.setByY(0.6);
@@ -102,6 +119,7 @@ public class GameEventhandler {
 	}
 
 	static Transition flipBack(Card c1, Card c2) {
+		TransitionRun TR = new TransitionRun();
 
 		RotateTransition c1turnAnimation = new RotateTransition(Duration.seconds(0.3), c1);
 		c1turnAnimation.setToAngle(90);
@@ -142,6 +160,7 @@ public class GameEventhandler {
 	}
 	
 	static Transition flipGrey(Card c1, Card c2) {
+		TransitionRun TR = new TransitionRun();
 
 		RotateTransition c1turnAnimation = new RotateTransition(Duration.seconds(0.3), c1);
 		c1turnAnimation.setToAngle(90);

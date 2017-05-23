@@ -2,6 +2,8 @@ package game;
 
 import java.util.ArrayList;
 
+import javafx.animation.AnimationTimer;
+
 public class GameMaster {
 	private ArrayList<Player> playerAL = new ArrayList<Player>();
 	private Player PlayerInTurn;
@@ -20,11 +22,22 @@ public class GameMaster {
 
 		// set the first player
 		PlayerInTurn = playerAL.get(0);
+		
+		AnimationTimer timer = new AnimationTimer() {
+			
+			@Override
+			public void handle(long now) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		timer.start();
 	}
 
-	public void doTurn(boolean scored, int time) {
+	public void doTurn(boolean scored, double newtime) {
 		if (scored) {
 			PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 2);
+			PlayerInTurn.setCurrenttime(PlayerInTurn.getCurrenttime() + newtime);
 			EndCheck -= 1;
 		} else {
 			if (playerAL.indexOf(PlayerInTurn) + 1 <= playerAL.size() - 1) {
@@ -43,6 +56,11 @@ public class GameMaster {
 
 		for (int i = 1; i < playerAL.size(); i++) {
 			playerAL.get(i).CommitSafe();
+			if (PlayerInTurn.getMintime() >= PlayerInTurn.getCurrenttime() ||
+				PlayerInTurn.getMintime() == 0) {
+				
+				PlayerInTurn.setMintime(PlayerInTurn.getCurrenttime());
+			}
 		}
 	}
 

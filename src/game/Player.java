@@ -4,8 +4,10 @@ import XML.PlayerSave;
 import XML.XMLhandler;
 
 public class Player {
+	private double currenttime;
+
 	private int id;
-	private int maxtime;
+	private double mintime;
 	private int highscore;
 	private String name;
 	private PlayerSave PlayerSafegame;
@@ -14,7 +16,7 @@ public class Player {
 		super();
 		PlayerSafegame = XMLhandler.readplayerinfo(id);
 		this.id = id;
-		this.maxtime = PlayerSafegame.maxtime;
+		this.mintime = PlayerSafegame.mintime;
 		this.highscore = PlayerSafegame.highscore;
 		this.name = PlayerSafegame.name;
 		XMLhandler.writeplayerinfo(PlayerSafegame, id);
@@ -22,13 +24,21 @@ public class Player {
 
 	public void CommitSafe() {
 		PlayerSafegame = null;
-		PlayerSafegame.maxtime = this.maxtime;
+		PlayerSafegame.mintime = this.mintime;
 		PlayerSafegame.highscore = this.highscore;
 		PlayerSafegame.name = this.name;
 		PlayerSafegame.id = this.id;
 		XMLhandler.writeplayerinfo(PlayerSafegame, this.id);
 	}
 
+	public double getCurrenttime() {
+		return currenttime;
+	}
+
+	public void setCurrenttime(double currenttime) {
+		this.currenttime = currenttime;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -37,12 +47,12 @@ public class Player {
 		this.id = id;
 	}
 
-	public int getMaxtime() {
-		return maxtime;
+	public double getMintime() {
+		return mintime;
 	}
 
-	public void setMaxtime(int maxtime) {
-		this.maxtime = maxtime;
+	public void setMintime(double maxtime) {
+		this.mintime = maxtime;
 	}
 
 	public int getHighscore() {

@@ -78,7 +78,7 @@ public class XMLhandler {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					ps.highscore = Integer.parseInt(eElement.getAttribute("highscore"));
-					ps.maxtime = Integer.parseInt(eElement.getAttribute("maxtime"));
+					ps.mintime = Integer.parseInt(eElement.getAttribute("maxtime"));
 					ps.name = eElement.getAttribute("name");
 					break;
 				}
@@ -103,7 +103,7 @@ public class XMLhandler {
 			if (nList.getLength() == 0) {
 				Element newElement = doc.createElementNS(null, player);
 				newElement.setAttribute("highscore", Integer.toString(ps.highscore));
-				newElement.setAttribute("maxtime", Integer.toString(ps.maxtime));
+				newElement.setAttribute("maxtime", Double.toString(ps.mintime));
 				if (ps.name == null) {
 					newElement.setAttribute("name", "none");
 				} else {
@@ -120,7 +120,7 @@ public class XMLhandler {
 					if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 						Element eElement = (Element) nNode;
 						eElement.setAttribute("highscore", Integer.toString(ps.highscore));
-						eElement.setAttribute("maxtime", Integer.toString(ps.maxtime));
+						eElement.setAttribute("maxtime", Double.toString(ps.mintime));
 						eElement.setAttribute("name", ps.name);
 						eElement.setAttribute("name", ps.name);
 						break;
