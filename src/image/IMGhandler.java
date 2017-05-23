@@ -1,21 +1,38 @@
 package image;
 
+import java.util.ArrayList;
+import javafx.concurrent.Task;
 import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 public class IMGhandler {
-	public static Image getImage_card(int id) {
-		Image img = null;
-		switch (id) {
-		case 1:
-			img = new Image("/image/1.jpg");
-			break;
-		case 2:
-			img = new Image("/image/2.jpg");
-			break;
-		default:
-			img = new Image("/image/1.jpg");
-			break;
-		}
-		return img;
+
+	private static ArrayList<ImagePattern> images = new ArrayList<ImagePattern>();
+	
+	public static Task<Void> initialize(int cardcount) {
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				// Background work
+				int i;
+				for (i = 0; i < cardcount + 1; i++) {
+					if (isCancelled()) {
+						break;
+					}
+					Image img = new Image("/image/" + i + ".jpg", 200, 200, true, true);
+					ImagePattern imgp = new ImagePattern(img);
+					images.add(imgp);
+					updateProgress(i, cardcount + 1);
+
+				}
+				// Keep with the background work
+				return null;
+			}
+		};
+		return task;
+	}
+
+	public static ImagePattern getImage_card(int id) {
+		return images.get(id);
 	}
 }

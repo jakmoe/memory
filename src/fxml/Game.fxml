@@ -7,7 +7,8 @@
 
 <AnchorPane id="Background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Test.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml_controller.GameController">
    <children>
-      <Button layoutX="87.0" layoutY="981.0" mnemonicParsing="false" onAction="#gamestart" text="Button" />
+      <Button fx:id="button" layoutX="87.0" layoutY="981.0" mnemonicParsing="false" onAction="#gamestart" text="Button" />
+      <Button fx:id="button2" layoutX="87.0" layoutY="920.0" mnemonicParsing="false" onAction="#startbackground" text="Button" />
       <BoardPane fx:id="gamepane" layoutX="20.0" layoutY="21.0" prefHeight="930.0" prefWidth="1880.0" />
    </children>
 </AnchorPane>

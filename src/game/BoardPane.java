@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import image.IMGhandler;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
 
 public class BoardPane extends FlowPane {
+
+	public TransitionRun TR = new TransitionRun();
 	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 120);
 	private Card selCard;
@@ -26,10 +29,12 @@ public class BoardPane extends FlowPane {
 
 	public BoardPane() {
 		super();
+		board.setCache(true);
+		board.setCacheShape(true);
 		board.setStyle("-fx-border-color: Blue");
-		board.setVgap(40);
-		board.setHgap(40);
-		board.setAlignment(Pos.TOP_CENTER);
+		board.setVgap(50);
+		board.setHgap(50);
+		board.setAlignment(Pos.CENTER);
 		offset = 0;
 	}
 
@@ -51,14 +56,16 @@ public class BoardPane extends FlowPane {
 		for (int val : cardValues) {
 			Card c = new Card(offset, offset, picSize, picSize);
 			// coordinates must be adapted
-			c.setFill(Color.BLUE);
+			c.setFill(IMGhandler.getImage_card(0));
 			c.setCard_Id(val);
 			c.setArcHeight(10);
 			c.setArcWidth(10);
+			c.setCache(true);
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
 					if (!c.isMatched() && !c.isTurned()) {
+						c.setCacheHint(CacheHint.QUALITY);
 						GameEventhandler.cardturn(c, board);
 					}
 				}
@@ -79,5 +86,6 @@ public class BoardPane extends FlowPane {
 	public void Test() {
 		this.getChildren().add(new Button("Test"));
 	}
+	
 
 }

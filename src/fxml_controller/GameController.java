@@ -13,18 +13,34 @@ import java.util.ResourceBundle;
 import game.BoardPane;
 import game.GameEventhandler;
 import game.GameMaster;
+import image.IMGhandler;
+import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 
 /**
  *
  * @author D067928
  */
 public class GameController implements Initializable {
+	
 	FXMLLoader loader = new FXMLLoader();
+
+	@FXML
+	private Button button;
+	
+	@FXML
+	private Button button2;
+
 	@FXML
 	private BoardPane gamepane;
 
@@ -38,13 +54,25 @@ public class GameController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		gamepane.setCache(true);
+		gamepane.setCacheShape(true);
+		gamepane.setCacheHint(CacheHint.SCALE_AND_ROTATE);
 	}
 
+
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+
 		GameMaster GM = new GameMaster();
 		GM.startGame(1, 16, gamepane);
 		// gamepane.Test();
 		GameEventhandler.fadein(gamepane);
+        
+	}
+	
+	@FXML
+	private void startbackground(ActionEvent event){
 	}
 }

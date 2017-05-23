@@ -2,6 +2,7 @@ package game;
 
 import image.IMGhandler;
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
@@ -12,32 +13,42 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Point3D;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.util.Duration;
 import sound.MP3handler;
 
 public class GameEventhandler {
-
+	public static TransitionRun TR = new TransitionRun();
+	
 	public static void fadein(Node n) {
 		FadeTransition ft = new FadeTransition(Duration.millis(4000), n);
 		ft.setFromValue(0);
 		ft.setToValue(1);
+		ft.setInterpolator(Interpolator.EASE_BOTH);
+		ft.play();
+	}
+	
+	public static void fadeout(Node n) {
+		FadeTransition ft = new FadeTransition(Duration.millis(4000), n);
+		ft.setFromValue(1);
+		ft.setToValue(0.5);
+		ft.setInterpolator(Interpolator.EASE_BOTH);
 		ft.play();
 	}
 
 	public static void cardturn(Card c, BoardPane internalBoard) {
+		internalBoard.getSelCard();
 		// if a match is made
-		if (internalBoard.getSelCard() == c) {
-			match(c, internalBoard.getSelCard());
-			internalBoard.setSelCard(null);
-			// if no card is selected - first card is then selected
-		} else if (internalBoard.getSelCard() == null) {
+		if (internalBoard.getSelCard() == null) {
 			// turn Card Animation here
 			flipCard(c).play();
 			c.setTurned(true);
 			internalBoard.setSelCard(c);
 			// if no match was made
+		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
+			flipBack(internalBoard.getSelCard(), c).play();
+			match(c, internalBoard.getSelCard());
+			internalBoard.setSelCard(null);
+			// if no card is selected - first card is then selected
 		} else {
 			flipBack(internalBoard.getSelCard(), c).play();
 			internalBoard.getSelCard().setTurned(false);
@@ -46,17 +57,20 @@ public class GameEventhandler {
 		}
 		// Play Sound
 		MP3handler.play(1);
+		// Platform.runLater(task);
 
 	}
 
-	private static void match(Card c1, Card c2) {
+	static void match(Card c1, Card c2) {
 		c1.setMatched(true);
 		c2.setMatched(true);
-		c1.setFill(Color.BLACK);
-		c2.setFill(Color.BLACK);
+		fadeout(c1);
+		fadeout(c2);
+		
+		
 	}
 
-	private static Transition flipCard(Card c) {
+	static Transition flipCard(Card c) {
 		ScaleTransition ScaleUp = new ScaleTransition(Duration.seconds(0.3), c);
 		ScaleUp.setByX(0.6);
 		ScaleUp.setByY(0.6);
@@ -80,16 +94,16 @@ public class GameEventhandler {
 		turnAnimation.setOnFinished(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				c.setFill(new ImagePattern(IMGhandler.getImage_card(c.getCard_Id())));
-				turnBackAnimation.play();
+				c.setFill(IMGhandler.getImage_card(c.getCard_Id()));
+				TR.setAnim(turnBackAnimation);
+				TR.run();
 			}
 		});
-		c.setFill(Color.RED);
 		ParallelTransition turn = new ParallelTransition(turnAnimation, zoomSeq);
 		return turn;
 	}
 
-	private static Transition flipBack(Card c1, Card c2) {
+	static Transition flipBack(Card c1, Card c2) {
 
 		RotateTransition c1turnAnimation = new RotateTransition(Duration.seconds(0.3), c1);
 		c1turnAnimation.setToAngle(90);
@@ -102,8 +116,9 @@ public class GameEventhandler {
 		c1turnAnimation.setOnFinished(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				c1.setFill(Color.BLUE);
-				c1turnBackAnimation.play();
+				c1.setFill(IMGhandler.getImage_card(0));
+				TR.setAnim(c1turnBackAnimation);
+				TR.run();
 			}
 		});
 
@@ -118,13 +133,13 @@ public class GameEventhandler {
 		c2turnAnimation.setOnFinished(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				c2.setFill(Color.BLUE);
-				c2turnBackAnimation.play();
+				c2.setFill(IMGhandler.getImage_card(0));
+				TR.setAnim(c2turnBackAnimation);
+				TR.run();
 			}
 		});
 		ParallelTransition parallel = new ParallelTransition(c1turnAnimation, c2turnAnimation);
 		SequentialTransition Seq = new SequentialTransition(flipCard(c2), parallel);
-
 		return Seq;
 	}
 }
