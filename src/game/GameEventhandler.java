@@ -19,20 +19,20 @@ import sound.MP3handler;
 public class GameEventhandler {
 	public static TransitionRun TR = new TransitionRun();
 	
-	public static void fadein(Node n) {
+	public static Transition fadein(Node n) {
 		FadeTransition ft = new FadeTransition(Duration.millis(4000), n);
 		ft.setFromValue(0);
 		ft.setToValue(1);
 		ft.setInterpolator(Interpolator.EASE_BOTH);
-		ft.play();
+		return ft;
 	}
 	
-	public static void fadeout(Node n) {
-		FadeTransition ft = new FadeTransition(Duration.millis(4000), n);
+	public static Transition fadeout(Node n) {
+		FadeTransition ft = new FadeTransition(Duration.millis(2000), n);
 		ft.setFromValue(1);
-		ft.setToValue(0.5);
+		ft.setToValue(0.4);
 		ft.setInterpolator(Interpolator.EASE_BOTH);
-		ft.play();
+		return ft;
 	}
 
 	public static void cardturn(Card c, BoardPane internalBoard) {
@@ -45,7 +45,9 @@ public class GameEventhandler {
 			internalBoard.setSelCard(c);
 			// if no match was made
 		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
-			flipBack(internalBoard.getSelCard(), c).play();
+			//could go into a pool of cards for each player
+			Transition greyanim = flipGrey(internalBoard.getSelCard(), c);
+			greyanim.play();
 			match(c, internalBoard.getSelCard());
 			internalBoard.setSelCard(null);
 			// if no card is selected - first card is then selected
@@ -64,10 +66,6 @@ public class GameEventhandler {
 	static void match(Card c1, Card c2) {
 		c1.setMatched(true);
 		c2.setMatched(true);
-		fadeout(c1);
-		fadeout(c2);
-		
-		
 	}
 
 	static Transition flipCard(Card c) {
@@ -140,6 +138,54 @@ public class GameEventhandler {
 		});
 		ParallelTransition parallel = new ParallelTransition(c1turnAnimation, c2turnAnimation);
 		SequentialTransition Seq = new SequentialTransition(flipCard(c2), parallel);
+		return Seq;
+	}
+	
+	static Transition flipGrey(Card c1, Card c2) {
+
+		RotateTransition c1turnAnimation = new RotateTransition(Duration.seconds(0.3), c1);
+		c1turnAnimation.setToAngle(90);
+		c1turnAnimation.setAxis(new Point3D(5, 5, 0));
+
+		RotateTransition c1turnBackAnimation = new RotateTransition(Duration.seconds(0.3), c1);
+		c1turnBackAnimation.setToAngle(0);
+		c1turnBackAnimation.setAxis(new Point3D(5, 5, 0));
+
+		c1turnAnimation.setOnFinished(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				fadeout(c2);
+				TR.setAnim(c1turnBackAnimation);
+				TR.run();
+			}
+		});
+
+		RotateTransition c2turnAnimation = new RotateTransition(Duration.seconds(0.3), c2);
+		c2turnAnimation.setToAngle(90);
+		c2turnAnimation.setAxis(new Point3D(5, 5, 0));
+
+		RotateTransition c2turnBackAnimation = new RotateTransition(Duration.seconds(0.3), c2);
+		c2turnBackAnimation.setToAngle(0);
+		c2turnBackAnimation.setAxis(new Point3D(5, 5, 0));
+
+		c2turnAnimation.setOnFinished(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				fadeout(c2);
+				TR.setAnim(c2turnBackAnimation);
+				TR.run();
+			}
+		});
+		ParallelTransition parallel = new ParallelTransition();
+		SequentialTransition Seq = new SequentialTransition(flipCard(c2), parallel);
+		
+		Seq.setOnFinished(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {			
+				fadeout(c2).play();
+				fadeout(c1).play();
+			}
+		});
 		return Seq;
 	}
 }

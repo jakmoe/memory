@@ -20,7 +20,6 @@ public class BoardPane extends FlowPane {
 	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 120);
 	private Card selCard;
-	private BoardPane board = this;
 	private double offset;
 
 	ObservableList<Node> workingCollection;
@@ -29,12 +28,12 @@ public class BoardPane extends FlowPane {
 
 	public BoardPane() {
 		super();
-		board.setCache(true);
-		board.setCacheShape(true);
-		board.setStyle("-fx-border-color: Blue");
-		board.setVgap(50);
-		board.setHgap(50);
-		board.setAlignment(Pos.CENTER);
+		BoardPane.this.setCache(true);
+		BoardPane.this.setCacheShape(true);
+		BoardPane.this.setStyle("-fx-border-color: Blue");
+		BoardPane.this.setVgap(50);
+		BoardPane.this.setHgap(50);
+		BoardPane.this.setAlignment(Pos.CENTER);
 		offset = 0;
 	}
 
@@ -47,8 +46,8 @@ public class BoardPane extends FlowPane {
 	}
 
 	public void Initialize(int cardPairs) {
-		board.cardPairs = cardPairs;
-		for (int i = 0; i < board.getCardPairs(); i++) {
+		BoardPane.this.cardPairs = cardPairs;
+		for (int i = 0; i < BoardPane.this.getCardPairs(); i++) {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
@@ -66,13 +65,13 @@ public class BoardPane extends FlowPane {
 				public void handle(MouseEvent t) {
 					if (!c.isMatched() && !c.isTurned()) {
 						c.setCacheHint(CacheHint.QUALITY);
-						GameEventhandler.cardturn(c, board);
+						GameEventhandler.cardturn(c, BoardPane.this);
 					}
 				}
 			});
 			cardList.add(c);
 		}
-		board.getChildren().addAll(cardList);
+		BoardPane.this.getChildren().addAll(cardList);
 	}
 
 	public void setCardcount(int cardcount) {
