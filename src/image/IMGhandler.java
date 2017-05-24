@@ -20,7 +20,7 @@ public class IMGhandler {
 					if (isCancelled()) {
 						break;
 					}
-					Image img = new Image("/image/" + i + ".jpg", 200, 200, true, true);
+					Image img = new Image("/image/" + i + ".jpg", 500, 500, true, true);
 					ImagePattern imgp = new ImagePattern(img);
 					images.add(imgp);
 					updateProgress(i, cardcount);
@@ -34,6 +34,6 @@ public class IMGhandler {
 	}
 
 	public static ImagePattern getImage_card(int id) {
-		return images.get(id);
+			return images.get(id);
 	}
 }

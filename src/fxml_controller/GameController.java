@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 
 //import game.Board;
 import game.BoardPane;
-import game.GameEventhandler;
 import game.GameMaster;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 
 /**
  *
@@ -33,13 +33,16 @@ public class GameController implements Initializable {
 	private Button button;
 
 	@FXML
-	private Button button2;
-
-	@FXML
 	private BoardPane gamepane;
 
+	
 	@FXML
-	private void gamestart(ActionEvent event) {
+	private void test(ActionEvent event) {
+		
+	}
+	
+	@FXML
+	private void back(ActionEvent event) {
 		loader.setLocation(getClass().getResource("/FXML/Menu.fxml"));
 		try {
 			Parent root = loader.load();
@@ -48,21 +51,14 @@ public class GameController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		gamepane.setCache(true);
+		gamepane.setCache(false);
 		gamepane.setCacheShape(true);
 		gamepane.setCacheHint(CacheHint.SCALE_AND_ROTATE);
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		GameMaster.startGame(1, 16, gamepane);
+		GameMaster.startGame(1, 16);
 		// gamepane.Test();
-		GameEventhandler.fadein(gamepane);
-
-	}
-
-	@FXML
-	private void startbackground(ActionEvent event) {
 	}
 }

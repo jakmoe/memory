@@ -8,13 +8,11 @@ public class GameMaster {
 	private static Player PlayerInTurn;
 	private static int EndCheck;
 
-	public static void startGame(int playercount, int boardsize, BoardPane gamepane) {
+	public static void startGame(int playercount, int boardsize) {
 		// add players
 		for (int i = 1; i <= playercount; i++) {
 			playerAL.add(new Player(i));
 		}
-		// initialize the board
-		gamepane.Initialize(boardsize);
 
 		// set the EndCheck to the Board size
 		EndCheck = boardsize;
@@ -24,6 +22,9 @@ public class GameMaster {
 	}
 
 	public static void doTurn(boolean scored, double newtime) {
+		if (EndCheck <= 0) {
+			GameOver();
+		}
 		if (scored) {
 			PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 2);
 			PlayerInTurn.setCurrenttime(PlayerInTurn.getCurrenttime() + newtime);
@@ -34,9 +35,6 @@ public class GameMaster {
 			} else {
 				PlayerInTurn = playerAL.get(0);
 			}
-		}
-		if (EndCheck <= 0) {
-			GameOver();
 		}
 	}
 

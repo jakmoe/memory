@@ -8,7 +8,9 @@ package start_MEMORY;
 import XML.XMLhandler;
 import image.IMGhandler;
 import javafx.application.Application;
+import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,7 +29,6 @@ public class Start extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/FXML/Menu.fxml"));
 		Parent root = loader.load();
-
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setFullScreen(true);
@@ -36,14 +37,12 @@ public class Start extends Application {
 		stage.setMaximized(true);
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.show();
+		
 
 		// initialize MP3Handler
 		MP3handler.play(0);
+		
 
-		Task<Void> tk = IMGhandler.initialize(16);
-		Thread th = new Thread(tk);
-		th.setDaemon(true);
-		th.run();
 	}
 
 	public static void main(String[] args) {

@@ -5,11 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import image.IMGhandler;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 
@@ -17,11 +15,13 @@ public class BoardPane extends FlowPane {
 
 	public TransitionRun TR = new TransitionRun();
 	private int cardPairs;
-	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 120);
+	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 110 * 1.25);
 	private Card selCard;
 	private double offset;
-
-	ObservableList<Node> workingCollection;
+	
+	
+	
+	//ObservableList<Node> workingCollection;
 	List<Card> cardList = new ArrayList<Card>();
 	List<Integer> cardValues = new ArrayList<Integer>();
 
@@ -30,10 +30,13 @@ public class BoardPane extends FlowPane {
 		BoardPane.this.setCache(true);
 		BoardPane.this.setCacheShape(true);
 		BoardPane.this.setStyle("-fx-border-color: Blue");
-		BoardPane.this.setVgap(50);
-		BoardPane.this.setHgap(50);
-		BoardPane.this.setAlignment(Pos.CENTER);
+		BoardPane.this.setVgap(20);
+		BoardPane.this.setHgap(40);
+		BoardPane.this.setAlignment(Pos.TOP_CENTER);
 		offset = 0;
+		if (cardValues.isEmpty()) {
+			Initialize(16);
+		}
 	}
 
 	public int getCardPairs() {
@@ -45,7 +48,7 @@ public class BoardPane extends FlowPane {
 	}
 
 	public void Initialize(int cardPairs) {
-		BoardPane.this.cardPairs = cardPairs;
+		BoardPane.this.cardPairs = 16; //debug
 		for (int i = 1; i < BoardPane.this.getCardPairs() + 1; i++) {
 			cardValues.add(i);
 			cardValues.add(i);
@@ -55,23 +58,33 @@ public class BoardPane extends FlowPane {
 			Card c = new Card(offset, offset, picSize, picSize);
 			// coordinates must be adapted
 			c.setFill(IMGhandler.getImage_card(0));
+			c.setCacheHint(CacheHint.SPEED);
 			c.setCard_Id(val);
 			c.setArcHeight(10);
 			c.setArcWidth(10);
 			c.setCache(true);
+			//c.setManaged(true);
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
 					if (!c.isMatched() && !c.isTurned()) {
-						c.setCacheHint(CacheHint.QUALITY);
 						GameEventhandler.cardturn(c, BoardPane.this);
-
 					}
 				}
 			});
 			cardList.add(c);
 		}
+
 		BoardPane.this.getChildren().addAll(cardList);
+//      Performance Test with ImageView
+//		ImageView imgv = new ImageView(new Image("/image/0.jpg", picSize, picSize, true, true));
+//		imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent t) {
+//					GameEventhandler.flipImageView(imgv, picSize).play();
+//			}
+//		});
+//		BoardPane.this.getChildren().add(imgv);
 	}
 
 	public void setCardcount(int cardcount) {
