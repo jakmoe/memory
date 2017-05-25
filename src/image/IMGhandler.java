@@ -10,6 +10,15 @@ public class IMGhandler {
 
 	private static ArrayList<ImagePattern> images = new ArrayList<ImagePattern>();
 
+	public static Image getGameBackground(){
+		Image img = new Image("/image/game_background.gif", 1400, 1200, false, true);
+		return img;
+	}
+
+	public static ImagePattern getImage_card(int id) {
+			return images.get(id);
+	}
+	
 	public static Task<Void> initialize(int cardcount) {
 		Task<Void> task = new Task<Void>() {
 			@Override
@@ -20,7 +29,7 @@ public class IMGhandler {
 					if (isCancelled()) {
 						break;
 					}
-					Image img = new Image("/image/" + i + ".jpg", 500, 500, true, true);
+					Image img = new Image("/image/cards/" + i + ".jpg", 500, 500, true, true);
 					ImagePattern imgp = new ImagePattern(img);
 					images.add(imgp);
 					updateProgress(i, cardcount);
@@ -32,8 +41,20 @@ public class IMGhandler {
 		};
 		return task;
 	}
-
-	public static ImagePattern getImage_card(int id) {
-			return images.get(id);
+	
+	public static ArrayList<ImagePattern> getSprites(int id){
+		ArrayList<ImagePattern> sprites = new ArrayList<ImagePattern>();
+		switch (id) {
+		case 1:
+			for (int i = 0; i < 6; i++) {
+				Image img = new Image("/image/sprites/gm_sprite_" + i +".png");
+				sprites.add(new ImagePattern(img));
+			}
+			break;
+		default:
+			break;
+		}
+		return sprites;
+		
 	}
 }

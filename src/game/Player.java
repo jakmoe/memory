@@ -1,7 +1,7 @@
 package game;
 
-import XML.PlayerSave;
-import XML.XMLhandler;
+import JSON.JSONhandler;
+import JSON.PlayerSave;
 
 public class Player {
 	private double currenttime;
@@ -11,60 +11,60 @@ public class Player {
 	private int highscore;
 	private String name;
 	private PlayerSave PlayerSafegame;
-
+	private JSONhandler jhdl = new JSONhandler();
 	public Player(int id) {
 		super();
-		PlayerSafegame = XMLhandler.readplayerinfo(id);
+		PlayerSafegame = jhdl.readinfo(id);
 		this.id = id;
-		this.mintime = PlayerSafegame.mintime;
-		this.highscore = PlayerSafegame.highscore;
-		this.name = PlayerSafegame.name;
-		XMLhandler.writeplayerinfo(PlayerSafegame, id);
+		this.mintime = PlayerSafegame.getMintime();
+		this.highscore = PlayerSafegame.getHighscore();
+		this.name = PlayerSafegame.getName();
+		jhdl.writeinfo(PlayerSafegame);
 	}
 
 	public void CommitSafe() {
 		PlayerSafegame = null;
-		PlayerSafegame.mintime = this.mintime;
-		PlayerSafegame.highscore = this.highscore;
-		PlayerSafegame.name = this.name;
-		PlayerSafegame.id = this.id;
-		XMLhandler.writeplayerinfo(PlayerSafegame, this.id);
+		PlayerSafegame.setMintime(this.mintime);
+		PlayerSafegame.setHighscore(this.highscore);
+		PlayerSafegame.setName(this.name);
+		PlayerSafegame.setId(this.id);
+		jhdl.writeinfo(PlayerSafegame);
 	}
 
 	public double getCurrenttime() {
 		return currenttime;
 	}
 
-	public void setCurrenttime(double currenttime) {
-		this.currenttime = currenttime;
+	public int getHighscore() {
+		return highscore;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public double getMintime() {
 		return mintime;
 	}
 
-	public void setMintime(double maxtime) {
-		this.mintime = maxtime;
+	public String getName() {
+		return name;
 	}
 
-	public int getHighscore() {
-		return highscore;
+	public void setCurrenttime(double currenttime) {
+		this.currenttime = currenttime;
 	}
 
 	public void setHighscore(int highscore) {
 		this.highscore = highscore;
 	}
 
-	public String getName() {
-		return name;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setMintime(double maxtime) {
+		this.mintime = maxtime;
 	}
 
 	public void setName(String name) {

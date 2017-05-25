@@ -8,19 +8,6 @@ public class GameMaster {
 	private static Player PlayerInTurn;
 	private static int EndCheck;
 
-	public static void startGame(int playercount, int boardsize) {
-		// add players
-		for (int i = 1; i <= playercount; i++) {
-			playerAL.add(new Player(i));
-		}
-
-		// set the EndCheck to the Board size
-		EndCheck = boardsize;
-
-		// set the first player
-		PlayerInTurn = playerAL.get(0);
-	}
-
 	public static void doTurn(boolean scored, double newtime) {
 		if (EndCheck <= 0) {
 			GameOver();
@@ -47,6 +34,32 @@ public class GameMaster {
 				PlayerInTurn.setMintime(PlayerInTurn.getCurrenttime());
 			}
 		}
+	}
+	
+	public static Player getPlayerInTurn() {
+		return PlayerInTurn;
+	}
+
+	public static ArrayList<Player> getPlayers(){
+		return playerAL;
+	}
+	
+	public static void setPlayerInTurn(Player playerInTurn) {
+		PlayerInTurn = playerInTurn;
+	}
+
+	public static void startGame(int playercount, int boardsize) {
+		playerAL.clear();
+		// add players
+		for (int i = 1; i <= playercount; i++) {
+			playerAL.add(new Player(i));
+		}
+
+		// set the EndCheck to the Board size
+		EndCheck = boardsize;
+
+		// set the first player
+		PlayerInTurn = playerAL.get(0);
 	}
 
 }

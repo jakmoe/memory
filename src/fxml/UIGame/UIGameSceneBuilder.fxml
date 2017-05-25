@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane depthTest="ENABLE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <FlowPane id="flow" fx:id="gamepane" cache="true" cacheHint="SPEED" depthTest="ENABLE" layoutX="100.0" layoutY="100.0" prefHeight="900.0" prefWidth="1200.0" />
+      <VBox fx:id="players" layoutX="1400.0" layoutY="100.0" prefHeight="900.0" prefWidth="400.0" />
+      <Region fx:id="info" layoutX="100.0" layoutY="1000.0" prefHeight="50.0" prefWidth="1200.0" />
+      <Region fx:id="menu" layoutX="1400.0" layoutY="1000.0" prefHeight="50.0" prefWidth="400.0" />
+   </children>
+</Pane>

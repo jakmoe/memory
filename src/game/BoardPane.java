@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import game.Sprites.Sprite;
 import image.IMGhandler;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -32,7 +33,7 @@ public class BoardPane extends FlowPane {
 		BoardPane.this.setStyle("-fx-border-color: Blue");
 		BoardPane.this.setVgap(20);
 		BoardPane.this.setHgap(40);
-		BoardPane.this.setAlignment(Pos.TOP_CENTER);
+		BoardPane.this.setAlignment(Pos.CENTER);
 		offset = 0;
 		if (cardValues.isEmpty()) {
 			Initialize(16);
@@ -76,6 +77,9 @@ public class BoardPane extends FlowPane {
 		}
 
 		BoardPane.this.getChildren().addAll(cardList);
+
+		Sprite sp = new Sprite(1, 100, 100);
+		BoardPane.this.getChildren().add(sp);
 //      Performance Test with ImageView
 //		ImageView imgv = new ImageView(new Image("/image/0.jpg", picSize, picSize, true, true));
 //		imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {

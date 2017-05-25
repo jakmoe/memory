@@ -5,12 +5,8 @@ package start_MEMORY;
  * and open the template in the editor.
  */
 
-import XML.XMLhandler;
-import image.IMGhandler;
+import XML_DEPRECATED.XMLhandler;
 import javafx.application.Application;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.concurrent.Worker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,29 +20,24 @@ import sound.MP3handler;
  * @author Gruppe 6 - Memory DHBW Mannheim
  */
 public class Start extends Application {
+	public static void main(String[] args) {
+		XMLhandler.createdoc();
+		launch(args);
+	}
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/FXML/Menu.fxml"));
+		loader.setLocation(getClass().getResource("/FXML/MainMenu/Menu.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setFullScreen(true);
-		stage.setFullScreenExitHint("Test");
+		stage.setFullScreenExitHint("");
 		stage.setResizable(false);
-		stage.setMaximized(true);
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.show();
-		
-
 		// initialize MP3Handler
 		MP3handler.play(0);
-		
-
-	}
-
-	public static void main(String[] args) {
-		XMLhandler.createdoc();
-		launch(args);
 	}
 }

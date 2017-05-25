@@ -10,14 +10,14 @@ public class TransitionRun implements Runnable {
 		return anim;
 	}
 
-	public void setAnim(Transition anim) {
-		this.anim = anim;
-	}
-
 	@Override
 	public void run() {
 		anim.setInterpolator(Interpolator.EASE_BOTH);
 		anim.play();
+	}
+
+	public void setAnim(Transition anim) {
+		this.anim = anim;
 	}
 
 }
