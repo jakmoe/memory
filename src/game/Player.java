@@ -2,6 +2,7 @@ package game;
 
 import JSON.JSONhandler;
 import JSON.PlayerSave;
+import start_MEMORY.Start;
 
 public class Player {
 	private double currenttime;
@@ -11,24 +12,24 @@ public class Player {
 	private int highscore;
 	private String name;
 	private PlayerSave PlayerSafegame;
-	private JSONhandler jhdl = new JSONhandler();
+	private JSONhandler jhdl = Start.getJhdl();
 	public Player(int id) {
 		super();
-		PlayerSafegame = jhdl.readinfo(id);
+		PlayerSafegame = jhdl.readPlayerinfo(id);
 		this.id = id;
 		this.mintime = PlayerSafegame.getMintime();
 		this.highscore = PlayerSafegame.getHighscore();
 		this.name = PlayerSafegame.getName();
-		jhdl.writeinfo(PlayerSafegame);
+		jhdl.writePlayerinfo(PlayerSafegame);
 	}
 
 	public void CommitSafe() {
-		PlayerSafegame = null;
+		PlayerSafegame = new PlayerSave();
 		PlayerSafegame.setMintime(this.mintime);
 		PlayerSafegame.setHighscore(this.highscore);
 		PlayerSafegame.setName(this.name);
 		PlayerSafegame.setId(this.id);
-		jhdl.writeinfo(PlayerSafegame);
+		jhdl.writePlayerinfo(PlayerSafegame);
 	}
 
 	public double getCurrenttime() {

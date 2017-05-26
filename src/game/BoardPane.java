@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import game.Sprites.Sprite;
 import image.IMGhandler;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
+import javafx.scene.DepthTest;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import start_MEMORY.Start;
 
 public class BoardPane extends FlowPane {
 
@@ -36,7 +37,8 @@ public class BoardPane extends FlowPane {
 		BoardPane.this.setAlignment(Pos.CENTER);
 		offset = 0;
 		if (cardValues.isEmpty()) {
-			Initialize(16);
+			picSize = Start.getJhdl().getModel().getInfo().getPicSize(this.getPrefWidth(), this.getPrefHeight());
+			Initialize(Start.getJhdl().getModel().getInfo().getCardcount());
 		}
 	}
 
@@ -49,7 +51,7 @@ public class BoardPane extends FlowPane {
 	}
 
 	public void Initialize(int cardPairs) {
-		BoardPane.this.cardPairs = 16; //debug
+		BoardPane.this.setCardPairs(cardPairs);
 		for (int i = 1; i < BoardPane.this.getCardPairs() + 1; i++) {
 			cardValues.add(i);
 			cardValues.add(i);
@@ -60,6 +62,7 @@ public class BoardPane extends FlowPane {
 			// coordinates must be adapted
 			c.setFill(IMGhandler.getImage_card(0));
 			c.setCacheHint(CacheHint.SPEED);
+			c.setDepthTest(DepthTest.INHERIT);
 			c.setCard_Id(val);
 			c.setArcHeight(10);
 			c.setArcWidth(10);
@@ -78,8 +81,9 @@ public class BoardPane extends FlowPane {
 
 		BoardPane.this.getChildren().addAll(cardList);
 
-		Sprite sp = new Sprite(1, 100, 100);
-		BoardPane.this.getChildren().add(sp);
+		//Sprite sp = new Sprite(1, 100, 100);
+		//BoardPane.this.getChildren().add(sp);
+		
 //      Performance Test with ImageView
 //		ImageView imgv = new ImageView(new Image("/image/0.jpg", picSize, picSize, true, true));
 //		imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -91,7 +95,7 @@ public class BoardPane extends FlowPane {
 //		BoardPane.this.getChildren().add(imgv);
 	}
 
-	public void setCardcount(int cardcount) {
+	public void setCardPairs(int cardcount) {
 		this.cardPairs = cardcount;
 	}
 

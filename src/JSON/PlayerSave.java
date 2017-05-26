@@ -1,6 +1,18 @@
 package JSON;
 
 public class PlayerSave {
+	private int id;
+	private String name;
+	private int highscore;
+	
+	private double mintime;
+	
+	public PlayerSave() {
+		mintime = 0;
+		highscore = 0;
+		name = "name";
+		id = 0;
+	}
 	public static PlayerSave getDummy(int dummy_id){
 		PlayerSave dummy = new PlayerSave();
     	dummy = new PlayerSave();
@@ -10,11 +22,7 @@ public class PlayerSave {
     	dummy.setId(dummy_id);
 		return dummy;
 	}
-	private int id;
-	private String name;
-	private int highscore;
-	
-	private double mintime;
+
 	public int getHighscore() {
 		return highscore;
 	}

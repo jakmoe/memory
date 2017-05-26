@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 import game.BoardPane;
 import game.GameMaster;
 import game.Player;
-import game.Sprites.Sprite;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +31,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 import sound.MP3handler;
+import start_MEMORY.Start;
 
 /**
  *
@@ -63,9 +63,11 @@ public class GameController implements Initializable {
 		
 		base.getStylesheets().add("/fxml/UIGame/UIGame.css");
 		
-		GameMaster.startGame(1, 16);
+		GameMaster.startGame(1, Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
+		
+		// Debug here needs to check if background is even running
 		MP3handler.stopbackground();
 		MP3handler.playbackground(2);
 		

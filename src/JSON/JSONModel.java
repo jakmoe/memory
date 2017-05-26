@@ -17,6 +17,10 @@ public class JSONModel {
     	players.add(dummy);
     }
     
+    public GameInfo getInfo(){
+		return gameInfo;
+    }
+    
     public void changeVersion(double ver){
     	gameInfo.setVersion(ver);
     }
@@ -34,10 +38,6 @@ public class JSONModel {
 		return null;
     }
     
-    public ArrayList<PlayerSave> getPlayers() {
-		return players;
-	}
-    
     public boolean newPlayer(PlayerSave ps){
     	boolean found = false;
     	for (PlayerSave playerSave : players) {
@@ -53,8 +53,6 @@ public class JSONModel {
     		players.add(ps);		
 		}
 		return found;
-
-
     }
 
 	public void removePlayer(int id){
@@ -67,7 +65,10 @@ public class JSONModel {
     		}
 		}
     }
-
+	
+    public ArrayList<PlayerSave> getPlayers() {
+		return players;
+	}
 	public void setPlayers(ArrayList<PlayerSave> players) {
 		this.players = players;
 	}

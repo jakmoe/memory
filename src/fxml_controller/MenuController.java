@@ -27,6 +27,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sound.MP3handler;
+import start_MEMORY.Start;
 
 public class MenuController implements Initializable {
 	FXMLLoader loader = new FXMLLoader();
@@ -44,12 +45,13 @@ public class MenuController implements Initializable {
 
 	@FXML
 	private void endprogram(ActionEvent event) {
+		Start.getJhdl().commit();
 		System.exit(0);
 	}
 
 	@FXML
 	private void gamesettings(ActionEvent event) {
-		loader.setLocation(getClass().getResource("/FXML/Setting/Settings.fxml"));
+		loader.setLocation(getClass().getResource("/FXML/Settings/Settings.fxml"));
 		try {
 			Parent root = loader.load();
 			singleplayer.getScene().setRoot(root);
@@ -67,7 +69,7 @@ public class MenuController implements Initializable {
 		Service<Void> sv = new Service<Void>() {
 			@Override
 			protected Task<Void> createTask() {
-				return IMGhandler.initialize(16);
+				return IMGhandler.initialize(Start.getJhdl().getModel().getInfo().getCardcount());
 			}
 		};
 		sv.addEventHandler(ActionEvent.ANY, new EventHandler<Event>() {
