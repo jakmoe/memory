@@ -14,6 +14,8 @@ import java.util.ResourceBundle;
 import game.BoardPane;
 import game.GameMaster;
 import game.Player;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,7 +65,7 @@ public class GameController implements Initializable {
 		
 		base.getStylesheets().add("/fxml/UIGame/UIGame.css");
 		
-		GameMaster.startGame(1, Start.getJhdl().getModel().getInfo().getCardcount());
+		GameMaster.startGame(4, Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
 		
@@ -139,5 +141,30 @@ public class GameController implements Initializable {
 		}
 		players.setAlignment(Pos.CENTER);
 		players.setSpacing(10);
+		
+		
+		GameMaster.setIdListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				if (oldValue.intValue() <= playerAL.size() && newValue.intValue() != 1) {
+					StackPane sp1 = (StackPane) players.getChildren().get(newValue.intValue()-1);
+					Circle c1 = (Circle) sp1.getChildren().get(0);
+					c1.setStrokeWidth(10);
+					
+					StackPane sp2 = (StackPane) players.getChildren().get(newValue.intValue()-2);
+					Circle c2 = (Circle) sp2.getChildren().get(0);
+					c2.setStrokeWidth(5);			
+				}
+				else {
+					StackPane sp1 = (StackPane) players.getChildren().get(0);
+					Circle c1 = (Circle) sp1.getChildren().get(0);
+					c1.setStrokeWidth(10);
+					
+					StackPane sp2 = (StackPane) players.getChildren().get(playerAL.size()-1);
+					Circle c2 = (Circle) sp2.getChildren().get(0);
+					c2.setStrokeWidth(5);	
+				}
+			}
+		});
 	}
 }

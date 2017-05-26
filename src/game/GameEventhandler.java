@@ -44,6 +44,7 @@ public class GameEventhandler {
 			// if no card is selected - first card is then selected
 		} else {
 			timer.stop();
+			GameMaster.doTurn(false, time);
 			flipBack(internalBoard.getSelCard(), c).play();
 			internalBoard.getSelCard().setTurned(false);
 			c.setTurned(false);

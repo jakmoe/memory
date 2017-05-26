@@ -2,10 +2,15 @@ package game;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+
 
 public class GameMaster {
 	private static ArrayList<Player> playerAL = new ArrayList<Player>();
 	private static Player PlayerInTurn;
+	private static IntegerProperty playeridproperty = new SimpleIntegerProperty(0);
 	private static int EndCheck;
 
 	public static void doTurn(boolean scored, double newtime) {
@@ -15,12 +20,12 @@ public class GameMaster {
 		if (scored) {
 			PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 2);
 			PlayerInTurn.setCurrenttime(PlayerInTurn.getCurrenttime() + newtime);
-			EndCheck -= 1;
+			EndCheck -= 2;
 		} else {
 			if (playerAL.indexOf(PlayerInTurn) + 1 <= playerAL.size() - 1) {
-				PlayerInTurn = playerAL.get(playerAL.indexOf(PlayerInTurn) + 1);
+				setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
 			} else {
-				PlayerInTurn = playerAL.get(0);
+				setPlayerInTurn(playerAL.get(0));
 			}
 		}
 	}
@@ -46,6 +51,7 @@ public class GameMaster {
 	
 	public static void setPlayerInTurn(Player playerInTurn) {
 		PlayerInTurn = playerInTurn;
+		playeridproperty.set(PlayerInTurn.getId());
 	}
 
 	public static void startGame(int playercount, int boardsize) {
@@ -60,6 +66,14 @@ public class GameMaster {
 
 		// set the first player
 		PlayerInTurn = playerAL.get(0);
+	}
+
+	public static IntegerProperty getPlayeridproperty() {
+		return playeridproperty;
+	}
+
+	public static void setIdListener(ChangeListener<Number> changeListener) {
+		playeridproperty.addListener(changeListener);
 	}
 
 }

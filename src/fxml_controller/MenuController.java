@@ -10,7 +10,6 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,12 +71,6 @@ public class MenuController implements Initializable {
 				return IMGhandler.initialize(Start.getJhdl().getModel().getInfo().getCardcount());
 			}
 		};
-		sv.addEventHandler(ActionEvent.ANY, new EventHandler<Event>() {
-			@Override
-			public void handle(Event event) {
-				
-			}
-		});
 		AnimationTimer anitim = new AnimationTimer() {
 			@Override
 			public void handle(long now) {

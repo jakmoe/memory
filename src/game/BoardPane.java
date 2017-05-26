@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import game.Sprites.Sprite;
 import image.IMGhandler;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -64,8 +65,8 @@ public class BoardPane extends FlowPane {
 			c.setCacheHint(CacheHint.SPEED);
 			c.setDepthTest(DepthTest.INHERIT);
 			c.setCard_Id(val);
-			c.setArcHeight(10);
-			c.setArcWidth(10);
+			c.setArcHeight(20);
+			c.setArcWidth(20);
 			c.setCache(true);
 			//c.setManaged(true);
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -81,8 +82,8 @@ public class BoardPane extends FlowPane {
 
 		BoardPane.this.getChildren().addAll(cardList);
 
-		//Sprite sp = new Sprite(1, 100, 100);
-		//BoardPane.this.getChildren().add(sp);
+		Sprite sp = new Sprite(1, 100, 100);
+		BoardPane.this.getChildren().add(sp);
 		
 //      Performance Test with ImageView
 //		ImageView imgv = new ImageView(new Image("/image/0.jpg", picSize, picSize, true, true));
