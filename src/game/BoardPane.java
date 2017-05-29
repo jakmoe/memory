@@ -82,8 +82,8 @@ public class BoardPane extends FlowPane {
 
 		BoardPane.this.getChildren().addAll(cardList);
 
-		Sprite sp = new Sprite(1, 100, 100);
-		BoardPane.this.getChildren().add(sp);
+//		Sprite sp = new Sprite(1, 100, 100);
+//		BoardPane.this.getChildren().add(sp);
 		
 //      Performance Test with ImageView
 //		ImageView imgv = new ImageView(new Image("/image/0.jpg", picSize, picSize, true, true));
