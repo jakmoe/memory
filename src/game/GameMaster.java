@@ -6,7 +6,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 
-
 public class GameMaster {
 	private static ArrayList<Player> playerAL = new ArrayList<Player>();
 	private static Player PlayerInTurn;
@@ -40,15 +39,15 @@ public class GameMaster {
 			}
 		}
 	}
-	
+
 	public static Player getPlayerInTurn() {
 		return PlayerInTurn;
 	}
 
-	public static ArrayList<Player> getPlayers(){
+	public static ArrayList<Player> getPlayers() {
 		return playerAL;
 	}
-	
+
 	public static void setPlayerInTurn(Player playerInTurn) {
 		PlayerInTurn = playerInTurn;
 		playeridproperty.set(PlayerInTurn.getId());

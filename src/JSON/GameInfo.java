@@ -12,6 +12,7 @@ public class GameInfo {
 		volume_effects = 0.5;
 		difficulty = 3;
 	}
+
 	public double getVersion() {
 		return version;
 	}
@@ -19,25 +20,32 @@ public class GameInfo {
 	public void setVersion(double version) {
 		this.version = version;
 	}
+
 	public double getVolume_effects() {
 		return volume_effects;
 	}
+
 	public void setVolume_effects(double volume_effects) {
 		this.volume_effects = volume_effects;
 	}
+
 	public double getVolume_music() {
 		return volume_music;
 	}
+
 	public void setVolume_music(double volume_music) {
 		this.volume_music = volume_music;
 	}
+
 	public int getDifficulty() {
 		return difficulty;
 	}
+
 	public void setDifficulty(int difficulty) {
 		this.difficulty = difficulty;
 	}
-	public int getCardcount(){
+
+	public int getCardcount() {
 		switch (difficulty) {
 		case 1:
 			return 8;
@@ -53,8 +61,8 @@ public class GameInfo {
 			return 24;
 		}
 	}
-	
-	public double getPicSize(double width, double height){
+
+	public double getPicSize(double width, double height) {
 		switch (difficulty) {
 		case 1:
 			return (width / height * 110 * 1.6);

@@ -4,47 +4,54 @@ public class PlayerSave {
 	private int id;
 	private String name;
 	private int highscore;
-	
+
 	private double mintime;
-	
+
 	public PlayerSave() {
 		mintime = 0;
 		highscore = 0;
 		name = "name";
 		id = 0;
 	}
-	public static PlayerSave getDummy(int dummy_id){
+
+	public static PlayerSave getDummy(int dummy_id) {
 		PlayerSave dummy = new PlayerSave();
-    	dummy = new PlayerSave();
-    	dummy.setHighscore(20);
-    	dummy.setMintime(20.0);
-    	dummy.setName("name");
-    	dummy.setId(dummy_id);
+		dummy = new PlayerSave();
+		dummy.setHighscore(20);
+		dummy.setMintime(20.0);
+		dummy.setName("name");
+		dummy.setId(dummy_id);
 		return dummy;
 	}
 
 	public int getHighscore() {
 		return highscore;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public double getMintime() {
 		return mintime;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setHighscore(int highscore) {
 		this.highscore = highscore;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public void setMintime(double mintime) {
 		this.mintime = mintime;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}

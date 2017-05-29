@@ -22,7 +22,7 @@ import javafx.stage.StageStyle;
 public class Start extends Application {
 	private static JSONhandler jhdl = new JSONhandler();
 	private static int gamemode = 1;
-	
+
 	public static void main(String[] args) {
 		XMLhandler.createdoc();
 		launch(args);

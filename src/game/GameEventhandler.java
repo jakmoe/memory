@@ -77,7 +77,7 @@ public class GameEventhandler {
 	}
 
 	static Transition flipBack(Card c1, Card c2) {
-		//TransitionRun TR = new TransitionRun();
+		// TransitionRun TR = new TransitionRun();
 
 		RotateTransition c1turnAnimation = new RotateTransition(Duration.seconds(0.2), c1);
 		c1turnAnimation.setToAngle(90);
@@ -91,8 +91,8 @@ public class GameEventhandler {
 			@Override
 			public void handle(ActionEvent event) {
 				c1.setFill(IMGhandler.getImage_card(0));
-				//TR.setAnim(c1turnBackAnimation);
-				//TR.run();
+				// TR.setAnim(c1turnBackAnimation);
+				// TR.run();
 				c1turnBackAnimation.play();
 			}
 		});
@@ -109,16 +109,18 @@ public class GameEventhandler {
 			@Override
 			public void handle(ActionEvent event) {
 				c2.setFill(IMGhandler.getImage_card(0));
-				//TR.setAnim(c2turnBackAnimation);
-				//TR.run();
+				// TR.setAnim(c2turnBackAnimation);
+				// TR.run();
 				c2turnBackAnimation.play();
 			}
 		});
 		ParallelTransition parallel = new ParallelTransition(c1turnAnimation, c2turnAnimation);
 		SequentialTransition Seq;
-		if (c1.getParent().getChildrenUnmodifiable().indexOf(c1) == c2.getParent().getChildrenUnmodifiable().indexOf(c2)-1) {
+		if (c1.getParent().getChildrenUnmodifiable().indexOf(c1) == c2.getParent().getChildrenUnmodifiable().indexOf(c2)
+				- 1) {
 			Seq = new SequentialTransition(flipCard(c2, 1), parallel);
-		} else if (c1.getParent().getChildrenUnmodifiable().indexOf(c1) -1  == c2.getParent().getChildrenUnmodifiable().indexOf(c2)){
+		} else if (c1.getParent().getChildrenUnmodifiable().indexOf(c1) - 1 == c2.getParent().getChildrenUnmodifiable()
+				.indexOf(c2)) {
 			Seq = new SequentialTransition(flipCard(c2, -1), parallel);
 		} else {
 			Seq = new SequentialTransition(flipCard(c2, 0), parallel);
@@ -128,7 +130,7 @@ public class GameEventhandler {
 
 	static Transition flipCard(Card c, int pos) {
 
-		//TransitionRun TR = new TransitionRun();
+		// TransitionRun TR = new TransitionRun();
 
 		ScaleTransition ScaleUp = new ScaleTransition(Duration.seconds(0.2), c);
 		ScaleUp.setByX(0.6);
@@ -139,7 +141,7 @@ public class GameEventhandler {
 		ScaleDown.setByY(-0.6);
 
 		PauseTransition pause = new PauseTransition(Duration.seconds(0.75));
-		
+
 		TranslateTransition moveAnimation = new TranslateTransition(Duration.seconds(0.2), c);
 		moveAnimation.setToY(-100);
 		TranslateTransition moveBackAnimation = new TranslateTransition(Duration.seconds(0.2), c);
@@ -151,7 +153,7 @@ public class GameEventhandler {
 			moveAnimation.setToZ(-100);
 			moveBackAnimation.setToZ(0);
 		}
-		
+
 		SequentialTransition zoomSeq = new SequentialTransition(ScaleUp, pause, ScaleDown, moveBackAnimation);
 		zoomSeq.setInterpolator(Interpolator.LINEAR);
 
@@ -163,13 +165,12 @@ public class GameEventhandler {
 		turnBackAnimation.setToAngle(0);
 		turnBackAnimation.setAxis(axis);
 
-		
 		turnAnimation.setOnFinished(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				c.setFill(IMGhandler.getImage_card(c.getCard_Id()));
-				//TR.setAnim(turnBackAnimation);
-				//TR.run();
+				// TR.setAnim(turnBackAnimation);
+				// TR.run();
 				turnBackAnimation.play();
 			}
 		});
@@ -225,10 +226,10 @@ public class GameEventhandler {
 				fadeout(c1).play();
 			}
 		});
-		
+
 		return Seq;
 	}
-	
+
 	static void match(Card c1, Card c2) {
 		c1.setMatched(true);
 		c2.setMatched(true);

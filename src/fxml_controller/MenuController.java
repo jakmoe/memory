@@ -37,9 +37,9 @@ public class MenuController implements Initializable {
 	FXMLLoader loader = new FXMLLoader();
 
 	Stage popupload;
-	
+
 	Alert multichoice;
-	
+
 	@FXML
 	private AnchorPane anchor;
 	@FXML
@@ -74,7 +74,7 @@ public class MenuController implements Initializable {
 		Start.setGamemode(1);
 		init_game();
 	}
-	
+
 	@FXML
 	private void gamemultiplayer(ActionEvent event) {
 		if (multichoice == null) {
@@ -94,28 +94,25 @@ public class MenuController implements Initializable {
 			multichoice.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
 
 			Optional<ButtonType> result = multichoice.showAndWait();
-			if (result.get() == buttonTypeTwo){
-			    // ... user chose "One"
+			if (result.get() == buttonTypeTwo) {
 				Start.setGamemode(2);
 			} else if (result.get() == buttonTypeThree) {
-			    // ... user chose "Two"
 				Start.setGamemode(3);
 			} else if (result.get() == buttonTypeFour) {
-			    // ... user chose "Three"
 				Start.setGamemode(4);
 			} else {
-			    // ... user chose CANCEL or closed the dialog
-				multichoice.hide();
-			}			
-		} else{
+				// ... user chose CANCEL or closed the dialog
+				multichoice.close();
+			}
+		} else {
 			multichoice.showAndWait();
 		}
 
 		init_game();
 	}
 
-	private void init_game(){
-		
+	private void init_game() {
+
 		ProgressBar progressBar = new ProgressBar(0);
 		progressBar.setPrefSize(400, 40);
 		Service<Void> sv = new Service<Void>() {
@@ -127,18 +124,18 @@ public class MenuController implements Initializable {
 		AnimationTimer anitim = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-					progressBar.setProgress(sv.getProgress());
-					if (progressBar.getProgress() == 1) {
-						this.stop();
-						loader.setLocation(getClass().getResource("/FXML/UIGame/UIGame.fxml"));
-						try {
-							Parent root = loader.load();
-							singleplayer.getScene().setRoot(root);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+				progressBar.setProgress(sv.getProgress());
+				if (progressBar.getProgress() == 1) {
+					this.stop();
+					loader.setLocation(getClass().getResource("/FXML/UIGame/UIGame.fxml"));
+					try {
+						Parent root = loader.load();
+						singleplayer.getScene().setRoot(root);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
+				}
 			}
 		};
 		if (popupload == null) {
@@ -149,25 +146,24 @@ public class MenuController implements Initializable {
 			popupload.initStyle(StageStyle.UTILITY);
 			popupload.initModality(Modality.NONE);
 			popupload.initOwner(anchor.getScene().getWindow());
-            VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text("Loading your game..."));
-            dialogVbox.getChildren().add(progressBar);
-            dialogVbox.setAlignment(Pos.CENTER);
-            Scene dialogScene = new Scene(dialogVbox, 300, 200);
-            popupload.setScene(dialogScene);
-    		anitim.start();
-    		sv.start();
-    		sv.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-    			@Override
-    			public void handle(WorkerStateEvent event) {
-    				popupload.hide();
-    				anitim.stop();
-    				sv.reset();
-    			}
-    		});
-            popupload.showAndWait();
-		}
-		else {
+			VBox dialogVbox = new VBox(20);
+			dialogVbox.getChildren().add(new Text("Loading your game..."));
+			dialogVbox.getChildren().add(progressBar);
+			dialogVbox.setAlignment(Pos.CENTER);
+			Scene dialogScene = new Scene(dialogVbox, 300, 200);
+			popupload.setScene(dialogScene);
+			anitim.start();
+			sv.start();
+			sv.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+				@Override
+				public void handle(WorkerStateEvent event) {
+					popupload.hide();
+					anitim.stop();
+					sv.reset();
+				}
+			});
+			popupload.showAndWait();
+		} else {
 			anitim.start();
 			sv.start();
 			sv.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -181,7 +177,7 @@ public class MenuController implements Initializable {
 			popupload.showAndWait();
 		}
 	}
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		MP3handler.playbackground(1);

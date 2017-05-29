@@ -8,10 +8,10 @@ import javafx.scene.media.MediaPlayer;
 public class MP3handler {
 	private static MediaPlayer soundPlayer;
 	private static MediaPlayer backgroundPlayer;
-	
+
 	private static double volumebg = 0.5;
 	private static double volumefx = 0.5;
-	
+
 	public static void play(int SoundID) {
 		String musicFile = "src\\sound\\";
 		switch (SoundID) {
@@ -29,7 +29,7 @@ public class MP3handler {
 		soundPlayer.setVolume(volumefx);
 		soundPlayer.play();
 	}
-	
+
 	public static void playbackground(int SoundID) {
 		String musicFile = "src\\sound\\";
 		switch (SoundID) {
@@ -44,19 +44,19 @@ public class MP3handler {
 			break;
 		}
 		musicFile += ".mp3";
-		
+
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		backgroundPlayer = new MediaPlayer(sound);
 		backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		backgroundPlayer.setVolume(volumebg);
 		backgroundPlayer.play();
 	}
-	
-	public static void stop(){
+
+	public static void stop() {
 		soundPlayer.stop();
 	}
-	
-	public static void stopbackground(){
+
+	public static void stopbackground() {
 		backgroundPlayer.stop();
 	}
 

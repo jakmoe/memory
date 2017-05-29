@@ -63,7 +63,7 @@ public class JSONhandler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public JSONModel getModel() {
 		return model;
 	}

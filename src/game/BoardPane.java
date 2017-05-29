@@ -20,10 +20,8 @@ public class BoardPane extends FlowPane {
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 110 * 1.25);
 	private Card selCard;
 	private double offset;
-	
-	
-	
-	//ObservableList<Node> workingCollection;
+
+	// ObservableList<Node> workingCollection;
 	List<Card> cardList = new ArrayList<Card>();
 	List<Integer> cardValues = new ArrayList<Integer>();
 
@@ -67,7 +65,7 @@ public class BoardPane extends FlowPane {
 			c.setArcHeight(20);
 			c.setArcWidth(20);
 			c.setCache(true);
-			//c.setManaged(true);
+			// c.setManaged(true);
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
@@ -81,18 +79,19 @@ public class BoardPane extends FlowPane {
 
 		BoardPane.this.getChildren().addAll(cardList);
 
-//		Sprite sp = new Sprite(1, 100, 100);
-//		BoardPane.this.getChildren().add(sp);
-		
-//      Performance Test with ImageView
-//		ImageView imgv = new ImageView(new Image("/image/0.jpg", picSize, picSize, true, true));
-//		imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent t) {
-//					GameEventhandler.flipImageView(imgv, picSize).play();
-//			}
-//		});
-//		BoardPane.this.getChildren().add(imgv);
+		// Sprite sp = new Sprite(1, 100, 100);
+		// BoardPane.this.getChildren().add(sp);
+
+		// Performance Test with ImageView
+		// ImageView imgv = new ImageView(new Image("/image/0.jpg", picSize,
+		// picSize, true, true));
+		// imgv.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		// @Override
+		// public void handle(MouseEvent t) {
+		// GameEventhandler.flipImageView(imgv, picSize).play();
+		// }
+		// });
+		// BoardPane.this.getChildren().add(imgv);
 	}
 
 	public void setCardPairs(int cardcount) {

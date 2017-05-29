@@ -42,16 +42,16 @@ import start_MEMORY.Start;
 public class GameController implements Initializable {
 
 	FXMLLoader loader = new FXMLLoader();
-	
+
 	@FXML
 	private Pane base;
-	
+
 	@FXML
 	private VBox players;
-	
+
 	@FXML
 	private Pane info;
-	
+
 	@FXML
 	private HBox menu;
 
@@ -60,56 +60,55 @@ public class GameController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		//Background bg = new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null));
-		//base.setBackground(bg);
-		
+		// Background bg = new Background(new
+		// BackgroundImage(IMGhandler.getGameBackground(), null, null, null,
+		// null));
+		// base.setBackground(bg);
+
 		base.getStylesheets().add("/fxml/UIGame/UIGame.css");
-		
+
 		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
-		
+
 		// Debug here needs to check if background is even running
 		MP3handler.stopbackground();
 		MP3handler.playbackground(2);
-		
+
 	}
-	
-	public void initMenu(){
+
+	public void initMenu() {
 		Button buttonMenu = new Button("Menu");
-		
-		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, 
-                new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						loader.setLocation(getClass().getResource("/FXML/MainMenu/Menu.fxml"));
-						try {
-							MP3handler.stopbackground();
-							Parent root = loader.load();
-							buttonMenu.getScene().setRoot(root);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					});
+
+		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				loader.setLocation(getClass().getResource("/FXML/MainMenu/Menu.fxml"));
+				try {
+					MP3handler.stopbackground();
+					Parent root = loader.load();
+					buttonMenu.getScene().setRoot(root);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		menu.getChildren().add(buttonMenu);
-		
+
 		Button buttonExit = new Button("Exit");
-		buttonExit.addEventHandler(MouseEvent.MOUSE_CLICKED, 
-                new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						System.exit(0);
-					}
-					});
+		buttonExit.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				System.exit(0);
+			}
+		});
 		menu.getChildren().add(buttonExit);
-		
+
 		menu.setAlignment(Pos.CENTER);
 	}
-	
-	
-	public void initPlayers(){
+
+	public void initPlayers() {
 		ArrayList<Player> playerAL = GameMaster.getPlayers();
 		for (Player player : playerAL) {
 			Circle circle = new Circle(100, Color.BLUE);
@@ -127,42 +126,40 @@ public class GameController implements Initializable {
 				circle.setFill(Color.ORANGERED);
 				break;
 			}
-            circle.setStrokeType(StrokeType.INSIDE);
-            circle.setStroke(Color.BLACK);
-            if (player.getId() == GameMaster.getPlayerInTurn().getId()) {
-                circle.setStrokeWidth(10);
+			circle.setStrokeType(StrokeType.INSIDE);
+			circle.setStroke(Color.BLACK);
+			if (player.getId() == GameMaster.getPlayerInTurn().getId()) {
+				circle.setStrokeWidth(10);
 			} else {
-	            circle.setStrokeWidth(5);
+				circle.setStrokeWidth(5);
 			}
 			Label playerlabel = new Label("Player " + player.getId());
 			StackPane circlestack = new StackPane(circle, playerlabel);
-			
+
 			players.getChildren().add(circlestack);
 		}
 		players.setAlignment(Pos.CENTER);
 		players.setSpacing(10);
-		
-		
+
 		GameMaster.setIdListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				if (oldValue.intValue() <= playerAL.size() && newValue.intValue() != 1) {
-					StackPane sp1 = (StackPane) players.getChildren().get(newValue.intValue()-1);
+					StackPane sp1 = (StackPane) players.getChildren().get(newValue.intValue() - 1);
 					Circle c1 = (Circle) sp1.getChildren().get(0);
 					c1.setStrokeWidth(10);
-					
-					StackPane sp2 = (StackPane) players.getChildren().get(newValue.intValue()-2);
+
+					StackPane sp2 = (StackPane) players.getChildren().get(newValue.intValue() - 2);
 					Circle c2 = (Circle) sp2.getChildren().get(0);
-					c2.setStrokeWidth(5);			
-				}
-				else {
+					c2.setStrokeWidth(5);
+				} else {
 					StackPane sp1 = (StackPane) players.getChildren().get(0);
 					Circle c1 = (Circle) sp1.getChildren().get(0);
 					c1.setStrokeWidth(10);
-					
-					StackPane sp2 = (StackPane) players.getChildren().get(playerAL.size()-1);
+
+					StackPane sp2 = (StackPane) players.getChildren().get(playerAL.size() - 1);
 					Circle c2 = (Circle) sp2.getChildren().get(0);
-					c2.setStrokeWidth(5);	
+					c2.setStrokeWidth(5);
 				}
 			}
 		});

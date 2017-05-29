@@ -13,6 +13,7 @@ public class Player {
 	private String name;
 	private PlayerSave PlayerSafegame;
 	private JSONhandler jhdl = Start.getJhdl();
+
 	public Player(int id) {
 		super();
 		PlayerSafegame = jhdl.readPlayerinfo(id);
