@@ -2,6 +2,7 @@ package fxml_controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import image.IMGhandler;
@@ -17,7 +18,11 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -32,6 +37,8 @@ public class MenuController implements Initializable {
 	FXMLLoader loader = new FXMLLoader();
 
 	Stage popupload;
+	
+	Alert multichoice;
 	
 	@FXML
 	private AnchorPane anchor;
@@ -70,7 +77,40 @@ public class MenuController implements Initializable {
 	
 	@FXML
 	private void gamemultiplayer(ActionEvent event) {
-		Start.setGamemode(4); //here input
+		if (multichoice == null) {
+			multichoice = new Alert(AlertType.CONFIRMATION);
+			multichoice.initStyle(StageStyle.UTILITY);
+			multichoice.initModality(Modality.NONE);
+			multichoice.initOwner(anchor.getScene().getWindow());
+			multichoice.setTitle("Playerchoice");
+			multichoice.setHeaderText("How many Players?");
+			multichoice.setContentText("Please choose.");
+
+			ButtonType buttonTypeTwo = new ButtonType("2");
+			ButtonType buttonTypeThree = new ButtonType("3");
+			ButtonType buttonTypeFour = new ButtonType("4");
+			ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+
+			multichoice.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
+
+			Optional<ButtonType> result = multichoice.showAndWait();
+			if (result.get() == buttonTypeTwo){
+			    // ... user chose "One"
+				Start.setGamemode(2);
+			} else if (result.get() == buttonTypeThree) {
+			    // ... user chose "Two"
+				Start.setGamemode(3);
+			} else if (result.get() == buttonTypeFour) {
+			    // ... user chose "Three"
+				Start.setGamemode(4);
+			} else {
+			    // ... user chose CANCEL or closed the dialog
+				multichoice.hide();
+			}			
+		} else{
+			multichoice.showAndWait();
+		}
+
 		init_game();
 	}
 
