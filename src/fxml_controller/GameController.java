@@ -65,7 +65,7 @@ public class GameController implements Initializable {
 		
 		base.getStylesheets().add("/fxml/UIGame/UIGame.css");
 		
-		GameMaster.startGame(4, Start.getJhdl().getModel().getInfo().getCardcount());
+		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
 		

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import game.Sprites.Sprite;
 import image.IMGhandler;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

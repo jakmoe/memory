@@ -38,6 +38,8 @@ public class MenuController implements Initializable {
 	@FXML
 	private Button singleplayer;
 	@FXML
+	private Button multiplayer;
+	@FXML
 	private Button settings;
 	@FXML
 	private Button end;
@@ -62,6 +64,17 @@ public class MenuController implements Initializable {
 
 	@FXML
 	private void gamesingleplayer(ActionEvent event) {
+		Start.setGamemode(1);
+		init_game();
+	}
+	
+	@FXML
+	private void gamemultiplayer(ActionEvent event) {
+		Start.setGamemode(4); //here input
+		init_game();
+	}
+
+	private void init_game(){
 		
 		ProgressBar progressBar = new ProgressBar(0);
 		progressBar.setPrefSize(400, 40);
@@ -128,7 +141,7 @@ public class MenuController implements Initializable {
 			popupload.showAndWait();
 		}
 	}
-
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		MP3handler.playbackground(1);
