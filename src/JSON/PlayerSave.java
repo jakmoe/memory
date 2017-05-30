@@ -17,8 +17,8 @@ public class PlayerSave {
 	public static PlayerSave getDummy(int dummy_id) {
 		PlayerSave dummy = new PlayerSave();
 		dummy = new PlayerSave();
-		dummy.setHighscore(20);
-		dummy.setMintime(20.0);
+		dummy.setHighscore(0);
+		dummy.setMintime(0.0);
 		dummy.setName("name");
 		dummy.setId(dummy_id);
 		return dummy;

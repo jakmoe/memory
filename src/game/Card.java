@@ -53,5 +53,4 @@ public class Card extends Rectangle {
 	public void setTurned(boolean turned) {
 		this.turned = turned;
 	}
-
 }

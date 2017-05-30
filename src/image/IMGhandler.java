@@ -1,5 +1,6 @@
 package image;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javafx.concurrent.Task;
@@ -11,7 +12,7 @@ public class IMGhandler {
 	private static ArrayList<ImagePattern> images = new ArrayList<ImagePattern>();
 
 	public static Image getGameBackground() {
-		Image img = new Image("/image/game_background.gif", 1400, 1200, false, true);
+		Image img = new Image(File.separator + "image" + File.separator + "board.jpg", 1400, 1200, false, true);
 		return img;
 	}
 
@@ -33,7 +34,6 @@ public class IMGhandler {
 					ImagePattern imgp = new ImagePattern(img);
 					images.add(imgp);
 					updateProgress(i, cardcount);
-
 				}
 				// Keep with the background work
 				return null;

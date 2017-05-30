@@ -12,8 +12,10 @@ import java.util.ResourceBundle;
 
 //import game.Board;
 import game.BoardPane;
+import game.ExceptionHandler;
 import game.GameMaster;
 import game.Player;
+import image.IMGhandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -21,10 +23,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -60,12 +65,11 @@ public class GameController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		// Background bg = new Background(new
-		// BackgroundImage(IMGhandler.getGameBackground(), null, null, null,
-		// null));
-		// base.setBackground(bg);
-
 		base.getStylesheets().add("/fxml/UIGame/UIGame.css");
+		base.setCache(true);
+		base.setCacheHint(CacheHint.SPEED);
+		base.setBackground(
+				new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
 
 		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
@@ -74,9 +78,8 @@ public class GameController implements Initializable {
 		// Debug here needs to check if background is even running
 		MP3handler.stopbackground();
 		MP3handler.playbackground(2);
-
 	}
-
+	
 	public void initMenu() {
 		Button buttonMenu = new Button("Menu");
 
@@ -106,11 +109,14 @@ public class GameController implements Initializable {
 		menu.getChildren().add(buttonExit);
 
 		menu.setAlignment(Pos.CENTER);
+
+		menu.setStyle("-fx-border-color: Blue");
 	}
 
 	public void initPlayers() {
 		ArrayList<Player> playerAL = GameMaster.getPlayers();
 		for (Player player : playerAL) {
+			// this is just debug coding
 			Circle circle = new Circle(100, Color.BLUE);
 			switch (player.getId()) {
 			case 1:
@@ -133,33 +139,44 @@ public class GameController implements Initializable {
 			} else {
 				circle.setStrokeWidth(5);
 			}
-			Label playerlabel = new Label("Player " + player.getId());
+			Label playerlabel = new Label("Player " + player.getId() + 
+										  "\nHighscore " + player.getHighscore() +
+										  "\nTime " + player.getMintime());
 			StackPane circlestack = new StackPane(circle, playerlabel);
 
 			players.getChildren().add(circlestack);
 		}
 		players.setAlignment(Pos.CENTER);
 		players.setSpacing(10);
+		players.setStyle("-fx-border-color: Blue");
 
+		//subject to change: Here the new handling for game avatars has to be implemented
 		GameMaster.setIdListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				if (oldValue.intValue() <= playerAL.size() && newValue.intValue() != 1) {
-					StackPane sp1 = (StackPane) players.getChildren().get(newValue.intValue() - 1);
-					Circle c1 = (Circle) sp1.getChildren().get(0);
-					c1.setStrokeWidth(10);
+				try {
+					if (playerAL.size() > 1) {
+						if (oldValue.intValue() <= playerAL.size() && newValue.intValue() != 1) {
+							StackPane sp1 = (StackPane) players.getChildren().get(newValue.intValue() - 1);
+							Circle c1 = (Circle) sp1.getChildren().get(0);
+							c1.setStrokeWidth(10);
 
-					StackPane sp2 = (StackPane) players.getChildren().get(newValue.intValue() - 2);
-					Circle c2 = (Circle) sp2.getChildren().get(0);
-					c2.setStrokeWidth(5);
-				} else {
-					StackPane sp1 = (StackPane) players.getChildren().get(0);
-					Circle c1 = (Circle) sp1.getChildren().get(0);
-					c1.setStrokeWidth(10);
+							StackPane sp2 = (StackPane) players.getChildren().get(newValue.intValue() - 2);
+							Circle c2 = (Circle) sp2.getChildren().get(0);
+							c2.setStrokeWidth(5);
+						} else {
+							StackPane sp1 = (StackPane) players.getChildren().get(0);
+							Circle c1 = (Circle) sp1.getChildren().get(0);
+							c1.setStrokeWidth(10);
 
-					StackPane sp2 = (StackPane) players.getChildren().get(playerAL.size() - 1);
-					Circle c2 = (Circle) sp2.getChildren().get(0);
-					c2.setStrokeWidth(5);
+							StackPane sp2 = (StackPane) players.getChildren().get(playerAL.size() - 1);
+							Circle c2 = (Circle) sp2.getChildren().get(0);
+							c2.setStrokeWidth(5);
+						}	
+					}
+				} catch (Exception e) {
+					ExceptionHandler exc = new ExceptionHandler(e, "Error", "Listener Error", "Something went wrong the Change Listener", "Oops");
+					exc.showdialog();
 				}
 			}
 		});

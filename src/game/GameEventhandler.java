@@ -18,7 +18,6 @@ import javafx.util.Duration;
 import sound.MP3handler;
 
 public class GameEventhandler {
-	private static double time;
 	private static Point3D axis = new Point3D(5, 5, 0);
 	private static CustomAnimationTimer timer = new CustomAnimationTimer();
 
@@ -33,7 +32,7 @@ public class GameEventhandler {
 			// if no match was made
 		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
 			// Turn handling here
-			GameMaster.doTurn(true, time);
+			GameMaster.doTurn(true, timer.getCurrent());
 			timer.stop();
 			timer.reset();
 			// could go into a pool of cards for each player
@@ -43,8 +42,8 @@ public class GameEventhandler {
 			internalBoard.setSelCard(null);
 			// if no card is selected - first card is then selected
 		} else {
+			GameMaster.doTurn(false, timer.getCurrent());
 			timer.stop();
-			GameMaster.doTurn(false, time);
 			flipBack(internalBoard.getSelCard(), c).play();
 			internalBoard.getSelCard().setTurned(false);
 			c.setTurned(false);

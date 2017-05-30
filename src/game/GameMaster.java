@@ -13,19 +13,26 @@ public class GameMaster {
 	private static int EndCheck;
 
 	public static void doTurn(boolean scored, double newtime) {
-		if (EndCheck <= 0) {
-			GameOver();
-		}
-		if (scored) {
-			PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 2);
-			PlayerInTurn.setCurrenttime(PlayerInTurn.getCurrenttime() + newtime);
-			EndCheck -= 2;
-		} else {
-			if (playerAL.indexOf(PlayerInTurn) + 1 <= playerAL.size() - 1) {
-				setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
-			} else {
-				setPlayerInTurn(playerAL.get(0));
+		try {
+			if (EndCheck <= 0) {
+				GameOver();
 			}
+			if (scored) {
+				PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 1);
+				PlayerInTurn.setCurrenttime(PlayerInTurn.getCurrenttime() + newtime);
+				playerAL.get(PlayerInTurn.getId() - 1).CommitSafe();
+				EndCheck -= 2;
+			} else {
+				if (playerAL.indexOf(PlayerInTurn) <= playerAL.size() - 2) {
+					setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
+				} else {
+					setPlayerInTurn(playerAL.get(0));
+				}
+			}
+
+		} catch (Exception e) {
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "GameMaster Error", "Something went wrong in the GameMaster", "Oops");
+			exc.showdialog();
 		}
 	}
 
@@ -38,6 +45,8 @@ public class GameMaster {
 				PlayerInTurn.setMintime(PlayerInTurn.getCurrenttime());
 			}
 		}
+		
+		System.out.println("GAME OVER DEBUG");
 	}
 
 	public static Player getPlayerInTurn() {

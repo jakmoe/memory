@@ -6,7 +6,6 @@ package start_MEMORY;
  */
 
 import JSON.JSONhandler;
-import XML_DEPRECATED.XMLhandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +23,6 @@ public class Start extends Application {
 	private static int gamemode = 1;
 
 	public static void main(String[] args) {
-		XMLhandler.createdoc();
 		launch(args);
 	}
 

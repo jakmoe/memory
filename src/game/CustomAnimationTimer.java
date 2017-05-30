@@ -8,7 +8,6 @@ public class CustomAnimationTimer extends AnimationTimer {
 
 	public double getCurrent() {
 		return currentTime;
-
 	}
 
 	@Override
