@@ -21,38 +21,36 @@ public class GameEventhandler {
 	private static Point3D axis = new Point3D(5, 5, 0);
 	private static CustomAnimationTimer timer = new CustomAnimationTimer();
 
-	public static void cardturn(Card c, BoardPane internalBoard) {
+	public static Transition cardturn(Card c, BoardPane internalBoard) {
+		Transition animation = null;
 		// if a match is made
 		if (internalBoard.getSelCard() == null) {
-			// turn Card Animation here
-			flipCard(c, 0).play();
+			animation = flipCard(c, 0);
 			timer.start();
 			c.setTurned(true);
 			internalBoard.setSelCard(c);
-			// if no match was made
 		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
-			// Turn handling here
 			GameMaster.doTurn(true, timer.getCurrent());
 			timer.stop();
 			timer.reset();
-			// could go into a pool of cards for each player
 			Transition greyanim = flipGrey(internalBoard.getSelCard(), c);
-			greyanim.play();
+			animation = greyanim;
 			match(c, internalBoard.getSelCard());
 			internalBoard.setSelCard(null);
-			// if no card is selected - first card is then selected
 		} else {
 			GameMaster.doTurn(false, timer.getCurrent());
 			timer.stop();
-			flipBack(internalBoard.getSelCard(), c).play();
+			animation = flipBack(internalBoard.getSelCard(), c);
 			internalBoard.getSelCard().setTurned(false);
 			c.setTurned(false);
 			internalBoard.setSelCard(null);
 		}
 		// Play Sound
 		MP3handler.play(1);
-		// Platform.runLater(task);
-
+		if (animation.getCurrentRate() == 0.0) {
+			//animation.play();
+		}
+		return animation;
 	}
 
 	public static Transition fadein(Node n) {
