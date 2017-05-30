@@ -73,6 +73,7 @@ public class BoardPane extends FlowPane {
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
+					//added handler for bugfix
 					if (!c.isMatched() && !c.isTurned() && ani_idx < 2) {
 						Transition animation = GameEventhandler.cardturn(c, BoardPane.this);
 						animation.play();
