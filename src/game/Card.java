@@ -8,6 +8,7 @@ import javafx.scene.shape.Rectangle;
 public class Card extends Rectangle {
 	private boolean turned;
 	private boolean matched;
+	private boolean animationlock;
 	private int card_id;
 
 	public Card() {
@@ -52,5 +53,17 @@ public class Card extends Rectangle {
 
 	public void setTurned(boolean turned) {
 		this.turned = turned;
+	}
+
+	public boolean inAnimation() {
+		return animationlock;
+	}
+	
+	public void lock(){
+		this.animationlock = true;
+	}
+	
+	public void unlock(){
+		this.animationlock = false;
 	}
 }

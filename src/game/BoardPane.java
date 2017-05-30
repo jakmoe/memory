@@ -19,11 +19,11 @@ import start_MEMORY.Start;
 
 public class BoardPane extends FlowPane {
 
+	public TransitionRun TR = new TransitionRun();
 	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 110 * 1.25);
 	private Card selCard;
 	private double offset;
-	private int ani_idx;
 	List<Card> cardList = new ArrayList<Card>();
 	List<Integer> cardValues = new ArrayList<Integer>();
 
@@ -73,19 +73,9 @@ public class BoardPane extends FlowPane {
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
-					//added handler for bugfix
-					if (!c.isMatched() && !c.isTurned() && ani_idx < 2) {
+					if (!c.isMatched() && !c.isTurned() && !c.inAnimation()) {
 						Transition animation = GameEventhandler.cardturn(c, BoardPane.this);
 						animation.play();
-						ani_idx++;
-						if (ani_idx == 2) {
-							animation.setOnFinished(new EventHandler<ActionEvent>() {
-								@Override
-								public void handle(ActionEvent event) {
-									ani_idx = 0;	
-								}
-							});
-						}
 					}
 				}
 			});

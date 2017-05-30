@@ -35,6 +35,7 @@ public class GameEventhandler {
 			timer.reset();
 			Transition greyanim = flipGrey(internalBoard.getSelCard(), c);
 			animation = greyanim;
+			animation.play();
 			match(c, internalBoard.getSelCard());
 			internalBoard.setSelCard(null);
 		} else {
@@ -47,9 +48,17 @@ public class GameEventhandler {
 		}
 		// Play Sound
 		MP3handler.play(1);
-		if (animation.getCurrentRate() == 0.0) {
-			//animation.play();
-		}
+		
+		animation.setOnFinished(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				c.unlock();
+				if (internalBoard.getSelCard() != null) {
+					internalBoard.getSelCard().unlock();
+				}
+			}
+		});
+		
 		return animation;
 	}
 
@@ -74,6 +83,8 @@ public class GameEventhandler {
 	}
 
 	static Transition flipBack(Card c1, Card c2) {
+		c1.lock();
+		c2.lock();
 		// TransitionRun TR = new TransitionRun();
 
 		RotateTransition c1turnAnimation = new RotateTransition(Duration.seconds(0.2), c1);
@@ -126,7 +137,7 @@ public class GameEventhandler {
 	}
 
 	static Transition flipCard(Card c, int pos) {
-
+		c.lock();
 		// TransitionRun TR = new TransitionRun();
 
 		ScaleTransition ScaleUp = new ScaleTransition(Duration.seconds(0.2), c);
@@ -178,6 +189,8 @@ public class GameEventhandler {
 	}
 
 	static Transition flipGrey(Card c1, Card c2) {
+		c1.lock();
+		c2.lock();
 		TransitionRun TR = new TransitionRun();
 
 		RotateTransition c1turnAnimation = new RotateTransition(Duration.seconds(0.2), c1);
@@ -223,8 +236,10 @@ public class GameEventhandler {
 				fadeout(c1).play();
 			}
 		});
+		
 
-		return Seq;
+		SequentialTransition output = new SequentialTransition(Seq);
+		return output;
 	}
 
 	static void match(Card c1, Card c2) {
