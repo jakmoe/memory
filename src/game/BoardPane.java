@@ -6,7 +6,6 @@ import java.util.List;
 
 import image.IMGhandler;
 import javafx.animation.Transition;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
