@@ -19,7 +19,6 @@ import start_MEMORY.Start;
 
 public class BoardPane extends FlowPane {
 
-	private TransitionRun TR = new TransitionRun();
 	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 110 * 1.25);
 	private Card selCard;
