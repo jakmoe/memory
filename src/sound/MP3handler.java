@@ -1,6 +1,7 @@
 package sound;
 
-import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -13,7 +14,7 @@ public class MP3handler {
 	private static double volumefx = 0.5;
 
 	public static void play(int SoundID) {
-		String musicFile = "src\\sound\\";
+		String musicFile = "";
 		switch (SoundID) {
 		case 1:
 			musicFile += "01_button";
@@ -23,15 +24,15 @@ public class MP3handler {
 			break;
 		}
 		musicFile += ".mp3";
-
-		Media sound = new Media(new File(musicFile).toURI().toString());
+		URL url = MP3handler.class.getResource(musicFile);
+		Media sound = new Media(url.toString());
 		soundPlayer = new MediaPlayer(sound);
 		soundPlayer.setVolume(volumefx);
 		soundPlayer.play();
 	}
 
 	public static void playbackground(int SoundID) {
-		String musicFile = "src\\sound\\";
+		String musicFile = "";
 		switch (SoundID) {
 		default:
 			musicFile += "00_idle";
@@ -44,8 +45,14 @@ public class MP3handler {
 			break;
 		}
 		musicFile += ".mp3";
-
-		Media sound = new Media(new File(musicFile).toURI().toString());
+		URL url = MP3handler.class.getResource(musicFile);
+		Media sound = null;
+		try {
+			sound = new Media(url.toURI().toString());
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		backgroundPlayer = new MediaPlayer(sound);
 		backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		backgroundPlayer.setVolume(volumebg);

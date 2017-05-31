@@ -40,7 +40,7 @@ public class SettingsController implements Initializable {
 		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				loader.setLocation(getClass().getResource("/FXML/MainMenu/Menu.fxml"));
+				loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
 				try {
 					Start.getJhdl().commit();
 					MP3handler.stopbackground();

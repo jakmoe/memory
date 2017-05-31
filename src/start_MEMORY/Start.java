@@ -29,7 +29,7 @@ public class Start extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/FXML/MainMenu/Menu.fxml"));
+		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);

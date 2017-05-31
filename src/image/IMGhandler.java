@@ -1,6 +1,7 @@
 package image;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javafx.concurrent.Task;
@@ -12,7 +13,8 @@ public class IMGhandler {
 	private static ArrayList<ImagePattern> images = new ArrayList<ImagePattern>();
 
 	public static Image getGameBackground() {
-		Image img = new Image(File.separator + "image" + File.separator + "board.jpg", 1400, 1200, false, true);
+		URL url = IMGhandler.class.getResource("/image/board.jpg");
+		Image img = new Image(url.toString(), 1400, 1200, false, true);
 		return img;
 	}
 
@@ -30,7 +32,8 @@ public class IMGhandler {
 					if (isCancelled()) {
 						break;
 					}
-					Image img = new Image("/image/cards/" + i + ".jpg", 500, 500, true, true);
+					URL url = IMGhandler.class.getResource("/image/cards/" + i + ".jpg");
+					Image img = new Image(url.toURI().toString(), 500, 500, true, true);
 					ImagePattern imgp = new ImagePattern(img);
 					images.add(imgp);
 					updateProgress(i, cardcount);
@@ -47,7 +50,8 @@ public class IMGhandler {
 		switch (id) {
 		case 1:
 			for (int i = 0; i < 6; i++) {
-				Image img = new Image("/image/sprites/gm_sprite_" + i + ".png");
+				URL url = IMGhandler.class.getResource("/image/sprites/gm_sprite_" + i + ".png");
+				Image img = new Image(url.toString());
 				sprites.add(new ImagePattern(img));
 			}
 			break;

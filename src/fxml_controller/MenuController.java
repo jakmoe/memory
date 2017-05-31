@@ -59,7 +59,7 @@ public class MenuController implements Initializable {
 
 	@FXML
 	private void gamesettings(ActionEvent event) {
-		loader.setLocation(getClass().getResource("/FXML/Settings/Settings.fxml"));
+		loader.setLocation(getClass().getResource("/fxml/Settings/Settings.fxml"));
 		try {
 			Parent root = loader.load();
 			singleplayer.getScene().setRoot(root);
@@ -127,7 +127,7 @@ public class MenuController implements Initializable {
 				progressBar.setProgress(sv.getProgress());
 				if (progressBar.getProgress() == 1) {
 					this.stop();
-					loader.setLocation(getClass().getResource("/FXML/UIGame/UIGame.fxml"));
+					loader.setLocation(getClass().getResource("/fxml/UIGame/UIGame.fxml"));
 					try {
 						Parent root = loader.load();
 						singleplayer.getScene().setRoot(root);
