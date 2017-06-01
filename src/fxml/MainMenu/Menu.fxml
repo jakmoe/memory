@@ -39,8 +39,8 @@
 				<Button fx:id="settings" alignment="CENTER" contentDisplay="CENTER"
 					mnemonicParsing="false" onAction="#gamesettings" prefHeight="80.0"
 					prefWidth="1723.0" text="Einstellungen" textAlignment="CENTER" />
-				<Button alignment="CENTER" contentDisplay="CENTER"
-					mnemonicParsing="false" prefHeight="80.0" prefWidth="1723.0" text="Credits"
+				<Button fx:id="credits" alignment="CENTER" contentDisplay="CENTER"
+					mnemonicParsing="false" onAction="#credits" prefHeight="80.0" prefWidth="1723.0" text="Credits"
 					textAlignment="CENTER" />
 				<Button fx:id="end" alignment="CENTER" contentDisplay="CENTER"
 					mnemonicParsing="false" onAction="#endprogram" prefHeight="80.0"

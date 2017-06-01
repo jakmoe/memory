@@ -11,8 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.DepthTest;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.FlowPane;
 import start_MEMORY.Start;
 

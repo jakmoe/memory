@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Julius+Sans+One');
+.anchor {
+    -fx-background-image:url('/image/cr.jpg');
+    -fx-background-size: stretch ;
+}
+.button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Julius Sans One", sans-serif;
+    -fx-text-fill: black;
+    
+    -fx-font-size: 15px; /* 12 */
+}
+.button:pressed {
+    -fx-background-color: grey;
+    -fx-text-fill: #828282;
+}
+.button:hover {
+    -fx-opacity: 0.5;
+    -fx-background-color:rgba(0, 0, 0, 0.5);
+}
+
+.label {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Julius Sans One", sans-serif;
+    -fx-text-fill: black;
+    
+    -fx-font-size: 40px; /* 12 */
+}
+
+.radio-button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Julius Sans One", sans-serif;
+    -fx-text-fill: black;
+    
+    -fx-font-size: 15px; /* 12 */
+}
+
+#sliderlabel {
+    -fx-font-size: 12px; /* 12 */
+}
