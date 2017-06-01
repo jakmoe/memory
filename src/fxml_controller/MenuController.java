@@ -77,6 +77,13 @@ public class MenuController implements Initializable {
 
 	@FXML
 	private void gamemultiplayer(ActionEvent event) {
+		Optional<ButtonType> result = null;
+		ButtonType buttonTypeTwo = new ButtonType("2");
+		ButtonType buttonTypeThree = new ButtonType("3");
+		ButtonType buttonTypeFour = new ButtonType("4");
+		ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+		
+		boolean cancel = false;
 		if (multichoice == null) {
 			multichoice = new Alert(AlertType.CONFIRMATION);
 			multichoice.initStyle(StageStyle.UTILITY);
@@ -85,30 +92,27 @@ public class MenuController implements Initializable {
 			multichoice.setTitle("Playerchoice");
 			multichoice.setHeaderText("How many Players?");
 			multichoice.setContentText("Please choose.");
-
-			ButtonType buttonTypeTwo = new ButtonType("2");
-			ButtonType buttonTypeThree = new ButtonType("3");
-			ButtonType buttonTypeFour = new ButtonType("4");
-			ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-
 			multichoice.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
-
-			Optional<ButtonType> result = multichoice.showAndWait();
-			if (result.get() == buttonTypeTwo) {
-				Start.setGamemode(2);
-			} else if (result.get() == buttonTypeThree) {
-				Start.setGamemode(3);
-			} else if (result.get() == buttonTypeFour) {
-				Start.setGamemode(4);
-			} else {
-				// ... user chose CANCEL or closed the dialog
-				multichoice.close();
-			}
+			result = multichoice.showAndWait();
 		} else {
-			multichoice.showAndWait();
+			result = multichoice.showAndWait();
 		}
 
-		init_game();
+		if (result.get() == buttonTypeTwo) {
+			Start.setGamemode(2);
+		} else if (result.get() == buttonTypeThree) {
+			Start.setGamemode(3);
+		} else if (result.get() == buttonTypeFour) {
+			Start.setGamemode(4);
+		} else {
+			// ... user chose CANCEL or closed the dialog
+			multichoice.close();
+			cancel = true;
+		}
+		
+		if (!cancel) {
+			init_game();
+		}
 	}
 
 	private void init_game() {

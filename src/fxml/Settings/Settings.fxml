@@ -86,6 +86,14 @@
                         <Insets right="50.0" />
                      </padding>
                   </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Cute" textFill="WHITE" toggleGroup="$theme">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="50.0" />
+                     </padding>
+                  </RadioButton>
                </children>
                <padding>
                   <Insets left="60.0" />

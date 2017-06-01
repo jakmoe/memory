@@ -21,11 +21,27 @@ public class IMGhandler {
 			break;
 		case 2:
 			url = IMGhandler.class.getResource("/image/dark.jpg");
+			break;
+		case 3:
+			url = IMGhandler.class.getResource("/image/cute.jpg");
+			break;
 		default:
 			break;
 		}
 		Image img = new Image(url.toString(), 1920, 1080, true, true);
 		return img;
+	}
+	
+	
+	public static ImagePattern getPlayer(boolean active) {
+		URL url = null;
+		if (active) {
+			url = IMGhandler.class.getResource("/image/player_x.png");
+		} else {
+			url = IMGhandler.class.getResource("/image/player.png");
+		}
+		Image img = new Image(url.toString());
+		return new ImagePattern(img);
 	}
 
 	public static ImagePattern getImage_card(int id) {

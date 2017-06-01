@@ -118,26 +118,11 @@ public class GameController implements Initializable {
 		for (Player player : playerAL) {
 			// this is just debug coding
 			Circle circle = new Circle(100, Color.BLUE);
-			switch (player.getId()) {
-			case 1:
-				circle.setFill(Color.AQUA);
-				break;
-			case 2:
-				circle.setFill(Color.LIGHTGREEN);
-				break;
-			case 3:
-				circle.setFill(Color.LIGHTYELLOW);
-				break;
-			case 4:
-				circle.setFill(Color.ORANGERED);
-				break;
-			}
-			circle.setStrokeType(StrokeType.INSIDE);
-			circle.setStroke(Color.BLACK);
+			circle.setFill(IMGhandler.getPlayer(false));
 			if (player.getId() == GameMaster.getPlayerInTurn().getId()) {
-				circle.setStrokeWidth(10);
+				circle.setFill(IMGhandler.getPlayer(true));
 			} else {
-				circle.setStrokeWidth(5);
+				circle.setFill(IMGhandler.getPlayer(false));
 			}
 			Label playerlabel = new Label("Player " + player.getId() + 
 										  "\nHighscore " + player.getHighscore() +
@@ -159,19 +144,19 @@ public class GameController implements Initializable {
 						if (oldValue.intValue() <= playerAL.size() && newValue.intValue() != 1) {
 							StackPane sp1 = (StackPane) players.getChildren().get(newValue.intValue() - 1);
 							Circle c1 = (Circle) sp1.getChildren().get(0);
-							c1.setStrokeWidth(10);
+							c1.setFill(IMGhandler.getPlayer(true));
 
 							StackPane sp2 = (StackPane) players.getChildren().get(newValue.intValue() - 2);
 							Circle c2 = (Circle) sp2.getChildren().get(0);
-							c2.setStrokeWidth(5);
+							c2.setFill(IMGhandler.getPlayer(false));
 						} else {
 							StackPane sp1 = (StackPane) players.getChildren().get(0);
 							Circle c1 = (Circle) sp1.getChildren().get(0);
-							c1.setStrokeWidth(10);
+							c1.setFill(IMGhandler.getPlayer(true));
 
 							StackPane sp2 = (StackPane) players.getChildren().get(playerAL.size() - 1);
 							Circle c2 = (Circle) sp2.getChildren().get(0);
-							c2.setStrokeWidth(5);
+							c2.setFill(IMGhandler.getPlayer(false));
 						}	
 					}
 				} catch (Exception e) {
