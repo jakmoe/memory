@@ -3,6 +3,7 @@ package sound;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import game.ExceptionHandler;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -50,8 +51,8 @@ public class MP3handler {
 		try {
 			sound = new Media(url.toURI().toString());
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Sound Error", "Something went wrong with the Sounds", "Oops");
+			exc.showdialog();
 		}
 		backgroundPlayer = new MediaPlayer(sound);
 		backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);

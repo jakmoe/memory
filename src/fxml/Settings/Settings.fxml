@@ -63,6 +63,34 @@
 						</RadioButton>
 					</children>
 				</HBox>
+            <Label text="Theme" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="920.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="Light" textFill="WHITE">
+                     <padding>
+                        <Insets right="50.0" />
+                     </padding>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="theme" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Dark" textFill="WHITE" toggleGroup="$theme">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="50.0" />
+                     </padding>
+                  </RadioButton>
+               </children>
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+            </HBox>
             <Label text="Lautstärke" textFill="WHITE">
                <font>
                   <Font size="24.0" />

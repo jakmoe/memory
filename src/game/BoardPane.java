@@ -28,11 +28,11 @@ public class BoardPane extends FlowPane {
 
 	public BoardPane() {
 		super();
-		BoardPane.this.setBackground(
-				new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
+//		BoardPane.this.setBackground(
+//				new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
 		BoardPane.this.setCache(true);
 		BoardPane.this.setCacheShape(true);
-		BoardPane.this.setStyle("-fx-border-color: Blue");
+//		BoardPane.this.setStyle("-fx-border-color: Blue");
 		BoardPane.this.setVgap(20);
 		BoardPane.this.setHgap(40);
 		BoardPane.this.setAlignment(Pos.CENTER);

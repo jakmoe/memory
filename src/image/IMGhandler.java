@@ -11,10 +11,20 @@ import javafx.scene.paint.ImagePattern;
 public class IMGhandler {
 
 	private static ArrayList<ImagePattern> images = new ArrayList<ImagePattern>();
-
+	private static int theme = 1;
+	
 	public static Image getGameBackground() {
-		URL url = IMGhandler.class.getResource("/image/board.jpg");
-		Image img = new Image(url.toString(), 1400, 1200, false, true);
+		URL url = null;
+		switch (theme) {
+		case 1:
+			url = IMGhandler.class.getResource("/image/light.jpg");
+			break;
+		case 2:
+			url = IMGhandler.class.getResource("/image/dark.jpg");
+		default:
+			break;
+		}
+		Image img = new Image(url.toString(), 1920, 1080, true, true);
 		return img;
 	}
 
@@ -60,5 +70,13 @@ public class IMGhandler {
 		}
 		return sprites;
 
+	}
+
+	public static int getTheme() {
+		return theme;
+	}
+
+	public static void setTheme(int theme) {
+		IMGhandler.theme = theme;
 	}
 }

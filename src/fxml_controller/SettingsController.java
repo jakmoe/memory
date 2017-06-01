@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import image.IMGhandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -34,6 +35,9 @@ public class SettingsController implements Initializable {
 
 	@FXML
 	ToggleGroup difficulty;
+	
+	@FXML
+	ToggleGroup theme;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -75,13 +79,31 @@ public class SettingsController implements Initializable {
 			}
 		});
 
-		int id = 1;
+		int theme_id = 1;
+		for (Toggle toggle : theme.getToggles()) {
+			if (IMGhandler.getTheme() == theme_id) {
+				theme.selectToggle(toggle);
+			}
+			toggle.setUserData(theme_id);
+			theme_id++;
+		}
+		theme.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			@Override
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+				if (theme.getSelectedToggle() != null) {
+					IMGhandler.setTheme((int) new_toggle.getUserData());
+				}
+			}
+		});
+		
+		
+		int difficulty_id = 1;
 		for (Toggle toggle : difficulty.getToggles()) {
-			if (Start.getJhdl().getModel().getInfo().getDifficulty() == id) {
+			if (Start.getJhdl().getModel().getInfo().getDifficulty() == difficulty_id) {
 				difficulty.selectToggle(toggle);
 			}
-			toggle.setUserData(id);
-			id++;
+			toggle.setUserData(difficulty_id);
+			difficulty_id++;
 		}
 		difficulty.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			@Override

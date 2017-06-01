@@ -110,7 +110,7 @@ public class GameController implements Initializable {
 
 		menu.setAlignment(Pos.CENTER);
 
-		menu.setStyle("-fx-border-color: Blue");
+//		menu.setStyle("-fx-border-color: Blue");
 	}
 
 	public void initPlayers() {
@@ -148,7 +148,7 @@ public class GameController implements Initializable {
 		}
 		players.setAlignment(Pos.CENTER);
 		players.setSpacing(10);
-		players.setStyle("-fx-border-color: Blue");
+//		players.setStyle("-fx-border-color: Blue");
 
 		//subject to change: Here the new handling for game avatars has to be implemented
 		GameMaster.setIdListener(new ChangeListener<Number>() {
@@ -175,7 +175,7 @@ public class GameController implements Initializable {
 						}	
 					}
 				} catch (Exception e) {
-					ExceptionHandler exc = new ExceptionHandler(e, "Error", "Listener Error", "Something went wrong the Change Listener", "Oops");
+					ExceptionHandler exc = new ExceptionHandler(e, "Error", "Listener Error", "Something went wrong with a Change Listener", "Oops");
 					exc.showdialog();
 				}
 			}
