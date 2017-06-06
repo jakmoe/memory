@@ -24,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -52,7 +53,7 @@ public class GameController implements Initializable {
 
 	@FXML
 	private VBox players;
-
+	
 	@FXML
 	private Pane info;
 
@@ -69,7 +70,6 @@ public class GameController implements Initializable {
 		base.setCacheHint(CacheHint.SPEED);
 		base.setBackground(
 				new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
-
 		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
@@ -132,36 +132,40 @@ public class GameController implements Initializable {
 		}
 		players.setAlignment(Pos.CENTER);
 		players.setSpacing(10);
-//		players.setStyle("-fx-border-color: Blue");
 
 		//subject to change: Here the new handling for game avatars has to be implemented
 		GameMaster.setIdListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				try {
-					if (playerAL.size() > 1) {
-						if (oldValue.intValue() <= playerAL.size() && newValue.intValue() != 1) {
-							StackPane sp1 = (StackPane) players.getChildren().get(newValue.intValue() - 1);
-							Circle c1 = (Circle) sp1.getChildren().get(0);
-							c1.setFill(IMGhandler.getPlayer(true));
+				for (Node n : base.getChildren()) {
+					if (n.getClass() == VBox.class && n.getId() == players.getId()) {
+						try {
+							if (((VBox) n).getChildren().size() > 1 & playerAL.size() > 1) {
+								if (oldValue.intValue() <= playerAL.size()) {
+									if (oldValue.intValue() == 0) {
+										oldValue = 1;
+									}
+									if (newValue.intValue() == 0) {
+										newValue = 1;
+									}
+									StackPane sp1 = null;
+									sp1 = (StackPane) ((VBox) n).getChildren().get(newValue.intValue() - 1);
+									Circle c1 = (Circle) sp1.getChildren().get(0);
+									c1.setFill(IMGhandler.getPlayer(true));
 
-							StackPane sp2 = (StackPane) players.getChildren().get(newValue.intValue() - 2);
-							Circle c2 = (Circle) sp2.getChildren().get(0);
-							c2.setFill(IMGhandler.getPlayer(false));
-						} else {
-							StackPane sp1 = (StackPane) players.getChildren().get(0);
-							Circle c1 = (Circle) sp1.getChildren().get(0);
-							c1.setFill(IMGhandler.getPlayer(true));
-
-							StackPane sp2 = (StackPane) players.getChildren().get(playerAL.size() - 1);
-							Circle c2 = (Circle) sp2.getChildren().get(0);
-							c2.setFill(IMGhandler.getPlayer(false));
-						}	
+									StackPane sp2 = null;
+									sp2 = (StackPane) ((VBox) n).getChildren().get(oldValue.intValue() - 1);
+									Circle c2 = (Circle) sp2.getChildren().get(0);
+									c2.setFill(IMGhandler.getPlayer(false));
+								} 
+							}
+						} catch (Exception e) {
+							ExceptionHandler exc = new ExceptionHandler(e, "Error", "Listener Error", "Something went wrong with a Change Listener", "Oops");
+							exc.showdialog();
+						}			
 					}
-				} catch (Exception e) {
-					ExceptionHandler exc = new ExceptionHandler(e, "Error", "Listener Error", "Something went wrong with a Change Listener", "Oops");
-					exc.showdialog();
 				}
+
 			}
 		});
 	}

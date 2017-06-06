@@ -26,13 +26,12 @@ public class GameEventhandler {
 		// if a match is made
 		if (internalBoard.getSelCard() == null) {
 			animation = flipCard(c, 0);
+			timer.stop();
 			timer.start();
 			c.setTurned(true);
 			internalBoard.setSelCard(c);
 		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
 			GameMaster.doTurn(true, timer.getCurrent());
-			timer.stop();
-			timer.reset();
 			Transition greyanim = flipGrey(internalBoard.getSelCard(), c);
 			animation = greyanim;
 			animation.play();
@@ -41,6 +40,7 @@ public class GameEventhandler {
 		} else {
 			GameMaster.doTurn(false, timer.getCurrent());
 			timer.stop();
+			timer.reset();
 			animation = flipBack(internalBoard.getSelCard(), c);
 			internalBoard.getSelCard().setTurned(false);
 			c.setTurned(false);
@@ -48,8 +48,8 @@ public class GameEventhandler {
 		}
 		// Play Sound
 		MP3handler.play(1);
-		
-		animation.setOnFinished(new EventHandler<ActionEvent>() {
+		ParallelTransition wrapperanimation = new ParallelTransition(animation);
+		wrapperanimation.setOnFinished(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				c.unlock();
@@ -59,7 +59,7 @@ public class GameEventhandler {
 			}
 		});
 		
-		return animation;
+		return wrapperanimation;
 	}
 
 	public static Transition fadein(Node n) {

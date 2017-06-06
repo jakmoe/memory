@@ -30,15 +30,12 @@ public class BoardPane extends FlowPane {
 //				new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
 		BoardPane.this.setCache(true);
 		BoardPane.this.setCacheShape(true);
-//		BoardPane.this.setStyle("-fx-border-color: Blue");
 		BoardPane.this.setVgap(20);
 		BoardPane.this.setHgap(40);
 		BoardPane.this.setAlignment(Pos.CENTER);
 		offset = 0;
-		if (cardValues.isEmpty()) {
-			picSize = Start.getJhdl().getModel().getInfo().getPicSize(this.getPrefWidth(), this.getPrefHeight());
-			Initialize(Start.getJhdl().getModel().getInfo().getCardcount());
-		}
+		picSize = Start.getJhdl().getModel().getInfo().getPicSize(this.getPrefWidth(), this.getPrefHeight());
+		Initialize(Start.getJhdl().getModel().getInfo().getCardcount());
 	}
 
 	public int getCardPairs() {
@@ -50,6 +47,11 @@ public class BoardPane extends FlowPane {
 	}
 
 	public void Initialize(int cardPairs) {
+		if (!cardValues.isEmpty()) {
+			cardList.clear();
+			cardValues.clear();
+		}
+		
 		BoardPane.this.setCardPairs(cardPairs);
 		for (int i = 1; i < BoardPane.this.getCardPairs() + 1; i++) {
 			cardValues.add(i);
@@ -73,6 +75,7 @@ public class BoardPane extends FlowPane {
 					if (!c.isMatched() && !c.isTurned() && !c.inAnimation()) {
 						Transition animation = GameEventhandler.cardturn(c, BoardPane.this);
 						animation.play();
+						c.lock();
 					}
 				}
 			});

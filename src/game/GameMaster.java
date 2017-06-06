@@ -55,6 +55,10 @@ public class GameMaster {
 	public static ArrayList<Player> getPlayers() {
 		return playerAL;
 	}
+	
+	public static void reset(){
+		playerAL.clear();
+	}
 
 	public static void setPlayerInTurn(Player playerInTurn) {
 		PlayerInTurn = playerInTurn;
@@ -62,7 +66,7 @@ public class GameMaster {
 	}
 
 	public static void startGame(int playercount, int boardsize) {
-		playerAL.clear();
+		reset();
 		// add players
 		for (int i = 1; i <= playercount; i++) {
 			playerAL.add(new Player(i));

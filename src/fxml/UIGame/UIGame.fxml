@@ -15,7 +15,7 @@
 		<BoardPane fx:id="gamepane" cache="true" cacheHint="SPEED"
 			depthTest="ENABLE" layoutX="100.0" layoutY="100.0" prefHeight="900.0"
 			prefWidth="1300.0" />
-		<VBox fx:id="players" layoutX="1500.0" layoutY="100.0"
+		<VBox fx:id="players" id="playersid" layoutX="1500.0" layoutY="100.0"
 			prefHeight="900.0" prefWidth="400.0" />
 		<Pane fx:id="info" layoutX="100.0" layoutY="1000.0" prefHeight="50.0"
 			prefWidth="1200.0" />
