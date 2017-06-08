@@ -21,6 +21,7 @@ import javafx.stage.StageStyle;
 public class Start extends Application {
 	private static JSONhandler jhdl = new JSONhandler();
 	private static int gamemode = 1;
+	private static Stage stage;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -37,6 +38,7 @@ public class Start extends Application {
 		stage.setFullScreenExitHint("");
 		stage.setResizable(false);
 		stage.initStyle(StageStyle.UNDECORATED);
+		setStage(stage);
 		stage.show();
 		jhdl.pull();
 		// initialize MP3Handler
@@ -57,5 +59,13 @@ public class Start extends Application {
 
 	public static void setGamemode(int gamemode) {
 		Start.gamemode = gamemode;
+	}
+
+	public static Stage getStage() {
+		return stage;
+	}
+
+	public static void setStage(Stage stage) {
+		Start.stage = stage;
 	}
 }

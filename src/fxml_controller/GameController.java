@@ -5,16 +5,27 @@ package fxml_controller;
  * and open the template in the editor.
  */
 
+import java.awt.Paint;
+import java.awt.PaintContext;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import game.BoardPane;
 import game.ExceptionHandler;
 import game.GameMaster;
 import game.Player;
 import image.IMGhandler;
+import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -27,8 +38,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -36,6 +49,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import sound.MP3handler;
 import start_MEMORY.Start;
 
@@ -62,6 +76,16 @@ public class GameController implements Initializable {
 	@FXML
 	private BoardPane gamepane;
 
+	private static boolean win_ind;
+
+	public static boolean isWin_ind() {
+		return win_ind;
+	}
+
+	public static void setWin_ind(boolean win_ind) {
+		GameController.win_ind = win_ind;
+	}
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		base.getStylesheets().add("/fxml/UIGame/UIGame.css");
@@ -73,11 +97,35 @@ public class GameController implements Initializable {
 		initPlayers();
 		initMenu();
 
+		setupGameover();
+		
 		// Debug here needs to check if background is even running
 		MP3handler.stopbackground();
 		MP3handler.playbackground(2);
+		
 	}
-	
+
+	private void setupGameover() {
+		AnimationTimer anitim = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				ImageView winbase = null;
+				if (win_ind && winbase == null) {
+				       winbase = new ImageView(IMGhandler.getWinScreen());
+				       winbase.setPreserveRatio(true);
+				       winbase.setOpacity(0);
+				       FadeTransition fadein = new FadeTransition(Duration.seconds(0.4), winbase);
+				       fadein.setToValue(1);
+				       base.getChildren().add(winbase);
+				       winbase.toFront();
+				       win_ind = false;
+				       fadein.play();
+				}
+			}
+		};
+		anitim.start();
+	}
+
 	public void initMenu() {
 		Button buttonMenu = new Button("Menu");
 

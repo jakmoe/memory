@@ -16,13 +16,13 @@ public class IMGhandler {
 		URL url = null;
 		switch (theme) {
 		case 1:
-			url = IMGhandler.class.getResource("/image/light.jpg");
+			url = IMGhandler.class.getResource("/image/background/light.jpg");
 			break;
 		case 2:
-			url = IMGhandler.class.getResource("/image/dark.jpg");
+			url = IMGhandler.class.getResource("/image/background/dark.jpg");
 			break;
 		case 3:
-			url = IMGhandler.class.getResource("/image/cute.jpg");
+			url = IMGhandler.class.getResource("/image/background/cute.jpg");
 			break;
 		default:
 			break;
@@ -31,13 +31,18 @@ public class IMGhandler {
 		return img;
 	}
 	
+	public static Image getWinScreen(){
+		URL url = IMGhandler.class.getResource("/image/winscreen/win.png");
+		Image img = new Image(url.toString(), 1920, 1080, true, true);
+		return img;
+	}
 	
 	public static ImagePattern getPlayer(boolean active) {
 		URL url = null;
 		if (active) {
-			url = IMGhandler.class.getResource("/image/player_x.png");
+			url = IMGhandler.class.getResource("/image/player/player_x.png");
 		} else {
-			url = IMGhandler.class.getResource("/image/player.png");
+			url = IMGhandler.class.getResource("/image/player/player.png");
 		}
 		Image img = new Image(url.toString());
 		return new ImagePattern(img);

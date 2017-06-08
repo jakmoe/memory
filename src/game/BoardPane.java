@@ -1,39 +1,23 @@
 package game;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import image.IMGhandler;
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.Transition;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.DepthTest;
-import javafx.scene.Parent;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.ImagePattern;
-import javafx.util.Duration;
 import start_MEMORY.Start;
 
 public class BoardPane extends FlowPane {
 
 	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 110 * 1.25);
-	private Card selCard;
 	private double offset;
 	List<Card> cardList = new ArrayList<Card>();
 	List<Integer> cardValues = new ArrayList<Integer>();
@@ -55,10 +39,6 @@ public class BoardPane extends FlowPane {
 
 	public int getCardPairs() {
 		return cardPairs;
-	}
-
-	public Card getSelCard() {
-		return selCard;
 	}
 
 	public void Initialize(int cardPairs) {
@@ -108,10 +88,6 @@ public class BoardPane extends FlowPane {
 
 	public void setCardPairs(int cardcount) {
 		this.cardPairs = cardcount;
-	}
-
-	public void setSelCard(Card selCard) {
-		this.selCard = selCard;
 	}
 
 }
