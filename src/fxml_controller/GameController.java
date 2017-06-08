@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-//import game.Board;
 import game.BoardPane;
 import game.ExceptionHandler;
 import game.GameMaster;

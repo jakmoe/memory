@@ -1,5 +1,7 @@
 package game;
 
+import java.util.LinkedList;
+
 import image.IMGhandler;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -20,46 +22,65 @@ import sound.MP3handler;
 public class GameEventhandler {
 	private static Point3D axis = new Point3D(5, 5, 0);
 	private static CustomAnimationTimer timer = new CustomAnimationTimer();
+	private static Card c1;
+	private static Card c2;
 
-	public static Transition cardturn(Card c, BoardPane internalBoard) {
+	private static LinkedList<Transition> queue = new LinkedList<Transition>();
+
+	public static void cardturn(Card c, BoardPane internalBoard) {
 		Transition animation = null;
-		// if a match is made
-		if (internalBoard.getSelCard() == null) {
-			animation = flipCard(c, 0);
+
+		if (c1 == null) {
+			
+			c1 = c;
+			c1.lock();
+			animation = flipCard(c1, 0);
 			timer.stop();
 			timer.start();
 			c.setTurned(true);
-			internalBoard.setSelCard(c);
-		} else if (internalBoard.getSelCard().getCard_Id() == c.getCard_Id()) {
-			GameMaster.doTurn(true, timer.getCurrent());
-			Transition greyanim = flipGrey(internalBoard.getSelCard(), c);
-			animation = greyanim;
-			animation.play();
-			match(c, internalBoard.getSelCard());
-			internalBoard.setSelCard(null);
-		} else {
-			GameMaster.doTurn(false, timer.getCurrent());
-			timer.stop();
-			timer.reset();
-			animation = flipBack(internalBoard.getSelCard(), c);
-			internalBoard.getSelCard().setTurned(false);
-			c.setTurned(false);
-			internalBoard.setSelCard(null);
+
+		} else if (c2 == null) {
+
+			c2 = c;
+			c2.lock();
+
 		}
-		// Play Sound
-		MP3handler.play(1);
-		ParallelTransition wrapperanimation = new ParallelTransition(animation);
-		wrapperanimation.setOnFinished(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				c.unlock();
-				if (internalBoard.getSelCard() != null) {
-					internalBoard.getSelCard().unlock();
-				}
+		if (c1 != null && c2 != null) {
+			if (c1.getCard_Id() == c2.getCard_Id()) {
+
+				GameMaster.doTurn(true, timer.getCurrent());
+				animation = flipGrey(c1, c2);
+				match(c1, c2);
+
+				c1 = null;
+				c2 = null;
+
+			} else {
+
+				GameMaster.doTurn(false, timer.getCurrent());
+				timer.stop();
+				timer.reset();
+				animation = flipBack(c1, c2);
+				c1.setTurned(false);
+				c2.setTurned(false);
+
+				c1 = null;
+				c2 = null;
+
 			}
-		});
-		
-		return wrapperanimation;
+		}
+		animation.play();
+		MP3handler.play(1);
+	}
+
+	public static void reset(Node n) {
+		n.setScaleX(1);
+		n.setScaleY(1);
+		n.setScaleZ(1);
+		n.setLayoutX(0);
+		n.setLayoutY(0);
+		n.setTranslateX(0);
+		n.setTranslateY(0);
 	}
 
 	public static Transition fadein(Node n) {
@@ -105,6 +126,13 @@ public class GameEventhandler {
 			}
 		});
 
+		c1turnBackAnimation.setOnFinished(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				c1.unlock();
+			}
+		});
+
 		RotateTransition c2turnAnimation = new RotateTransition(Duration.seconds(0.2), c2);
 		c2turnAnimation.setToAngle(90);
 		c2turnAnimation.setAxis(axis);
@@ -117,11 +145,17 @@ public class GameEventhandler {
 			@Override
 			public void handle(ActionEvent event) {
 				c2.setFill(IMGhandler.getImage_card(0));
-				// TR.setAnim(c2turnBackAnimation);
-				// TR.run();
 				c2turnBackAnimation.play();
 			}
 		});
+
+		c2turnBackAnimation.setOnFinished(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				c2.unlock();
+			}
+		});
+
 		ParallelTransition parallel = new ParallelTransition(c1turnAnimation, c2turnAnimation);
 		SequentialTransition Seq;
 		if (c1.getParent().getChildrenUnmodifiable().indexOf(c1) == c2.getParent().getChildrenUnmodifiable().indexOf(c2)
@@ -177,8 +211,6 @@ public class GameEventhandler {
 			@Override
 			public void handle(ActionEvent event) {
 				c.setFill(IMGhandler.getImage_card(c.getCard_Id()));
-				// TR.setAnim(turnBackAnimation);
-				// TR.run();
 				turnBackAnimation.play();
 			}
 		});
@@ -236,7 +268,6 @@ public class GameEventhandler {
 				fadeout(c1).play();
 			}
 		});
-		
 
 		SequentialTransition output = new SequentialTransition(Seq);
 		return output;
@@ -247,7 +278,9 @@ public class GameEventhandler {
 		c2.setMatched(true);
 	}
 
-	public static void time() {
-
+	public static void handlequeue() {
+		if (queue.peek() != null) {
+				queue.poll().play();
+		}
 	}
 }

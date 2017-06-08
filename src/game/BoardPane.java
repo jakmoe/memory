@@ -1,22 +1,36 @@
 package game;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import image.IMGhandler;
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.Transition;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.DepthTest;
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.util.Duration;
 import start_MEMORY.Start;
 
 public class BoardPane extends FlowPane {
 
-	public TransitionRun TR = new TransitionRun();
 	private int cardPairs;
 	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 110 * 1.25);
 	private Card selCard;
@@ -26,8 +40,9 @@ public class BoardPane extends FlowPane {
 
 	public BoardPane() {
 		super();
-//		BoardPane.this.setBackground(
-//				new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
+		// BoardPane.this.setBackground(
+		// new Background(new BackgroundImage(IMGhandler.getGameBackground(),
+		// null, null, null, null)));
 		BoardPane.this.setCache(true);
 		BoardPane.this.setCacheShape(true);
 		BoardPane.this.setVgap(20);
@@ -47,11 +62,19 @@ public class BoardPane extends FlowPane {
 	}
 
 	public void Initialize(int cardPairs) {
+		AnimationTimer anitim = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				GameEventhandler.handlequeue();
+			}
+		};
+		anitim.start();
+		
 		if (!cardValues.isEmpty()) {
 			cardList.clear();
 			cardValues.clear();
 		}
-		
+
 		BoardPane.this.setCardPairs(cardPairs);
 		for (int i = 1; i < BoardPane.this.getCardPairs() + 1; i++) {
 			cardValues.add(i);
@@ -68,14 +91,11 @@ public class BoardPane extends FlowPane {
 			c.setArcHeight(20);
 			c.setArcWidth(20);
 			c.setCache(true);
-			// c.setManaged(true);
 			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
-					if (!c.isMatched() && !c.isTurned() && !c.inAnimation()) {
-						Transition animation = GameEventhandler.cardturn(c, BoardPane.this);
-						animation.play();
-						c.lock();
+					if (!c.isMatched() & !c.isTurned() & !c.inAnimation()) {
+						GameEventhandler.cardturn(c, BoardPane.this);
 					}
 				}
 			});
