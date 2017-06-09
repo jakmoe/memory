@@ -5,22 +5,15 @@ package fxml_controller;
  * and open the template in the editor.
  */
 
-import java.awt.Paint;
-import java.awt.PaintContext;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
-
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import game.BoardPane;
 import game.ExceptionHandler;
+import game.GameEventhandler;
 import game.GameMaster;
 import game.Player;
 import image.IMGhandler;
@@ -36,12 +29,14 @@ import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -49,6 +44,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import sound.MP3handler;
 import start_MEMORY.Start;
@@ -60,6 +57,9 @@ import start_MEMORY.Start;
 public class GameController implements Initializable {
 
 	FXMLLoader loader = new FXMLLoader();
+
+	private Button buttonMenu = new Button("Menu");
+	private Label timerlabel = new Label("-");
 
 	@FXML
 	private Pane base;
@@ -96,6 +96,7 @@ public class GameController implements Initializable {
 		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
+		initTimer();
 
 		setupGameover();
 		
@@ -105,11 +106,19 @@ public class GameController implements Initializable {
 		
 	}
 
+	private void initTimer() {
+		timerlabel.setScaleX(4);
+		timerlabel.setScaleY(4);
+		timerlabel.setLayoutX(base.getPrefWidth()/2);
+		timerlabel.setLayoutY(40);
+		base.getChildren().add(timerlabel);
+	}
+
 	private void setupGameover() {
 		AnimationTimer anitim = new AnimationTimer() {
+			ImageView winbase = null;
 			@Override
 			public void handle(long now) {
-				ImageView winbase = null;
 				if (win_ind && winbase == null) {
 				       winbase = new ImageView(IMGhandler.getWinScreen());
 				       winbase.setPreserveRatio(true);
@@ -121,14 +130,14 @@ public class GameController implements Initializable {
 				       win_ind = false;
 				       fadein.play();
 				}
+				   //debug time
+			       timerlabel.setText(Double.toString(Math.round(GameEventhandler.getTimer().getCurrent()*10.0)/10.0));
 			}
 		};
 		anitim.start();
 	}
 
 	public void initMenu() {
-		Button buttonMenu = new Button("Menu");
-
 		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -143,13 +152,24 @@ public class GameController implements Initializable {
 				}
 			}
 		});
-		menu.getChildren().add(buttonMenu);
+		buttonMenu.setGraphic(new ImageView(IMGhandler.getArrow(1, 60, 60, true)));
+		buttonMenu.setText("");
+		base.getChildren().add(buttonMenu);
 
 		Button buttonExit = new Button("Exit");
 		buttonExit.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.exit(0);
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Exit");
+				alert.setHeaderText("Do you really want to exit the program?");
+				alert.initStyle(StageStyle.TRANSPARENT);
+				alert.initOwner(base.getScene().getWindow());
+				alert.initModality(Modality.WINDOW_MODAL);
+				Optional<ButtonType> result = alert.showAndWait();
+				if (result.get() == ButtonType.OK){
+					System.exit(0);
+				}
 			}
 		});
 		menu.getChildren().add(buttonExit);

@@ -22,8 +22,9 @@ public class CustomAnimationTimer extends AnimationTimer {
 
 	@Override
 	public void start() {
-		startTime = System.currentTimeMillis();
-		super.start();
+		if (currentTime == 0) {
+			startTime = System.currentTimeMillis();
+			super.start();
+		}
 	}
-
 }

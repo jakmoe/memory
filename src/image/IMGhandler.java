@@ -1,5 +1,6 @@
 package image;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ public class IMGhandler {
 
 	private static ArrayList<ImagePattern> images = new ArrayList<ImagePattern>();
 	private static int theme = 1;
-	
+
 	public static Image getGameBackground() {
 		URL url = null;
 		switch (theme) {
@@ -30,13 +31,13 @@ public class IMGhandler {
 		Image img = new Image(url.toString(), 1920, 1080, true, true);
 		return img;
 	}
-	
-	public static Image getWinScreen(){
+
+	public static Image getWinScreen() {
 		URL url = IMGhandler.class.getResource("/image/winscreen/win.png");
 		Image img = new Image(url.toString(), 1920, 1080, true, true);
 		return img;
 	}
-	
+
 	public static ImagePattern getPlayer(boolean active) {
 		URL url = null;
 		if (active) {
@@ -98,5 +99,27 @@ public class IMGhandler {
 
 	public static void setTheme(int theme) {
 		IMGhandler.theme = theme;
+	}
+
+	public static Image getArrow(int id, double width, double height, boolean preserveRatio) {
+		URL url = null;
+		Image img = null;
+
+		switch (id) {
+		case 1:
+			url = IMGhandler.class.getResource("/image/navigation/arrow_left.png");
+			break;
+		case 2:
+			url = IMGhandler.class.getResource("/image/navigation/arrow_right.png");
+			break;
+		default:
+			break;
+		}
+		try {
+			img = new Image(url.toURI().toString(), width, height, preserveRatio, true);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return img;
 	}
 }

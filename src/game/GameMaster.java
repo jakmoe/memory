@@ -1,24 +1,11 @@
 package game;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import fxml_controller.GameController;
-import image.IMGhandler;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import start_MEMORY.Start;
 
 public class GameMaster {
 	private static ArrayList<Player> playerAL = new ArrayList<Player>();

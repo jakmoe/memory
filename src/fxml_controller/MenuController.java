@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import game.GameEventhandler;
 import image.IMGhandler;
 import javafx.animation.AnimationTimer;
 import javafx.concurrent.Service;
@@ -130,7 +131,8 @@ public class MenuController implements Initializable {
 	}
 
 	private void init_game() {
-
+		GameEventhandler.getTimer().stop();
+		GameEventhandler.getTimer().reset();
 		ProgressBar progressBar = new ProgressBar(0);
 		progressBar.setPrefSize(400, 40);
 		Service<Void> sv = new Service<Void>() {

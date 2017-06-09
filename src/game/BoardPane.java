@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import image.IMGhandler;
-import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
@@ -17,23 +16,17 @@ import start_MEMORY.Start;
 public class BoardPane extends FlowPane {
 
 	private int cardPairs;
-	private double picSize = (this.getPrefWidth() / this.getPrefHeight() * 110 * 1.25);
+	private double picSize = getPicSize(this.getPrefWidth(), this.getPrefHeight());
 	private double offset;
-	List<Card> cardList = new ArrayList<Card>();
-	List<Integer> cardValues = new ArrayList<Integer>();
+	private List<Card> cardList = new ArrayList<Card>();
+	private List<Integer> cardValues = new ArrayList<Integer>();
 
 	public BoardPane() {
 		super();
-		// BoardPane.this.setBackground(
-		// new Background(new BackgroundImage(IMGhandler.getGameBackground(),
-		// null, null, null, null)));
 		BoardPane.this.setCache(true);
 		BoardPane.this.setCacheShape(true);
-		BoardPane.this.setVgap(20);
-		BoardPane.this.setHgap(40);
 		BoardPane.this.setAlignment(Pos.CENTER);
 		offset = 0;
-		picSize = Start.getJhdl().getModel().getInfo().getPicSize(this.getPrefWidth(), this.getPrefHeight());
 		Initialize(Start.getJhdl().getModel().getInfo().getCardcount());
 	}
 
@@ -42,13 +35,6 @@ public class BoardPane extends FlowPane {
 	}
 
 	public void Initialize(int cardPairs) {
-		AnimationTimer anitim = new AnimationTimer() {
-			@Override
-			public void handle(long now) {
-				GameEventhandler.handlequeue();
-			}
-		};
-		anitim.start();
 		
 		if (!cardValues.isEmpty()) {
 			cardList.clear();
@@ -89,5 +75,33 @@ public class BoardPane extends FlowPane {
 	public void setCardPairs(int cardcount) {
 		this.cardPairs = cardcount;
 	}
-
+	
+	public double getPicSize(double width, double height) {
+		switch (Start.getJhdl().getModel().getInfo().getDifficulty()) {
+		case 1:
+			BoardPane.this.setVgap(20);
+			BoardPane.this.setHgap(40);
+			return (width / height * 110 * 1.6);
+		case 2:
+			BoardPane.this.setVgap(20);
+			BoardPane.this.setHgap(40);
+			return (width / height * 110 * 1.25);
+		case 3:
+			BoardPane.this.setVgap(20);
+			BoardPane.this.setHgap(40);
+			return (width / height * 110 * 1.1);
+		case 4:
+			BoardPane.this.setVgap(10);
+			BoardPane.this.setHgap(50);
+			return (width / height * 110 * 0.85);
+		case 5:
+			BoardPane.this.setVgap(10);
+			BoardPane.this.setHgap(50);
+			return (width / height * 110 * 0.85);
+		default:
+			BoardPane.this.setVgap(20);
+			BoardPane.this.setHgap(40);
+			return (width / height * 110 * 1.25);
+		}
+	}
 }

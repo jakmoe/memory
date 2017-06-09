@@ -1,7 +1,5 @@
 package game;
 
-import java.util.LinkedList;
-
 import image.IMGhandler;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -18,6 +16,7 @@ import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import sound.MP3handler;
+import start_MEMORY.Start;
 
 public class GameEventhandler {
 	private static Point3D axis = new Point3D(5, 5, 0);
@@ -25,54 +24,53 @@ public class GameEventhandler {
 	private static Card c1;
 	private static Card c2;
 
-	private static LinkedList<Transition> queue = new LinkedList<Transition>();
 
 	public static void cardturn(Card c, BoardPane internalBoard) {
 		Transition animation = null;
-
 		if (c1 == null) {
-			
 			c1 = c;
 			c1.lock();
 			animation = flipCard(c1, 0);
-			timer.stop();
+			if(Start.getGamemode() > 1) {
+				timer.stop();
+			}
 			timer.start();
 			c.setTurned(true);
-
 		} else if (c2 == null) {
-
 			c2 = c;
 			c2.lock();
-
 		}
 		if (c1 != null && c2 != null) {
 			if (c1.getCard_Id() == c2.getCard_Id()) {
-
 				GameMaster.doTurn(true, timer.getCurrent());
 				animation = flipGrey(c1, c2);
 				match(c1, c2);
 
 				c1 = null;
 				c2 = null;
-
 			} else {
 
 				GameMaster.doTurn(false, timer.getCurrent());
-				timer.stop();
-				timer.reset();
+				if(Start.getGamemode() > 1) {
+					timer.stop();
+					timer.reset();
+				}
 				animation = flipBack(c1, c2);
 				c1.setTurned(false);
 				c2.setTurned(false);
-
+				
 				c1 = null;
 				c2 = null;
-
 			}
 		}
 		animation.play();
 		MP3handler.play(1);
 	}
 
+	public static CustomAnimationTimer getTimer() {
+		return timer;
+	}
+	
 	public static void reset(Node n) {
 		n.setScaleX(1);
 		n.setScaleY(1);
@@ -278,9 +276,4 @@ public class GameEventhandler {
 		c2.setMatched(true);
 	}
 
-	public static void handlequeue() {
-		if (queue.peek() != null) {
-				queue.poll().play();
-		}
-	}
 }

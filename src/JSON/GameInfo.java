@@ -61,21 +61,4 @@ public class GameInfo {
 			return 24;
 		}
 	}
-
-	public double getPicSize(double width, double height) {
-		switch (difficulty) {
-		case 1:
-			return (width / height * 110 * 1.6);
-		case 2:
-			return (width / height * 110 * 1.25);
-		case 3:
-			return (width / height * 110 * 1.1);
-		case 4:
-			return (width / height * 110 * 0.9);
-		case 5:
-			return (width / height * 110 * 0.85);
-		default:
-			return 24;
-		}
-	}
 }
