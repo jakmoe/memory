@@ -15,14 +15,9 @@ public class GameMaster {
 
 	public static void doTurn(boolean scored, double newtime) {
 		try {
-			if (EndCheck <= 1) {
-				GameOver();
-			}
 			if (scored) {
 				PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 1);
-				PlayerInTurn.setCurrenttime(PlayerInTurn.getCurrenttime() + newtime);
-				playerAL.get(PlayerInTurn.getId() - 1).CommitSafe();
-				EndCheck--;
+				PlayerInTurn.setMintime(PlayerInTurn.getCurrenttime() + newtime);
 			} else {
 				if (playerAL.indexOf(PlayerInTurn) <= playerAL.size() - 2) {
 					setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
@@ -30,23 +25,35 @@ public class GameMaster {
 					setPlayerInTurn(playerAL.get(0));
 				}
 			}
+			if (EndCheck <= 1) {
+				GameOver();
+			}
+			if (scored) {
+				EndCheck--;
+			}
+//			System.out.println(PlayerInTurn.getName() + " " + PlayerInTurn.getCurrenttime() + " " + PlayerInTurn.getHighscore() + " " +
+//					PlayerInTurn.getId() + " " + PlayerInTurn.getMintime());
+
 		} catch (Exception e) {
-			ExceptionHandler exc = new ExceptionHandler(e, "Error", "GameMaster Error", "Something went wrong in the GameMaster", "Oops");
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "GameMaster Error",
+					"Something went wrong in the GameMaster", "Oops");
 			exc.showdialog();
 		}
 	}
 
 	public static void GameOver() {
+		GameEventhandler.getTimer().stop();
 		// still implementation for the final game with boardsize 9 needed
-
-		for (int i = 1; i < playerAL.size(); i++) {
+		for (int i = 0; i < playerAL.size(); i++) {
+			System.out.println("Name" + playerAL.get(i).getName());
+			System.out.println("Time curr" + playerAL.get(i).getCurrenttime());
+			System.out.println("Highscore" + playerAL.get(i).getHighscore());
+			System.out.println("ID" + playerAL.get(i).getId());
+			System.out.println("Mintime" + playerAL.get(i).getMintime());
 			playerAL.get(i).CommitSafe();
-			if (PlayerInTurn.getMintime() >= PlayerInTurn.getCurrenttime() || PlayerInTurn.getMintime() == 0) {
-				PlayerInTurn.setMintime(PlayerInTurn.getCurrenttime());
-			}
 		}
-		
-	    GameController.setWin_ind(true);
+
+		GameController.setWin_ind(true);
 	}
 
 	public static Player getPlayerInTurn() {
@@ -56,8 +63,8 @@ public class GameMaster {
 	public static ArrayList<Player> getPlayers() {
 		return playerAL;
 	}
-	
-	public static void reset(){
+
+	public static void reset() {
 		playerAL.clear();
 	}
 
@@ -70,7 +77,7 @@ public class GameMaster {
 		reset();
 		// add players
 		for (int i = 1; i <= playercount; i++) {
-			playerAL.add(new Player(i));
+			playerAL.add(new Player(0.0, i, 0.0, 0, "testname"));
 		}
 
 		// set the EndCheck to the Board size

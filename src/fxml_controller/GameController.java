@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import JSON.PlayerSave;
 import game.BoardPane;
 import game.ExceptionHandler;
 import game.GameEventhandler;
@@ -66,7 +67,7 @@ public class GameController implements Initializable {
 
 	@FXML
 	private VBox players;
-	
+
 	@FXML
 	private Pane info;
 
@@ -91,47 +92,64 @@ public class GameController implements Initializable {
 		base.getStylesheets().add("/fxml/UIGame/UIGame.css");
 		base.setCache(true);
 		base.setCacheHint(CacheHint.SPEED);
-		base.setBackground(
-				new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
+		base.setBackground(new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
 		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
 		initTimer();
 
-		setupGameover();
-		
+		setupTimer();
+
 		// Debug here needs to check if background is even running
 		MP3handler.stopbackground();
 		MP3handler.playbackground(2);
-		
+
 	}
 
 	private void initTimer() {
 		timerlabel.setScaleX(4);
 		timerlabel.setScaleY(4);
-		timerlabel.setLayoutX(base.getPrefWidth()/2);
+		timerlabel.setLayoutX(base.getPrefWidth() / 2);
 		timerlabel.setLayoutY(40);
 		base.getChildren().add(timerlabel);
 	}
 
-	private void setupGameover() {
+	private void setupTimer() {
 		AnimationTimer anitim = new AnimationTimer() {
-			ImageView winbase = null;
+			ImageView winbaseimg = null;
+			Pane winbase = null;
+
 			@Override
 			public void handle(long now) {
 				if (win_ind && winbase == null) {
-				       winbase = new ImageView(IMGhandler.getWinScreen());
-				       winbase.setPreserveRatio(true);
-				       winbase.setOpacity(0);
-				       FadeTransition fadein = new FadeTransition(Duration.seconds(0.4), winbase);
-				       fadein.setToValue(1);
-				       base.getChildren().add(winbase);
-				       winbase.toFront();
-				       win_ind = false;
-				       fadein.play();
+					winbaseimg = new ImageView(IMGhandler.getWinScreen());
+					winbase = new Pane(winbaseimg);
+					winbase.setPrefHeight(base.getPrefHeight());
+					winbase.setPrefWidth(base.getPrefWidth());
+					winbaseimg.setPreserveRatio(true);
+					winbaseimg.setOpacity(0);
+					FadeTransition fadein = new FadeTransition(Duration.seconds(0.4), winbaseimg);
+					fadein.setToValue(1);
+					
+					winbaseimg.toFront();
+
+					ArrayList<PlayerSave> highscoreAL = Start.getJhdl().getModel().getPlayers();
+					VBox highscores = new VBox();
+					for (PlayerSave playerSave : highscoreAL) {
+						Button player = new Button(playerSave.getName() + "-" +
+												 playerSave.getHighscore() + "-" +
+												 playerSave.getMintime());
+						highscores.getChildren().add(player);
+					}
+					winbase.getChildren().add(highscores);
+					highscores.toFront();
+					
+					base.getChildren().add(winbase);
+					win_ind = false;
+					fadein.play();
 				}
-				   //debug time
-			       timerlabel.setText(Double.toString(Math.round(GameEventhandler.getTimer().getCurrent()*10.0)/10.0));
+				// debug time
+				timerlabel.setText(Double.toString(Math.round(GameEventhandler.getTimer().getCurrent() * 10.0) / 10.0));
 			}
 		};
 		anitim.start();
@@ -167,7 +185,7 @@ public class GameController implements Initializable {
 				alert.initOwner(base.getScene().getWindow());
 				alert.initModality(Modality.WINDOW_MODAL);
 				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == ButtonType.OK){
+				if (result.get() == ButtonType.OK) {
 					System.exit(0);
 				}
 			}
@@ -176,7 +194,7 @@ public class GameController implements Initializable {
 
 		menu.setAlignment(Pos.CENTER);
 
-//		menu.setStyle("-fx-border-color: Blue");
+		// menu.setStyle("-fx-border-color: Blue");
 	}
 
 	public void initPlayers() {
@@ -190,9 +208,8 @@ public class GameController implements Initializable {
 			} else {
 				circle.setFill(IMGhandler.getPlayer(false));
 			}
-			Label playerlabel = new Label("Player " + player.getId() + 
-										  "\nHighscore " + player.getHighscore() +
-										  "\nTime " + player.getMintime());
+			Label playerlabel = new Label("Player " + player.getId() + "\nHighscore " + player.getHighscore()
+					+ "\nTime " + player.getMintime());
 			StackPane circlestack = new StackPane(circle, playerlabel);
 
 			players.getChildren().add(circlestack);
@@ -200,7 +217,8 @@ public class GameController implements Initializable {
 		players.setAlignment(Pos.CENTER);
 		players.setSpacing(10);
 
-		//subject to change: Here the new handling for game avatars has to be implemented
+		// subject to change: Here the new handling for game avatars has to be
+		// implemented
 		GameMaster.setIdListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -224,12 +242,13 @@ public class GameController implements Initializable {
 									sp2 = (StackPane) ((VBox) n).getChildren().get(oldValue.intValue() - 1);
 									Circle c2 = (Circle) sp2.getChildren().get(0);
 									c2.setFill(IMGhandler.getPlayer(false));
-								} 
+								}
 							}
 						} catch (Exception e) {
-							ExceptionHandler exc = new ExceptionHandler(e, "Error", "Listener Error", "Something went wrong with a Change Listener", "Oops");
+							ExceptionHandler exc = new ExceptionHandler(e, "Error", "Listener Error",
+									"Something went wrong with a Change Listener", "Oops");
 							exc.showdialog();
-						}			
+						}
 					}
 				}
 

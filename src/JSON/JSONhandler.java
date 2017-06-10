@@ -22,24 +22,8 @@ public class JSONhandler {
 
 	private JSONModel model = new JSONModel();
 
-	public void deleteinfo(int id) {
-		try (Reader reader = new FileReader(s)) {
-			model = gson.fromJson(reader, JSONModel.class);
-			model.removePlayer(id);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public PlayerSave readPlayerinfo(int id) {
-		if (model.getPlayer(id) == null) {
-			writePlayerinfo(PlayerSave.getDummy(id));
-		}
-		return model.getPlayer(id);
-	}
-
 	public void writePlayerinfo(PlayerSave ps) {
-		model.newPlayer(ps);
+		model.updateModel(ps);
 		commit();
 	}
 

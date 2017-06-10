@@ -1,7 +1,6 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import image.IMGhandler;
@@ -46,7 +45,7 @@ public class BoardPane extends FlowPane {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
-		Collections.shuffle(cardValues);
+//		Collections.shuffle(cardValues);
 		for (int val : cardValues) {
 			Card c = new Card(offset, offset, picSize, picSize);
 			// coordinates must be adapted

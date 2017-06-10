@@ -1,20 +1,57 @@
 package JSON;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class JSONModel {
 	private GameInfo gameInfo = new GameInfo();
-	private ArrayList<PlayerSave> players = new ArrayList<>();
+	private ArrayList<PlayerSave> players_very_easy = new ArrayList<>();
+	private ArrayList<PlayerSave> players_easy = new ArrayList<>();
+	private ArrayList<PlayerSave> players_medium = new ArrayList<>();
+	private ArrayList<PlayerSave> players_hard = new ArrayList<>();
+	private ArrayList<PlayerSave> players_very_hard = new ArrayList<>();
 
-	public void addDummy(int id, PlayerSave dummy) {
-		if (dummy == null) {
-			dummy = new PlayerSave();
-			dummy.setHighscore(20);
-			dummy.setMintime(20.0);
-			dummy.setName("John");
-			dummy.setId(id);
+	public void updateModel(PlayerSave ps) {
+		ps.setId(getPlayers().size() + 1);
+		getPlayers().add(ps);
+		
+		getPlayers().sort(new Comparator<PlayerSave>() {
+			@Override
+			public int compare(PlayerSave o1, PlayerSave o2) {
+				// TODO Auto-generated method stub
+				if (o1.getHighscore() > o2.getHighscore()) {
+					return 1;
+				} else if (o1.getHighscore() < o2.getHighscore()) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+		
+		getPlayers().sort(new Comparator<PlayerSave>() {
+			@Override
+			public int compare(PlayerSave o1, PlayerSave o2) {
+				// TODO Auto-generated method stub
+				if (o1.getMintime() > o2.getMintime()) {
+					return 1;
+				} else if (o1.getMintime() < o2.getMintime()) {
+					return -1;
+				}
+				return 0;
+			}
+		});
+		
+		shrinkTo(getPlayers(), 10);
+	}
+
+	public static void shrinkTo(List<PlayerSave> list, int newSize) {
+		int size = list.size();
+		if (newSize >= size)
+			return;
+		for (int i = newSize; i < size; i++) {
+			list.remove(list.size() - 1);
 		}
-		players.add(dummy);
 	}
 
 	public GameInfo getInfo() {
@@ -25,52 +62,45 @@ public class JSONModel {
 		gameInfo.setVersion(ver);
 	}
 
-	public void fillModel(ArrayList<PlayerSave> posts) {
-		this.players = posts;
-	}
-
-	public PlayerSave getPlayer(int id) {
-		for (PlayerSave playerSave : players) {
-			if (playerSave.getId() == id) {
-				return playerSave;
-			}
-		}
-		return null;
-	}
-
-	public boolean newPlayer(PlayerSave ps) {
-		boolean found = false;
-		for (PlayerSave playerSave : players) {
-			if (playerSave.getId() == ps.getId()) {
-				playerSave.setId(ps.getId());
-				playerSave.setHighscore(ps.getHighscore());
-				playerSave.setMintime(ps.getMintime());
-				playerSave.setName(ps.getName());
-				found = true;
-			}
-		}
-		if (!found) {
-			players.add(ps);
-		}
-		return found;
-	}
-
-	public void removePlayer(int id) {
-		boolean all_removed = false;
-		while (!all_removed) {
-			for (PlayerSave playerSave : players) {
-				if (playerSave.getId() == id) {
-					all_removed = !(players.remove(playerSave));
-				}
-			}
-		}
-	}
-
 	public ArrayList<PlayerSave> getPlayers() {
-		return players;
+		int difficulty = gameInfo.getDifficulty();
+		switch (difficulty) {
+		case 1:
+			return players_very_easy;
+		case 2:
+			return players_easy;
+		case 3:
+			return players_medium;
+		case 4:
+			return players_hard;
+		case 5:
+			return players_very_hard;
+		default:
+			return null;
+		// Exception here
+		}
 	}
 
 	public void setPlayers(ArrayList<PlayerSave> players) {
-		this.players = players;
+		int difficulty = gameInfo.getDifficulty();
+		switch (difficulty) {
+		case 1:
+			this.players_very_easy = players;
+			break;
+		case 2:
+			this.players_easy = players;
+			break;
+		case 3:
+			this.players_medium = players;
+			break;
+		case 4:
+			this.players_hard = players;
+			break;
+		case 5:
+			this.players_very_hard = players;
+			break;
+		default:
+			// Exception here
+		}
 	}
 }

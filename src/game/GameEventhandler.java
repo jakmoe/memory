@@ -31,10 +31,9 @@ public class GameEventhandler {
 			c1 = c;
 			c1.lock();
 			animation = flipCard(c1, 0);
-			if(Start.getGamemode() > 1) {
-				timer.stop();
+			if (timer.getCurrent() == 0) {
+				timer.start();
 			}
-			timer.start();
 			c.setTurned(true);
 		} else if (c2 == null) {
 			c2 = c;
