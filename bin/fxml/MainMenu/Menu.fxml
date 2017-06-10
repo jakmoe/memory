@@ -33,8 +33,8 @@
 				<Button fx:id="multiplayer" alignment="CENTER" contentDisplay="CENTER"
 					mnemonicParsing="false" onAction="#gamemultiplayer" prefHeight="80.0" prefWidth="1723.0" text="Mehrspieler"
 					textAlignment="CENTER" />
-				<Button alignment="CENTER" contentDisplay="CENTER"
-					mnemonicParsing="false" prefHeight="80.0" prefWidth="1723.0" text="Highscores"
+				<Button fx:id="highscores" alignment="CENTER" contentDisplay="CENTER"
+					mnemonicParsing="false" onAction="#highscores" prefHeight="80.0" prefWidth="1723.0" text="Highscores"
 					textAlignment="CENTER" />
 				<Button fx:id="settings" alignment="CENTER" contentDisplay="CENTER"
 					mnemonicParsing="false" onAction="#gamesettings" prefHeight="80.0"

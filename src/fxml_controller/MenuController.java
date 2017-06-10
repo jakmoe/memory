@@ -50,6 +50,8 @@ public class MenuController implements Initializable {
 	@FXML
 	private Button settings;
 	@FXML
+	private Button highscores;
+	@FXML
 	private Button credits;
 	@FXML
 	private Button end;
@@ -63,6 +65,18 @@ public class MenuController implements Initializable {
 	@FXML
 	private void gamesettings(ActionEvent event) {
 		loader.setLocation(getClass().getResource("/fxml/Settings/Settings.fxml"));
+		try {
+			Parent root = loader.load();
+			singleplayer.getScene().setRoot(root);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	private void highscores(ActionEvent event) {
+		loader.setLocation(getClass().getResource("/fxml/Highscore/Highscore.fxml"));
 		try {
 			Parent root = loader.load();
 			singleplayer.getScene().setRoot(root);
