@@ -17,6 +17,7 @@ import game.ExceptionHandler;
 import game.GameEventhandler;
 import game.GameMaster;
 import game.Player;
+import game.WinStack;
 import image.IMGhandler;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
@@ -34,7 +35,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -59,6 +63,7 @@ public class GameController implements Initializable {
 
 	FXMLLoader loader = new FXMLLoader();
 
+	private Button buttonExit = new Button("Exit");
 	private Button buttonMenu = new Button("Menu");
 	private Label timerlabel = new Label("-");
 
@@ -97,7 +102,7 @@ public class GameController implements Initializable {
 		initPlayers();
 		initMenu();
 		initTimer();
-
+		initSettings();
 		setupTimer();
 
 		// Debug here needs to check if background is even running
@@ -106,11 +111,52 @@ public class GameController implements Initializable {
 
 	}
 
+	private void initSettings() {
+		Slider fx = new Slider(0, 100, Start.getJhdl().getModel().getInfo().getVolume_effects());
+		Slider bg = new Slider(0, 100, Start.getJhdl().getModel().getInfo().getVolume_music());
+		HBox volfx = new HBox(10,fx,new Label("Effects"));
+		HBox volbg = new HBox(10,bg,new Label("Background"));
+		CustomMenuItem volumefx = new CustomMenuItem(volfx);
+		CustomMenuItem volumebg = new CustomMenuItem(volbg);
+		volumefx.setHideOnClick(false);
+		volumebg.setHideOnClick(false);
+		MenuButton mb = new MenuButton();
+		mb.getItems().add(volumebg);
+		mb.getItems().add(volumefx);
+		mb.getItems().add(new CustomMenuItem(buttonMenu, false));
+		mb.getItems().add(new CustomMenuItem(buttonExit, false));
+		mb.setLayoutX(1660);
+		mb.setLayoutY(0);
+		mb.setGraphic(new ImageView(IMGhandler.getSettings()));
+		mb.setBackground(Background.EMPTY);
+		bg.setValue(Start.getJhdl().getModel().getInfo().getVolume_music() * 100);
+		bg.valueProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				double volume = newValue.doubleValue() / 100;
+				MP3handler.setVolumebg(volume);
+				Start.getJhdl().getModel().getInfo().setVolume_music(volume);
+			}
+		});
+
+		fx.setValue(Start.getJhdl().getModel().getInfo().getVolume_effects() * 100);
+		fx.valueProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				double volume = newValue.doubleValue() / 100;
+				MP3handler.setVolumefx(volume);
+				Start.getJhdl().getModel().getInfo().setVolume_effects(volume);
+			}
+		});
+		
+		base.getChildren().add(mb);
+	}
+
 	private void initTimer() {
-		timerlabel.setScaleX(4);
-		timerlabel.setScaleY(4);
-		timerlabel.setLayoutX(base.getPrefWidth() / 2);
-		timerlabel.setLayoutY(40);
+		timerlabel.setScaleX(3.5);
+		timerlabel.setScaleY(3.5);
+		timerlabel.setLayoutX(1690);
+		timerlabel.setLayoutY(1040);
 		base.getChildren().add(timerlabel);
 	}
 
@@ -128,11 +174,10 @@ public class GameController implements Initializable {
 					winbase.setPrefWidth(base.getPrefWidth());
 					winbaseimg.setPreserveRatio(true);
 					winbaseimg.setOpacity(0);
-					FadeTransition fadein = new FadeTransition(Duration.seconds(0.4), winbaseimg);
-					fadein.setToValue(1);
-					
 					winbaseimg.toFront();
-
+					WinStack winstack = new WinStack();
+					winstack.initialize(GameMaster.getPlayers());
+					winbase.getChildren().add(winstack);
 					ArrayList<PlayerSave> highscoreAL = Start.getJhdl().getModel().getPlayers();
 					VBox highscores = new VBox();
 					for (PlayerSave playerSave : highscoreAL) {
@@ -143,9 +188,10 @@ public class GameController implements Initializable {
 					}
 					winbase.getChildren().add(highscores);
 					highscores.toFront();
-					
 					base.getChildren().add(winbase);
 					win_ind = false;
+					FadeTransition fadein = new FadeTransition(Duration.seconds(0.4), winbase);
+					fadein.setToValue(1);
 					fadein.play();
 				}
 				// debug time
@@ -163,18 +209,15 @@ public class GameController implements Initializable {
 				try {
 					MP3handler.stopbackground();
 					Parent root = loader.load();
-					buttonMenu.getScene().setRoot(root);
+					base.getScene().setRoot(root);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
-		buttonMenu.setGraphic(new ImageView(IMGhandler.getArrow(1, 60, 60, true)));
-		buttonMenu.setText("");
-		base.getChildren().add(buttonMenu);
+		buttonMenu.setText("Menu");
 
-		Button buttonExit = new Button("Exit");
 		buttonExit.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -190,11 +233,7 @@ public class GameController implements Initializable {
 				}
 			}
 		});
-		menu.getChildren().add(buttonExit);
-
 		menu.setAlignment(Pos.CENTER);
-
-		// menu.setStyle("-fx-border-color: Blue");
 	}
 
 	public void initPlayers() {

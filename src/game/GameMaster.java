@@ -31,8 +31,6 @@ public class GameMaster {
 			if (scored) {
 				EndCheck--;
 			}
-//			System.out.println(PlayerInTurn.getName() + " " + PlayerInTurn.getCurrenttime() + " " + PlayerInTurn.getHighscore() + " " +
-//					PlayerInTurn.getId() + " " + PlayerInTurn.getMintime());
 
 		} catch (Exception e) {
 			ExceptionHandler exc = new ExceptionHandler(e, "Error", "GameMaster Error",
@@ -52,7 +50,7 @@ public class GameMaster {
 			System.out.println("Mintime" + playerAL.get(i).getMintime());
 			playerAL.get(i).CommitSafe();
 		}
-
+		
 		GameController.setWin_ind(true);
 	}
 

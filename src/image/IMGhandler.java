@@ -122,4 +122,44 @@ public class IMGhandler {
 		}
 		return img;
 	}
+
+	public static Image getSettings() {
+		URL url = IMGhandler.class.getResource("/image/navigation/settings.png");
+		try {
+			Image img = new Image(url.toURI().toString(), 50, 50, true, true);
+			return img;
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static Image getWinNumber(int id) {
+		URL url = null;
+		Image img = null;
+
+		switch (id) {
+		case 1:
+			url = IMGhandler.class.getResource("/image/winscreen/1.png");
+			break;
+		case 2:
+			url = IMGhandler.class.getResource("/image/winscreen/2.png");
+			break;
+		case 3:
+			url = IMGhandler.class.getResource("/image/winscreen/3.png");
+			break;
+		case 4:
+			url = IMGhandler.class.getResource("/image/winscreen/4.png");
+			break;
+		default:
+			break;
+		}
+		try {
+			img = new Image(url.toURI().toString(), 100, 100, true, true);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return img;
+	}
 }

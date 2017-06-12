@@ -29,6 +29,9 @@ public class JSONModel {
 			}
 		});
 		
+
+		shrinkTo(getPlayers(), 10);
+		
 		getPlayers().sort(new Comparator<PlayerSave>() {
 			@Override
 			public int compare(PlayerSave o1, PlayerSave o2) {
@@ -41,8 +44,6 @@ public class JSONModel {
 				return 0;
 			}
 		});
-		
-		shrinkTo(getPlayers(), 10);
 	}
 
 	public static void shrinkTo(List<PlayerSave> list, int newSize) {
