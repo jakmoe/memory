@@ -162,4 +162,16 @@ public class IMGhandler {
 		}
 		return img;
 	}
+	
+	public static Image getStack() {
+		URL url = IMGhandler.class.getResource("/image/winscreen/stack.jpg");
+		try {
+			Image img = new Image(url.toURI().toString(), 50, 50, true, true);
+			return img;
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

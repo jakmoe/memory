@@ -25,6 +25,7 @@ public class GameMaster {
 					setPlayerInTurn(playerAL.get(0));
 				}
 			}
+			PlayerInTurn.setAttempts(PlayerInTurn.getAttempts() + 1);
 			if (EndCheck <= 1) {
 				GameOver();
 			}
@@ -48,6 +49,7 @@ public class GameMaster {
 			System.out.println("Highscore" + playerAL.get(i).getHighscore());
 			System.out.println("ID" + playerAL.get(i).getId());
 			System.out.println("Mintime" + playerAL.get(i).getMintime());
+			System.out.println("Attempts" + playerAL.get(i).getAttempts());
 			playerAL.get(i).CommitSafe();
 		}
 		
@@ -75,7 +77,7 @@ public class GameMaster {
 		reset();
 		// add players
 		for (int i = 1; i <= playercount; i++) {
-			playerAL.add(new Player(0.0, i, 0.0, 0, "testname"));
+			playerAL.add(new Player(0.0, i, 0.0, 0, "testname", 0));
 		}
 
 		// set the EndCheck to the Board size

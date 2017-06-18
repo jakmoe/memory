@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.FlowPane?>
+
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import game.BoardPane?>
+<?import game.WinStack?>
 
 <Pane fx:id="base" depthTest="ENABLE" maxHeight="-Infinity"
 	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -21,5 +24,11 @@
 			prefWidth="1200.0" />
 		<HBox fx:id="menu" layoutX="1500.0" layoutY="1000.0" prefHeight="50.0"
 			prefWidth="400.0" />
+		<Pane fx:id="winbase" layoutX="0" layoutY="0" prefWidth="1920.0"
+			prefHeight="1080.0" disable="true">
+			<children>
+				<WinStack fx:id="winstack"/>
+			</children>
+		</Pane>
 	</children>
 </Pane>

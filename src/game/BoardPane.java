@@ -15,7 +15,7 @@ import start_MEMORY.Start;
 public class BoardPane extends FlowPane {
 
 	private int cardPairs;
-	private double picSize = getPicSize(this.getPrefWidth(), this.getPrefHeight());
+	private double picSize = adjustSize(this.getPrefWidth(), this.getPrefHeight());
 	private double offset;
 	private List<Card> cardList = new ArrayList<Card>();
 	private List<Integer> cardValues = new ArrayList<Integer>();
@@ -75,7 +75,7 @@ public class BoardPane extends FlowPane {
 		this.cardPairs = cardcount;
 	}
 	
-	public double getPicSize(double width, double height) {
+	public double adjustSize(double width, double height) {
 		switch (Start.getJhdl().getModel().getInfo().getDifficulty()) {
 		case 1:
 			BoardPane.this.setVgap(20);

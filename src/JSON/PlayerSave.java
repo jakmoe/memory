@@ -1,10 +1,18 @@
 package JSON;
 
 public class PlayerSave {
+	@Override
+	public String toString() {
+		return "Name=" + name + ", Highscore=" + highscore + ", Mintime=" + mintime
+				+ ", Attempts=" + attempts;
+	}
+
+
 	private String name;
 	private int highscore;
 	private double mintime;
 	private int id;
+	private int attempts;
 
 	public PlayerSave() {
 		mintime = 0;
@@ -13,11 +21,12 @@ public class PlayerSave {
 	}
 	
 
-	public PlayerSave(int id, String name, int highscore, double mintime) {
+	public PlayerSave(int id, String name, int highscore, double mintime, int attempts) {
 		super();
 		this.name = name;
 		this.highscore = highscore;
 		this.mintime = mintime;
+		this.setAttempts(attempts);
 	}
 
 
@@ -63,6 +72,16 @@ public class PlayerSave {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+
+	public int getAttempts() {
+		return attempts;
+	}
+
+
+	public void setAttempts(int attempts) {
+		this.attempts = attempts;
 	}
 
 }

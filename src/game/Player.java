@@ -8,20 +8,22 @@ public class Player {
 	private int id;
 	private double mintime;
 	private int highscore;
+	private int attempts;
 	private String name;
 	private PlayerSave PlayerSafegame;
 	
-	public Player(double currenttime, int id, double mintime, int highscore, String name) {
+	public Player(double currenttime, int id, double mintime, int highscore, String name, int attempts) {
 		super();
 		this.currenttime = currenttime;
 		this.id = id;
 		this.mintime = mintime;
 		this.highscore = highscore;
 		this.name = name;
+		this.attempts = attempts;
 	}
 
 	public void CommitSafe() {
-		PlayerSafegame = new PlayerSave(this.id, this.name, this.highscore, this.mintime);
+		PlayerSafegame = new PlayerSave(this.id, this.name, this.highscore, this.mintime, this.attempts);
 		Start.getJhdl().writePlayerinfo(PlayerSafegame);
 	}
 
@@ -63,6 +65,14 @@ public class Player {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getAttempts() {
+		return attempts;
+	}
+
+	public void setAttempts(int attempts) {
+		this.attempts = attempts;
 	}
 
 }

@@ -66,7 +66,19 @@ public class GameController implements Initializable {
 	private Button buttonExit = new Button("Exit");
 	private Button buttonMenu = new Button("Menu");
 	private Label timerlabel = new Label("-");
-
+	
+	@FXML
+	private WinStack winstack;
+	
+	@FXML
+	private Button rematch;
+	
+	@FXML
+	private Button remenu;
+	
+	@FXML
+	private Pane winbase;	
+	
 	@FXML
 	private Pane base;
 
@@ -90,6 +102,10 @@ public class GameController implements Initializable {
 
 	public static void setWin_ind(boolean win_ind) {
 		GameController.win_ind = win_ind;
+	}
+	
+	public void rematch(){
+		initialize(null, null);
 	}
 
 	@Override
@@ -162,37 +178,20 @@ public class GameController implements Initializable {
 
 	private void setupTimer() {
 		AnimationTimer anitim = new AnimationTimer() {
-			ImageView winbaseimg = null;
-			Pane winbase = null;
-
 			@Override
 			public void handle(long now) {
-				if (win_ind && winbase == null) {
-					winbaseimg = new ImageView(IMGhandler.getWinScreen());
-					winbase = new Pane(winbaseimg);
-					winbase.setPrefHeight(base.getPrefHeight());
-					winbase.setPrefWidth(base.getPrefWidth());
+				if (win_ind && winbase.isDisabled()) {
+					ImageView winbaseimg = new ImageView(IMGhandler.getWinScreen());
 					winbaseimg.setPreserveRatio(true);
-					winbaseimg.setOpacity(0);
-					winbaseimg.toFront();
-					WinStack winstack = new WinStack();
+					winbase.getChildren().add(winbaseimg);
+					winbaseimg.toBack();
 					winstack.initialize(GameMaster.getPlayers());
-					winbase.getChildren().add(winstack);
-					ArrayList<PlayerSave> highscoreAL = Start.getJhdl().getModel().getPlayers();
-					VBox highscores = new VBox();
-					for (PlayerSave playerSave : highscoreAL) {
-						Button player = new Button(playerSave.getName() + "-" +
-												 playerSave.getHighscore() + "-" +
-												 playerSave.getMintime());
-						highscores.getChildren().add(player);
-					}
-					winbase.getChildren().add(highscores);
-					highscores.toFront();
-					base.getChildren().add(winbase);
 					win_ind = false;
+					winbase.setOpacity(0);
 					FadeTransition fadein = new FadeTransition(Duration.seconds(0.4), winbase);
 					fadein.setToValue(1);
 					fadein.play();
+					winbase.setDisable(false);
 				}
 				// debug time
 				timerlabel.setText(Double.toString(Math.round(GameEventhandler.getTimer().getCurrent() * 10.0) / 10.0));

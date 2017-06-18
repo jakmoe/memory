@@ -12,38 +12,44 @@ public class JSONModel {
 	private ArrayList<PlayerSave> players_hard = new ArrayList<>();
 	private ArrayList<PlayerSave> players_very_hard = new ArrayList<>();
 
+	public void resetModel() {
+		players_very_easy.clear();
+		players_easy.clear();
+		players_medium.clear();
+		players_hard.clear();
+		players_very_hard.clear();
+	}
+	
 	public void updateModel(PlayerSave ps) {
+		if(ps.getMintime() == 0){
+			return;
+		}
 		ps.setId(getPlayers().size() + 1);
 		getPlayers().add(ps);
-		
 		getPlayers().sort(new Comparator<PlayerSave>() {
 			@Override
 			public int compare(PlayerSave o1, PlayerSave o2) {
-				// TODO Auto-generated method stub
 				if (o1.getHighscore() > o2.getHighscore()) {
-					return 1;
+					return -1;
 				} else if (o1.getHighscore() < o2.getHighscore()) {
-					return -1;
-				}
-				return 0;
-			}
-		});
-		
-
-		shrinkTo(getPlayers(), 10);
-		
-		getPlayers().sort(new Comparator<PlayerSave>() {
-			@Override
-			public int compare(PlayerSave o1, PlayerSave o2) {
-				// TODO Auto-generated method stub
-				if (o1.getMintime() > o2.getMintime()) {
 					return 1;
-				} else if (o1.getMintime() < o2.getMintime()) {
-					return -1;
+				} else {
+					if (o1.getAttempts() < o2.getAttempts()) {
+						return -1;
+					} else if (o1.getAttempts() > o2.getAttempts()) {
+						return 1;
+					} else {
+						if (o1.getMintime() > o2.getMintime()) {
+							return -1;
+						} else if (o1.getMintime() < o2.getMintime()) {
+							return 1;
+						}
+						return 0;	
+					}				
 				}
-				return 0;
 			}
 		});
+		shrinkTo(getPlayers(), 10);
 	}
 
 	public static void shrinkTo(List<PlayerSave> list, int newSize) {
@@ -65,6 +71,24 @@ public class JSONModel {
 
 	public ArrayList<PlayerSave> getPlayers() {
 		int difficulty = gameInfo.getDifficulty();
+		switch (difficulty) {
+		case 1:
+			return players_very_easy;
+		case 2:
+			return players_easy;
+		case 3:
+			return players_medium;
+		case 4:
+			return players_hard;
+		case 5:
+			return players_very_hard;
+		default:
+			return null;
+		// Exception here
+		}
+	}
+	
+	public ArrayList<PlayerSave> getPlayers(int difficulty) {
 		switch (difficulty) {
 		case 1:
 			return players_very_easy;

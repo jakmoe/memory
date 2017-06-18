@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Julius+Sans+One');
+.button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Julius Sans One", sans-serif;
+    -fx-font-size: 50px; /* 12 */
+    -fx-text-fill: black;
+}

@@ -51,7 +51,7 @@ public class ExceptionHandler {
 		if (alert != null) {
 			alert.showAndWait();
 		} else {
-			NullPointerException np = new NullPointerException("Something went wrong while creating the Error!");
+			NullPointerException np = new NullPointerException("Something went wrong while creating the Error dialog!");
 			throw np;
 		}
 	}
