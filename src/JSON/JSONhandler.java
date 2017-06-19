@@ -12,6 +12,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import game.ExceptionHandler;
 import sound.MP3handler;
 
 public class JSONhandler {
@@ -36,15 +37,19 @@ public class JSONhandler {
 		try (Reader reader = new FileReader(s)) {
 			model = gson.fromJson(reader, JSONModel.class);
 		} catch (IOException e) {
-			e.printStackTrace();
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Read Error",
+					"Something went wrong reading the Save.", "Oops");
+			exc.showdialog();
 		}
 	}
 
 	public void commit() {
 		try (FileWriter writer = new FileWriter(s)) {
 			gson.toJson(model, writer);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException e) {			
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Write Error",
+				"Something went wrong writing the Save.", "Oops");
+			exc.showdialog();
 		}
 	}
 

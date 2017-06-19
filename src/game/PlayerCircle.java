@@ -16,7 +16,7 @@ public class PlayerCircle extends StackPane {
 	public PlayerCircle(Player pl) {
 		super();
 		setPlayer(pl);
-		playerlabel.setText("Player " + pl.getId() + "\nHighscore " + pl.getHighscore() + "\nTime " + pl.getMintime()
+		playerlabel.setText(pl.getName() + "\nHighscore " + pl.getHighscore() + "\nTime " + pl.getMintime()
 				+ "\nAttempts " + pl.getAttempts());
 
 		circle.setFill(IMGhandler.getPlayer(false));
@@ -31,7 +31,7 @@ public class PlayerCircle extends StackPane {
 	}
 
 	public void update() {
-		playerlabel.setText("Player " + player.getId() + "\nHighscore " + player.getHighscore() + "\nTime "
+		playerlabel.setText(player.getName() + "\nHighscore " + player.getHighscore() + "\nTime "
 				+ player.getMintime() + "\nAttempts " + player.getAttempts());
 
 		circle.setFill(IMGhandler.getPlayer(false));

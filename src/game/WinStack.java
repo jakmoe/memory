@@ -24,14 +24,26 @@ public class WinStack extends HBox {
 
 		arrayList.sort(new Comparator<Player>() {
 			@Override
-			public int compare(Player arg0, Player arg1) {
-				if (arg0.getHighscore() > arg1.getHighscore()) {
+			public int compare(Player o1, Player o2) {
+				if (o1.getHighscore() > o2.getHighscore()) {
 					return -1;
-				} else {
+				} else if (o1.getHighscore() < o2.getHighscore()) {
 					return 1;
+				} else {
+					if (o1.getAttempts() < o2.getAttempts()) {
+						return -1;
+					} else if (o1.getAttempts() > o2.getAttempts()) {
+						return 1;
+					} else {
+						if (o1.getMintime() > o2.getMintime()) {
+							return -1;
+						} else if (o1.getMintime() < o2.getMintime()) {
+							return 1;
+						}
+						return 0;
+					}
 				}
 			}
-
 		});
 
 		if (Start.getGamemode() > 1) {

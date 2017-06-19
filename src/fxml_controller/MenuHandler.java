@@ -2,6 +2,7 @@ package fxml_controller;
 
 import java.io.IOException;
 
+import game.ExceptionHandler;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -30,8 +31,9 @@ public class MenuHandler implements EventHandler<MouseEvent> {
 			Parent root = loader.load();
 			base.getScene().setRoot(root);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
+					"Something went wrong loading the next screen", "Oops");
+			exc.showdialog();
 		}
 	}
 

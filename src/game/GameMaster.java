@@ -6,12 +6,15 @@ import fxml_controller.GameController;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
+import start_MEMORY.Start;
 
 public class GameMaster {
 	private static ArrayList<Player> playerAL = new ArrayList<Player>();
 	private static Player PlayerInTurn;
 	private static IntegerProperty playeridproperty = new SimpleIntegerProperty(0);
 	private static int EndCheck;
+	private static String[] names = new String [Start.getGamemode()];
+	private static int i = 0;
 
 	public static void doTurn(boolean scored, double newtime) {
 		try {
@@ -77,7 +80,7 @@ public class GameMaster {
 		reset();
 		// add players
 		for (int i = 1; i <= playercount; i++) {
-			playerAL.add(new Player(0.0, i, 0.0, 0, "testname", 0));
+			playerAL.add(new Player(0.0, i, 0.0, 0, names[i-1], 0));
 		}
 
 		// set the EndCheck to the Board size
@@ -86,7 +89,12 @@ public class GameMaster {
 		// set the first player
 		PlayerInTurn = playerAL.get(0);
 	}
-
+	
+	public static void setNames(String name){
+		names[i] = name;
+		i++;
+	}
+	
 	public static IntegerProperty getPlayeridproperty() {
 		return playeridproperty;
 	}

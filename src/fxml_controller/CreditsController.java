@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import game.ExceptionHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,8 +35,9 @@ public class CreditsController implements Initializable {
 			Parent root = loader.load();
 			back.getScene().setRoot(root);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
+					"Something went wrong loading the next screen", "Oops");
+			exc.showdialog();
 		}
 	}
 

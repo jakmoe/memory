@@ -88,7 +88,7 @@ public class JSONModel {
 		}
 	}
 
-	public ArrayList<PlayerSave> getPlayers(int difficulty) {
+	public ArrayList<PlayerSave> getPlayers(int difficulty) throws Exception {
 		switch (difficulty) {
 		case 1:
 			return players_very_easy;
@@ -101,12 +101,11 @@ public class JSONModel {
 		case 5:
 			return players_very_hard;
 		default:
-			return null;
-		// Exception here
+			throw new Exception("No difficulty was given to the method.");
 		}
 	}
 
-	public void setPlayers(ArrayList<PlayerSave> players) {
+	public void setPlayers(ArrayList<PlayerSave> players) throws Exception {
 		int difficulty = gameInfo.getDifficulty();
 		switch (difficulty) {
 		case 1:
@@ -125,7 +124,7 @@ public class JSONModel {
 			this.players_very_hard = players;
 			break;
 		default:
-			// Exception here
+			throw new Exception("No difficulty was given to the method.");
 		}
 	}
 }

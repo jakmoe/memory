@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import game.ExceptionHandler;
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -129,8 +130,9 @@ public class IMGhandler {
 			Image img = new Image(url.toURI().toString(), 50, 50, true, true);
 			return img;
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Sound Error",
+					"Something went wrong with the Images", "Oops");
+			exc.showdialog();
 		}
 		return null;
 	}

@@ -106,110 +106,118 @@ public class MenuController implements Initializable {
 
 	@FXML
 	private void gamemultiplayer(ActionEvent event) {
-		Optional<ButtonType> result = null;
-		ButtonType buttonTypeTwo = new ButtonType("2");
-		ButtonType buttonTypeThree = new ButtonType("3");
-		ButtonType buttonTypeFour = new ButtonType("4");
-		ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-
-		boolean cancel = false;
-		if (multichoice == null) {
-			multichoice = new Alert(AlertType.CONFIRMATION);
-			multichoice.initStyle(StageStyle.UTILITY);
-			multichoice.initModality(Modality.NONE);
-			multichoice.initOwner(anchor.getScene().getWindow());
-			multichoice.setTitle("Playerchoice");
-			multichoice.setHeaderText("How many Players?");
-			multichoice.setContentText("Please choose.");
-			multichoice.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
-			result = multichoice.showAndWait();
-		} else {
-			result = multichoice.showAndWait();
-		}
-
-		if (result.get() == buttonTypeTwo) {
-			Start.setGamemode(2);
-		} else if (result.get() == buttonTypeThree) {
-			Start.setGamemode(3);
-		} else if (result.get() == buttonTypeFour) {
-			Start.setGamemode(4);
-		} else {
-			// ... user chose CANCEL or closed the dialog
-			multichoice.close();
-			cancel = true;
-		}
-
-		if (!cancel) {
+//		Optional<ButtonType> result = null;
+//		ButtonType buttonTypeTwo = new ButtonType("2");
+//		ButtonType buttonTypeThree = new ButtonType("3");
+//		ButtonType buttonTypeFour = new ButtonType("4");
+//		ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+//
+//		boolean cancel = false;
+//		if (multichoice == null) {
+//			multichoice = new Alert(AlertType.CONFIRMATION);
+//			multichoice.initStyle(StageStyle.UTILITY);
+//			multichoice.initModality(Modality.NONE);
+//			multichoice.initOwner(anchor.getScene().getWindow());
+//			multichoice.setTitle("Playerchoice");
+//			multichoice.setHeaderText("How many Players?");
+//			multichoice.setContentText("Please choose.");
+//			multichoice.getButtonTypes().setAll(buttonTypeTwo, buttonTypeThree, buttonTypeFour, buttonTypeCancel);
+//			result = multichoice.showAndWait();
+//		} else {
+//			result = multichoice.showAndWait();
+//		}
+//
+//		if (result.get() == buttonTypeTwo) {
+//			Start.setGamemode(2);
+//		} else if (result.get() == buttonTypeThree) {
+//			Start.setGamemode(3);
+//		} else if (result.get() == buttonTypeFour) {
+//			Start.setGamemode(4);
+//		} else {
+//			// ... user chose CANCEL or closed the dialog
+//			multichoice.close();
+//			cancel = true;
+//		}
+//
+//		if (!cancel) {
 			init_game();
-		}
+//		}
 	}
 
 	private void init_game() {
-		GameEventhandler.getTimer().stop();
-		GameEventhandler.getTimer().reset();
-		ProgressBar progressBar = new ProgressBar(0);
-		progressBar.setPrefSize(400, 40);
-		Service<Void> sv = new Service<Void>() {
-			@Override
-			protected Task<Void> createTask() {
-				return IMGhandler.initialize(Start.getJhdl().getModel().getInfo().getCardcount());
-			}
-		};
-		AnimationTimer anitim = new AnimationTimer() {
-			@Override
-			public void handle(long now) {
-				progressBar.setProgress(sv.getProgress());
-				if (progressBar.getProgress() == 1) {
-					this.stop();
-					loader.setLocation(getClass().getResource("/fxml/UIGame/UIGame.fxml"));
-					try {
-						Parent root = loader.load();
-						singleplayer.getScene().setRoot(root);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-		if (popupload == null) {
-			popupload = new Stage();
-			popupload.setWidth(400);
-			popupload.setHeight(100);
-			popupload.centerOnScreen();
-			popupload.initStyle(StageStyle.UTILITY);
-			popupload.initModality(Modality.NONE);
-			popupload.initOwner(anchor.getScene().getWindow());
-			VBox dialogVbox = new VBox(20);
-			dialogVbox.getChildren().add(new Text("Loading your game..."));
-			dialogVbox.getChildren().add(progressBar);
-			dialogVbox.setAlignment(Pos.CENTER);
-			Scene dialogScene = new Scene(dialogVbox, 300, 200);
-			popupload.setScene(dialogScene);
-			anitim.start();
-			sv.start();
-			sv.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-				@Override
-				public void handle(WorkerStateEvent event) {
-					popupload.hide();
-					anitim.stop();
-					sv.reset();
-				}
-			});
-			popupload.showAndWait();
-		} else {
-			anitim.start();
-			sv.start();
-			sv.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-				@Override
-				public void handle(WorkerStateEvent event) {
-					popupload.hide();
-					anitim.stop();
-					sv.reset();
-				}
-			});
-			popupload.showAndWait();
+		loader.setLocation(getClass().getResource("/fxml/Multiplayer/Multiplayer01.fxml"));
+		try {
+			Parent root = loader.load();
+			singleplayer.getScene().setRoot(root);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+//		GameEventhandler.getTimer().stop();
+//		GameEventhandler.getTimer().reset();
+//		ProgressBar progressBar = new ProgressBar(0);
+//		progressBar.setPrefSize(400, 40);
+//		Service<Void> sv = new Service<Void>() {
+//			@Override
+//			protected Task<Void> createTask() {
+//				return IMGhandler.initialize(Start.getJhdl().getModel().getInfo().getCardcount());
+//			}
+//		};
+//		AnimationTimer anitim = new AnimationTimer() {
+//			@Override
+//			public void handle(long now) {
+//				progressBar.setProgress(sv.getProgress());
+//				if (progressBar.getProgress() == 1) {
+//					this.stop();
+//					loader.setLocation(getClass().getResource("/fxml/UIGame/UIGame.fxml"));
+//					try {
+//						Parent root = loader.load();
+//						singleplayer.getScene().setRoot(root);
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//		};
+//		if (popupload == null) {
+//			popupload = new Stage();
+//			popupload.setWidth(400);
+//			popupload.setHeight(100);
+//			popupload.centerOnScreen();
+//			popupload.initStyle(StageStyle.UTILITY);
+//			popupload.initModality(Modality.NONE);
+//			popupload.initOwner(anchor.getScene().getWindow());
+//			VBox dialogVbox = new VBox(20);
+//			dialogVbox.getChildren().add(new Text("Loading your game..."));
+//			dialogVbox.getChildren().add(progressBar);
+//			dialogVbox.setAlignment(Pos.CENTER);
+//			Scene dialogScene = new Scene(dialogVbox, 300, 200);
+//			popupload.setScene(dialogScene);
+//			anitim.start();
+//			sv.start();
+//			sv.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+//				@Override
+//				public void handle(WorkerStateEvent event) {
+//					popupload.hide();
+//					anitim.stop();
+//					sv.reset();
+//				}
+//			});
+//			popupload.showAndWait();
+//		} else {
+//			anitim.start();
+//			sv.start();
+//			sv.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+//				@Override
+//				public void handle(WorkerStateEvent event) {
+//					popupload.hide();
+//					anitim.stop();
+//					sv.reset();
+//				}
+//			});
+//			popupload.showAndWait();
+//		}
 	}
 
 	@Override
