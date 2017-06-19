@@ -41,43 +41,19 @@ public class SettingsController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
-				try {
-					Start.getJhdl().commit();
-					MP3handler.stopbackground();
-					Parent root = loader.load();
-					buttonMenu.getScene().setRoot(root);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
+		MenuHandler mh = new MenuHandler();
+		mh.setBase(buttonMenu);
+		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, mh);
 
 		soundmusic.setValue(Start.getJhdl().getModel().getInfo().getVolume_music() * 100);
-		soundmusic.valueProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stub
-				double volume = newValue.doubleValue() / 100;
-				MP3handler.setVolumebg(volume);
-				Start.getJhdl().getModel().getInfo().setVolume_music(volume);
-			}
-		});
+		VolumeChangeListener vcl = new VolumeChangeListener();
+		vcl.setBg(true);
+		soundmusic.valueProperty().addListener(vcl);
 
 		soundeffects.setValue(Start.getJhdl().getModel().getInfo().getVolume_effects() * 100);
-		soundeffects.valueProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stub
-				double volume = newValue.doubleValue() / 100;
-				MP3handler.setVolumefx(volume);
-				Start.getJhdl().getModel().getInfo().setVolume_effects(volume);
-			}
-		});
+		VolumeChangeListener vcl2 = new VolumeChangeListener();
+		vcl2.setBg(false);
+		soundeffects.valueProperty().addListener(vcl2);
 
 		int theme_id = 1;
 		for (Toggle toggle : theme.getToggles()) {

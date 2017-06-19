@@ -56,13 +56,6 @@ public class HighscoreController implements Initializable {
 	private void resetaction() {
 		Start.getJhdl().getModel().resetModel();
 		Start.getJhdl().commit();
-		
-//		for (PlayerSave playersave : 
-//		Start.getJhdl().getModel().getPlayers(1)) {
-//			Label l = new Label(playersave.getName() + "-" + playersave.getHighscore() + "-" + playersave.getMintime() + "-" + playersave.getAttempts());
-//			veryeasy.getChildren().add(l);
-//		}
-		
 	}
 	
 	@Override

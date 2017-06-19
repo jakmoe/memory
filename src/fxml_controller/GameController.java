@@ -66,19 +66,19 @@ public class GameController implements Initializable {
 	private Button buttonExit = new Button("Exit");
 	private Button buttonMenu = new Button("Menu");
 	private Label timerlabel = new Label("-");
-	
+
 	@FXML
 	private WinStack winstack;
-	
+
 	@FXML
 	private Button rematch;
-	
+
 	@FXML
 	private Button remenu;
-	
+
 	@FXML
-	private Pane winbase;	
-	
+	private Pane winbase;
+
 	@FXML
 	private Pane base;
 
@@ -103,8 +103,8 @@ public class GameController implements Initializable {
 	public static void setWin_ind(boolean win_ind) {
 		GameController.win_ind = win_ind;
 	}
-	
-	public void rematch(){
+
+	public void rematch() {
 		initialize(null, null);
 	}
 
@@ -114,6 +114,7 @@ public class GameController implements Initializable {
 		base.setCache(true);
 		base.setCacheHint(CacheHint.SPEED);
 		base.setBackground(new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
+		
 		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
@@ -130,12 +131,16 @@ public class GameController implements Initializable {
 	private void initSettings() {
 		Slider fx = new Slider(0, 100, Start.getJhdl().getModel().getInfo().getVolume_effects());
 		Slider bg = new Slider(0, 100, Start.getJhdl().getModel().getInfo().getVolume_music());
-		HBox volfx = new HBox(10,fx,new Label("Effects"));
-		HBox volbg = new HBox(10,bg,new Label("Background"));
+
+		HBox volfx = new HBox(10, fx, new Label("Effects"));
+		HBox volbg = new HBox(10, bg, new Label("Background"));
+
 		CustomMenuItem volumefx = new CustomMenuItem(volfx);
 		CustomMenuItem volumebg = new CustomMenuItem(volbg);
+
 		volumefx.setHideOnClick(false);
 		volumebg.setHideOnClick(false);
+
 		MenuButton mb = new MenuButton();
 		mb.getItems().add(volumebg);
 		mb.getItems().add(volumefx);
@@ -145,26 +150,17 @@ public class GameController implements Initializable {
 		mb.setLayoutY(0);
 		mb.setGraphic(new ImageView(IMGhandler.getSettings()));
 		mb.setBackground(Background.EMPTY);
-		bg.setValue(Start.getJhdl().getModel().getInfo().getVolume_music() * 100);
-		bg.valueProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				double volume = newValue.doubleValue() / 100;
-				MP3handler.setVolumebg(volume);
-				Start.getJhdl().getModel().getInfo().setVolume_music(volume);
-			}
-		});
 
+		VolumeChangeListener vcl = new VolumeChangeListener();
+		bg.setValue(Start.getJhdl().getModel().getInfo().getVolume_music() * 100);
+		vcl.setBg(true);
+		bg.valueProperty().addListener(vcl);
+
+		VolumeChangeListener vcl2 = new VolumeChangeListener();
+		vcl2.setBg(false);
 		fx.setValue(Start.getJhdl().getModel().getInfo().getVolume_effects() * 100);
-		fx.valueProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				double volume = newValue.doubleValue() / 100;
-				MP3handler.setVolumefx(volume);
-				Start.getJhdl().getModel().getInfo().setVolume_effects(volume);
-			}
-		});
-		
+		fx.valueProperty().addListener(vcl2);
+
 		base.getChildren().add(mb);
 	}
 
@@ -201,37 +197,14 @@ public class GameController implements Initializable {
 	}
 
 	public void initMenu() {
-		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
-				try {
-					MP3handler.stopbackground();
-					Parent root = loader.load();
-					base.getScene().setRoot(root);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
+		MenuHandler mh = new MenuHandler();
+		mh.setBase(base);
+		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, mh);
 		buttonMenu.setText("Menu");
-
-		buttonExit.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Exit");
-				alert.setHeaderText("Do you really want to exit the program?");
-				alert.initStyle(StageStyle.TRANSPARENT);
-				alert.initOwner(base.getScene().getWindow());
-				alert.initModality(Modality.WINDOW_MODAL);
-				Optional<ButtonType> result = alert.showAndWait();
-				if (result.get() == ButtonType.OK) {
-					System.exit(0);
-				}
-			}
-		});
+		
+		ExitHandler ex = new ExitHandler();
+		ex.setBase(base);
+		buttonExit.addEventHandler(MouseEvent.MOUSE_CLICKED, ex);
 		menu.setAlignment(Pos.CENTER);
 	}
 
