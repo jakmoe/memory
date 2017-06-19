@@ -17,6 +17,7 @@ import game.ExceptionHandler;
 import game.GameEventhandler;
 import game.GameMaster;
 import game.Player;
+import game.PlayerCircle;
 import game.WinStack;
 import image.IMGhandler;
 import javafx.animation.AnimationTimer;
@@ -211,19 +212,8 @@ public class GameController implements Initializable {
 	public void initPlayers() {
 		ArrayList<Player> playerAL = GameMaster.getPlayers();
 		for (Player player : playerAL) {
-			// this is just debug coding
-			Circle circle = new Circle(100, Color.BLUE);
-			circle.setFill(IMGhandler.getPlayer(false));
-			if (player.getId() == GameMaster.getPlayerInTurn().getId()) {
-				circle.setFill(IMGhandler.getPlayer(true));
-			} else {
-				circle.setFill(IMGhandler.getPlayer(false));
-			}
-			Label playerlabel = new Label("Player " + player.getId() + "\nHighscore " + player.getHighscore()
-					+ "\nTime " + player.getMintime());
-			StackPane circlestack = new StackPane(circle, playerlabel);
-
-			players.getChildren().add(circlestack);
+			PlayerCircle pc = new PlayerCircle(player);
+			players.getChildren().add(pc);
 		}
 		players.setAlignment(Pos.CENTER);
 		players.setSpacing(10);
@@ -244,15 +234,13 @@ public class GameController implements Initializable {
 									if (newValue.intValue() == 0) {
 										newValue = 1;
 									}
-									StackPane sp1 = null;
-									sp1 = (StackPane) ((VBox) n).getChildren().get(newValue.intValue() - 1);
-									Circle c1 = (Circle) sp1.getChildren().get(0);
-									c1.setFill(IMGhandler.getPlayer(true));
+									PlayerCircle sp1 = null;
+									sp1 = (PlayerCircle) ((VBox) n).getChildren().get(newValue.intValue() - 1);
+									sp1.update();
 
-									StackPane sp2 = null;
-									sp2 = (StackPane) ((VBox) n).getChildren().get(oldValue.intValue() - 1);
-									Circle c2 = (Circle) sp2.getChildren().get(0);
-									c2.setFill(IMGhandler.getPlayer(false));
+									PlayerCircle sp2 = null;
+									sp2 = (PlayerCircle) ((VBox) n).getChildren().get(oldValue.intValue() - 1);
+									sp2.update();
 								}
 							}
 						} catch (Exception e) {

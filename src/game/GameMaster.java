@@ -17,7 +17,6 @@ public class GameMaster {
 		try {
 			if (scored) {
 				PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 1);
-				PlayerInTurn.setMintime(PlayerInTurn.getCurrenttime() + newtime);
 			} else {
 				if (playerAL.indexOf(PlayerInTurn) <= playerAL.size() - 2) {
 					setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
@@ -25,6 +24,7 @@ public class GameMaster {
 					setPlayerInTurn(playerAL.get(0));
 				}
 			}
+			PlayerInTurn.setMintime(PlayerInTurn.getCurrenttime() + newtime);
 			PlayerInTurn.setAttempts(PlayerInTurn.getAttempts() + 1);
 			if (EndCheck <= 1) {
 				GameOver();
