@@ -19,9 +19,9 @@ public class JSONModel {
 		players_hard.clear();
 		players_very_hard.clear();
 	}
-	
+
 	public void updateModel(PlayerSave ps) {
-		if(ps.getMintime() == 0){
+		if (ps.getMintime() == 0) {
 			return;
 		}
 		ps.setId(getPlayers().size() + 1);
@@ -44,8 +44,8 @@ public class JSONModel {
 						} else if (o1.getMintime() < o2.getMintime()) {
 							return 1;
 						}
-						return 0;	
-					}				
+						return 0;
+					}
 				}
 			}
 		});
@@ -87,7 +87,7 @@ public class JSONModel {
 		// Exception here
 		}
 	}
-	
+
 	public ArrayList<PlayerSave> getPlayers(int difficulty) {
 		switch (difficulty) {
 		case 1:

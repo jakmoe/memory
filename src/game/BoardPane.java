@@ -34,7 +34,7 @@ public class BoardPane extends FlowPane {
 	}
 
 	public void Initialize(int cardPairs) {
-		
+
 		if (!cardValues.isEmpty()) {
 			cardList.clear();
 			cardValues.clear();
@@ -45,7 +45,7 @@ public class BoardPane extends FlowPane {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
-//		Collections.shuffle(cardValues);
+		// Collections.shuffle(cardValues);
 		for (int val : cardValues) {
 			Card c = new Card(offset, offset, picSize, picSize);
 			// coordinates must be adapted
@@ -74,7 +74,7 @@ public class BoardPane extends FlowPane {
 	public void setCardPairs(int cardcount) {
 		this.cardPairs = cardcount;
 	}
-	
+
 	public double adjustSize(double width, double height) {
 		switch (Start.getJhdl().getModel().getInfo().getDifficulty()) {
 		case 1:

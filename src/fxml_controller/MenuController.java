@@ -73,7 +73,7 @@ public class MenuController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private void highscores(ActionEvent event) {
 		loader.setLocation(getClass().getResource("/fxml/Highscore/Highscore.fxml"));
@@ -85,9 +85,9 @@ public class MenuController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
-	private void credits(ActionEvent event){
+	private void credits(ActionEvent event) {
 		loader.setLocation(getClass().getResource("/fxml/Credits/Credits.fxml"));
 		try {
 			Parent root = loader.load();
@@ -111,7 +111,7 @@ public class MenuController implements Initializable {
 		ButtonType buttonTypeThree = new ButtonType("3");
 		ButtonType buttonTypeFour = new ButtonType("4");
 		ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-		
+
 		boolean cancel = false;
 		if (multichoice == null) {
 			multichoice = new Alert(AlertType.CONFIRMATION);
@@ -138,7 +138,7 @@ public class MenuController implements Initializable {
 			multichoice.close();
 			cancel = true;
 		}
-		
+
 		if (!cancel) {
 			init_game();
 		}

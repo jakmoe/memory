@@ -14,7 +14,7 @@ import javafx.stage.Modality;
 public class ExceptionHandler {
 	Exception ex = null;
 	Alert alert = new Alert(AlertType.ERROR);
-	
+
 	public ExceptionHandler(Exception ex, String title, String header, String content, String message) {
 		alert.setTitle(title);
 		alert.setHeaderText(header);
@@ -46,8 +46,8 @@ public class ExceptionHandler {
 		alert.getDialogPane().setExpandableContent(expContent);
 		alert.initModality(Modality.NONE);
 	}
-	
-	public void showdialog() throws NullPointerException{
+
+	public void showdialog() throws NullPointerException {
 		if (alert != null) {
 			alert.showAndWait();
 		} else {

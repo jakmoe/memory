@@ -10,30 +10,30 @@ public class PlayerCircle extends StackPane {
 	private Player player;
 
 	private Circle circle = new Circle(100, Color.BLUE);
-	
+
 	private Label playerlabel = new Label();
-	
+
 	public PlayerCircle(Player pl) {
 		super();
 		setPlayer(pl);
-		playerlabel.setText("Player " + pl.getId() + "\nHighscore " + pl.getHighscore()
-		+ "\nTime " + pl.getMintime() + "\nAttempts " + pl.getAttempts());
-		
+		playerlabel.setText("Player " + pl.getId() + "\nHighscore " + pl.getHighscore() + "\nTime " + pl.getMintime()
+				+ "\nAttempts " + pl.getAttempts());
+
 		circle.setFill(IMGhandler.getPlayer(false));
 		if (pl.getId() == GameMaster.getPlayerInTurn().getId()) {
 			circle.setFill(IMGhandler.getPlayer(true));
 		} else {
 			circle.setFill(IMGhandler.getPlayer(false));
 		}
-		
+
 		this.getChildren().add(circle);
 		this.getChildren().add(playerlabel);
 	}
-	
+
 	public void update() {
-		playerlabel.setText("Player " + player.getId() + "\nHighscore " + player.getHighscore()
-		+ "\nTime " + player.getMintime() + "\nAttempts " + player.getAttempts());
-		
+		playerlabel.setText("Player " + player.getId() + "\nHighscore " + player.getHighscore() + "\nTime "
+				+ player.getMintime() + "\nAttempts " + player.getAttempts());
+
 		circle.setFill(IMGhandler.getPlayer(false));
 		if (player.getId() == GameMaster.getPlayerInTurn().getId()) {
 			circle.setFill(IMGhandler.getPlayer(true));
@@ -41,7 +41,7 @@ public class PlayerCircle extends StackPane {
 			circle.setFill(IMGhandler.getPlayer(false));
 		}
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}
@@ -66,5 +66,5 @@ public class PlayerCircle extends StackPane {
 	public void setPlayerlabel(Label playerlabel) {
 		this.playerlabel = playerlabel;
 	}
-	
+
 }

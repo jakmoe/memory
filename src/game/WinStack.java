@@ -21,7 +21,7 @@ public class WinStack extends HBox {
 		this.setLayoutX(650);
 		this.setLayoutY(325);
 		this.setAlignment(Pos.TOP_CENTER);
-		
+
 		arrayList.sort(new Comparator<Player>() {
 			@Override
 			public int compare(Player arg0, Player arg1) {
@@ -31,9 +31,9 @@ public class WinStack extends HBox {
 					return 1;
 				}
 			}
-			
+
 		});
-		
+
 		if (Start.getGamemode() > 1) {
 			int idx = 0;
 			for (Player playerSave : arrayList) {
@@ -45,7 +45,8 @@ public class WinStack extends HBox {
 				highscore.setAlignment(Pos.TOP_CENTER);
 				highscore.getChildren().add(new Label(playerSave.getName()));
 				for (int i = 0; i < playerSave.getHighscore(); i++) {
-					Rectangle scorerec = new Rectangle(this.getPrefWidth()/Start.getGamemode(), 25 * 1/Start.getJhdl().getModel().getInfo().getDifficulty());
+					Rectangle scorerec = new Rectangle(this.getPrefWidth() / Start.getGamemode(),
+							25 * 1 / Start.getJhdl().getModel().getInfo().getDifficulty());
 					scorerec.setFill(new ImagePattern(IMGhandler.getStack()));
 					highscore.getChildren().add(scorerec);
 					scorerec.toFront();

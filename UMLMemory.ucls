@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.14" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
-  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.1.14" icons="true" always-add-relationships="true" generalizations="true" realizations="false" 
+  associations="true" dependencies="true" nesting-relationships="false" router="FAN">  
   <class id="1" language="java" name="fxml_controller.CreditsController" project="MemoryGame" 
     file="/MemoryGame/src/fxml_controller/CreditsController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="231" x="1621" y="37"/>    
+    <position height="160" width="231" x="409" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="fxml_controller.ExitHandler" project="MemoryGame" 
     file="/MemoryGame/src/fxml_controller/ExitHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="169" x="312" y="37"/>    
+    <position height="160" width="169" x="293" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="fxml_controller.GameController" project="MemoryGame" 
     file="/MemoryGame/src/fxml_controller/GameController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="466" width="231" x="3097" y="37"/>    
+    <position height="466" width="231" x="1632" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="fxml_controller.HighscoreController" project="MemoryGame" 
     file="/MemoryGame/src/fxml_controller/HighscoreController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="268" width="231" x="41" y="37"/>    
+    <position height="268" width="231" x="89" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="fxml_controller.MenuController" project="MemoryGame" 
     file="/MemoryGame/src/fxml_controller/MenuController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="412" width="231" x="1892" y="37"/>    
+    <position height="412" width="231" x="730" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="fxml_controller.MenuHandler" project="MemoryGame" 
     file="/MemoryGame/src/fxml_controller/MenuHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="178" width="169" x="2684" y="37"/>    
+    <position height="178" width="169" x="1393" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="fxml_controller.SettingsController" project="MemoryGame" 
     file="/MemoryGame/src/fxml_controller/SettingsController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="214" width="231" x="2163" y="37"/>    
+    <position height="214" width="231" x="1052" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="fxml_controller.VolumeChangeListener" project="MemoryGame" 
     file="/MemoryGame/src/fxml_controller/VolumeChangeListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="363" x="521" y="37"/>    
+    <position height="160" width="363" x="740" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="game.BoardPane" project="MemoryGame" file="/MemoryGame/src/game/BoardPane.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="232" width="217" x="2302" y="543"/>    
+    <position height="232" width="217" x="1899" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="game.Card" project="MemoryGame" file="/MemoryGame/src/game/Card.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="394" width="225" x="2161" y="869"/>    
+    <position height="394" width="225" x="1997" y="1737"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="game.CustomAnimationTimer" project="MemoryGame" 
     file="/MemoryGame/src/game/CustomAnimationTimer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="188" x="1933" y="869"/>    
+    <position height="196" width="188" x="2262" y="1737"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="game.ExceptionHandler" project="MemoryGame" 
     file="/MemoryGame/src/game/ExceptionHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="142" width="346" x="924" y="37"/>    
+    <position height="142" width="346" x="2302" y="1267"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="game.GameEventhandler" project="MemoryGame" 
     file="/MemoryGame/src/game/GameEventhandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="268" width="223" x="2039" y="543"/>    
+    <position height="268" width="223" x="2018" y="1267"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -120,7 +120,7 @@
   </class>  
   <class id="14" language="java" name="game.GameMaster" project="MemoryGame" file="/MemoryGame/src/game/GameMaster.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="286" width="285" x="2772" y="543"/>    
+    <position height="286" width="285" x="2018" y="887"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -129,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="game.Player" project="MemoryGame" file="/MemoryGame/src/game/Player.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="430" width="243" x="2772" y="869"/>    
+    <position height="430" width="243" x="1646" y="1267"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -138,7 +138,7 @@
   </class>  
   <class id="16" language="java" name="game.PlayerCircle" project="MemoryGame" 
     file="/MemoryGame/src/game/PlayerCircle.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2623" y="772"/>    
+    <position height="250" width="173" x="1665" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -147,7 +147,7 @@
   </class>  
   <class id="17" language="java" name="game.TransitionRun" project="MemoryGame" 
     file="/MemoryGame/src/game/TransitionRun.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="164" x="2893" y="37"/>    
+    <position height="160" width="164" x="1375" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,7 +156,7 @@
   </class>  
   <class id="18" language="java" name="game.WinStack" project="MemoryGame" file="/MemoryGame/src/game/WinStack.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="212" x="3097" y="543"/>    
+    <position height="106" width="212" x="41" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -165,7 +165,7 @@
   </class>  
   <class id="19" language="java" name="image.IMGhandler" project="MemoryGame" 
     file="/MemoryGame/src/image/IMGhandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="340" width="271" x="1310" y="37"/>    
+    <position height="340" width="271" x="1686" y="887"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -174,7 +174,7 @@
   </class>  
   <class id="20" language="java" name="JSON.GameInfo" project="MemoryGame" file="/MemoryGame/src/JSON/GameInfo.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="322" width="204" x="3330" y="1339"/>    
+    <position height="322" width="204" x="1604" y="1737"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -183,7 +183,7 @@
   </class>  
   <class id="21" language="java" name="JSON.JSONhandler" project="MemoryGame" 
     file="/MemoryGame/src/JSON/JSONhandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="232" width="209" x="3349" y="543"/>    
+    <position height="232" width="209" x="700" y="887"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -192,7 +192,7 @@
   </class>  
   <class id="22" language="java" name="JSON.JSONModel" project="MemoryGame" file="/MemoryGame/src/JSON/JSONModel.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="232" width="255" x="3061" y="869"/>    
+    <position height="232" width="255" x="1328" y="1267"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -201,7 +201,7 @@
   </class>  
   <class id="23" language="java" name="JSON.PlayerSave" project="MemoryGame" file="/MemoryGame/src/JSON/PlayerSave.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="412" width="229" x="3061" y="1339"/>    
+    <position height="412" width="229" x="1328" y="1737"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -210,7 +210,7 @@
   </class>  
   <class id="24" language="java" name="sound.MP3handler" project="MemoryGame" 
     file="/MemoryGame/src/sound/MP3handler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="304" width="210" x="2434" y="37"/>    
+    <position height="304" width="210" x="1143" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -219,7 +219,7 @@
   </class>  
   <class id="25" language="java" name="start_MEMORY.Start" project="MemoryGame" 
     file="/MemoryGame/src/start_MEMORY/Start.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="268" width="177" x="3368" y="37"/>    
+    <position height="268" width="177" x="502" y="543"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -227,24 +227,28 @@
     </display>  
   </class>  
   <dependency id="26">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="15"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="22"/>  
   </dependency>  
-  <association id="27">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="28" name="players_medium"/>      
-      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="30">    
+  <dependency id="27">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="28">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="29">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="25"/>  
   </dependency>  
-  <dependency id="31">    
+  <dependency id="30">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="31">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="25"/>  
   </dependency>  
   <association id="32">    
     <end type="SOURCE" refId="22" navigable="false">      
@@ -259,6 +263,7 @@
     <end type="TARGET" refId="13"/>  
   </dependency>  
   <association id="36">    
+    <bendpoint x="1655" y="887"/>    
     <end type="SOURCE" refId="16" navigable="false">      
       <attribute id="37" name="player"/>      
       <multiplicity id="38" minimum="0" maximum="1"/>    
@@ -267,189 +272,406 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <dependency id="39">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="40">    
+    <bendpoint x="2146" y="543"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="14"/>  
   </dependency>  
-  <association id="40">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="41" name="PlayerSafegame"/>      
-      <multiplicity id="42" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <dependency id="41">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="42">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
   <dependency id="43">    
+    <bendpoint x="2167" y="543"/>    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
   <dependency id="44">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="13"/>  
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="22"/>  
   </dependency>  
   <dependency id="45">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="21"/>  
-  </dependency>  
-  <dependency id="46">    
+    <bendpoint x="1592" y="543"/>    
+    <bendpoint x="1592" y="887"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
+  <dependency id="46">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
   <dependency id="47">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="14"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="25"/>  
   </dependency>  
-  <dependency id="48">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <dependency id="49">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="19"/>  
-  </dependency>  
-  <association id="50">    
+  <association id="48">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="51" name="gamepane"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
+      <attribute id="49" name="gamepane"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="53">    
+  <association id="51">    
     <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="54" name="model"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
+      <attribute id="52" name="model"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="56">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="57" name="winstack"/>      
-      <multiplicity id="58" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="59">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="11"/>  
+  <dependency id="54">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="21"/>  
   </dependency>  
-  <association id="60">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="61" name="playerAL"/>      
-      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="63">    
+  <dependency id="55">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="56">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="57">    
     <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="64" name="players_very_easy"/>      
-      <multiplicity id="65" minimum="0" maximum="2147483647"/>    
+      <attribute id="58" name="players_very_easy"/>      
+      <multiplicity id="59" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="66">    
+  <dependency id="60">    
+    <bendpoint x="1868" y="543"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="19"/>  
   </dependency>  
-  <dependency id="67">    
+  <dependency id="61">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <dependency id="62">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <association id="68">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="69" name="PlayerInTurn"/>      
-      <multiplicity id="70" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="71">    
+  <dependency id="63">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="64">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="24"/>  
   </dependency>  
-  <association id="72">    
+  <dependency id="65">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="66">    
     <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="73" name="players_hard"/>      
-      <multiplicity id="74" minimum="0" maximum="2147483647"/>    
+      <attribute id="67" name="players_hard"/>      
+      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="75">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="76" name="c1"/>      
-      <multiplicity id="77" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="78">    
+  <association id="69">    
     <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="79" name="gameInfo"/>      
-      <multiplicity id="80" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="81">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="82" name="players_very_hard"/>      
-      <multiplicity id="83" minimum="0" maximum="2147483647"/>    
+      <attribute id="70" name="players_very_hard"/>      
+      <multiplicity id="71" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="84">    
+  <dependency id="72">    
+    <bendpoint x="2354" y="543"/>    
+    <bendpoint x="2354" y="887"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="12"/>  
   </dependency>  
-  <dependency id="85">    
+  <dependency id="73">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="16"/>  
   </dependency>  
-  <association id="86">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="87" name="timer"/>      
-      <multiplicity id="88" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="89">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="90" name="cardList"/>      
-      <multiplicity id="91" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="92">    
+  <dependency id="74">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="75">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <dependency id="93">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="11"/>  
+  <dependency id="76">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
   </dependency>  
-  <association id="94">    
+  <dependency id="77">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="78">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="79">    
     <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="95" name="jhdl"/>      
-      <multiplicity id="96" minimum="0" maximum="1"/>    
+      <attribute id="80" name="jhdl"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="21" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="97">    
+  <dependency id="82">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="83">    
+    <bendpoint x="1613" y="543"/>    
+    <bendpoint x="1613" y="887"/>    
+    <bendpoint x="1613" y="1267"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="20"/>  
   </dependency>  
-  <association id="98">    
+  <dependency id="84">    
+    <bendpoint x="1634" y="543"/>    
+    <bendpoint x="1634" y="887"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="85">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <association id="86">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="87" name="players_medium"/>      
+      <multiplicity id="88" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="89">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="90">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="91">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <association id="92">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="93" name="PlayerSafegame"/>      
+      <multiplicity id="94" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="95">    
+    <bendpoint x="2333" y="543"/>    
+    <bendpoint x="2333" y="887"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="96">    
+    <bendpoint x="709" y="543"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="97">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="98">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="99">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="100">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="101">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="102">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="103">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="104" name="winstack"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="106">    
+    <bendpoint x="2678" y="543"/>    
+    <bendpoint x="2678" y="887"/>    
+    <bendpoint x="2678" y="1267"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="107">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="108">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <association id="109">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="110" name="playerAL"/>      
+      <multiplicity id="111" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="112">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="113">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="114">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="115">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="116">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="117">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="118">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="119">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <association id="120">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="121" name="PlayerInTurn"/>      
+      <multiplicity id="122" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="123">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="124">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="125">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <association id="126">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="99" name="c2"/>      
-      <multiplicity id="100" minimum="0" maximum="1"/>    
+      <attribute id="127" name="c1"/>      
+      <multiplicity id="128" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="130" name="gameInfo"/>      
+      <multiplicity id="131" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="132">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="133">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="134">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="135" name="timer"/>      
+      <multiplicity id="136" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="137">    
+    <bendpoint x="1987" y="887"/>    
+    <bendpoint x="1987" y="1267"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="138" name="cardList"/>      
+      <multiplicity id="139" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="140">    
+    <bendpoint x="2271" y="1267"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="141">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="142">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="143">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="144">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="145">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="146">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <dependency id="147">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <association id="148">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="149" name="c2"/>      
+      <multiplicity id="150" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

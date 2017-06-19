@@ -25,7 +25,7 @@ public class CreditsController implements Initializable {
 
 	@FXML
 	private Button back;
-	
+
 	@FXML
 	private void backaction() {
 		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
@@ -38,9 +38,9 @@ public class CreditsController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	}
-	
+
 }

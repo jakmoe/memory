@@ -24,7 +24,6 @@ public class GameEventhandler {
 	private static Card c1;
 	private static Card c2;
 
-
 	public static void cardturn(Card c, BoardPane internalBoard) {
 		Transition animation = null;
 		if (c1 == null) {
@@ -50,14 +49,14 @@ public class GameEventhandler {
 			} else {
 
 				GameMaster.doTurn(false, timer.getCurrent());
-				if(Start.getGamemode() > 1) {
+				if (Start.getGamemode() > 1) {
 					timer.stop();
 					timer.reset();
 				}
 				animation = flipBack(c1, c2);
 				c1.setTurned(false);
 				c2.setTurned(false);
-				
+
 				c1 = null;
 				c2 = null;
 			}
@@ -69,7 +68,7 @@ public class GameEventhandler {
 	public static CustomAnimationTimer getTimer() {
 		return timer;
 	}
-	
+
 	public static void reset(Node n) {
 		n.setScaleX(1);
 		n.setScaleY(1);

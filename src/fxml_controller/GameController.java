@@ -5,13 +5,10 @@ package fxml_controller;
  * and open the template in the editor.
  */
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
-import JSON.PlayerSave;
 import game.BoardPane;
 import game.ExceptionHandler;
 import game.GameEventhandler;
@@ -24,18 +21,13 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -46,12 +38,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.stage.Modality;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import sound.MP3handler;
 import start_MEMORY.Start;
@@ -72,22 +59,13 @@ public class GameController implements Initializable {
 	private WinStack winstack;
 
 	@FXML
-	private Button rematch;
+	private Button rematch, remenu;
 
 	@FXML
-	private Button remenu;
-
-	@FXML
-	private Pane winbase;
-
-	@FXML
-	private Pane base;
+	private Pane winbase, base, info;
 
 	@FXML
 	private VBox players;
-
-	@FXML
-	private Pane info;
 
 	@FXML
 	private HBox menu;
@@ -115,7 +93,7 @@ public class GameController implements Initializable {
 		base.setCache(true);
 		base.setCacheHint(CacheHint.SPEED);
 		base.setBackground(new Background(new BackgroundImage(IMGhandler.getGameBackground(), null, null, null, null)));
-		
+
 		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		initPlayers();
 		initMenu();
@@ -202,7 +180,7 @@ public class GameController implements Initializable {
 		mh.setBase(base);
 		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, mh);
 		buttonMenu.setText("Menu");
-		
+
 		ExitHandler ex = new ExitHandler();
 		ex.setBase(base);
 		buttonExit.addEventHandler(MouseEvent.MOUSE_CLICKED, ex);

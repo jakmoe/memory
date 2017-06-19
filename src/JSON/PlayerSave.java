@@ -3,10 +3,8 @@ package JSON;
 public class PlayerSave {
 	@Override
 	public String toString() {
-		return "Name=" + name + ", Highscore=" + highscore + ", Mintime=" + mintime
-				+ ", Attempts=" + attempts;
+		return "Name=" + name + ", Highscore=" + highscore + ", Mintime=" + mintime + ", Attempts=" + attempts;
 	}
-
 
 	private String name;
 	private int highscore;
@@ -19,7 +17,6 @@ public class PlayerSave {
 		highscore = 0;
 		name = "name";
 	}
-	
 
 	public PlayerSave(int id, String name, int highscore, double mintime, int attempts) {
 		super();
@@ -28,7 +25,6 @@ public class PlayerSave {
 		this.mintime = mintime;
 		this.setAttempts(attempts);
 	}
-
 
 	public static PlayerSave getDummy(int dummy_id) {
 		PlayerSave dummy = new PlayerSave();
@@ -42,7 +38,6 @@ public class PlayerSave {
 	public int getHighscore() {
 		return highscore;
 	}
-
 
 	public double getMintime() {
 		return mintime;
@@ -64,21 +59,17 @@ public class PlayerSave {
 		this.name = name;
 	}
 
-
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public int getAttempts() {
 		return attempts;
 	}
-
 
 	public void setAttempts(int attempts) {
 		this.attempts = attempts;

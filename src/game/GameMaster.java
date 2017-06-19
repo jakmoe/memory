@@ -52,7 +52,7 @@ public class GameMaster {
 			System.out.println("Attempts" + playerAL.get(i).getAttempts());
 			playerAL.get(i).CommitSafe();
 		}
-		
+
 		GameController.setWin_ind(true);
 	}
 

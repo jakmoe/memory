@@ -162,7 +162,7 @@ public class IMGhandler {
 		}
 		return img;
 	}
-	
+
 	public static Image getStack() {
 		URL url = IMGhandler.class.getResource("/image/winscreen/stack.jpg");
 		try {

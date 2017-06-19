@@ -5,25 +5,22 @@ import java.util.Optional;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 
 public class ExitHandler implements EventHandler<MouseEvent> {
 	private Node base;
-	
-	
+
 	public Node getBase() {
 		return base;
 	}
 
-
 	public void setBase(Node base) {
 		this.base = base;
 	}
-
 
 	@Override
 	public void handle(MouseEvent event) {

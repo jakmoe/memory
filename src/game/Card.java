@@ -58,12 +58,12 @@ public class Card extends Rectangle {
 	public boolean inAnimation() {
 		return animationlock;
 	}
-	
-	public void lock(){
+
+	public void lock() {
 		this.animationlock = true;
 	}
-	
-	public void unlock(){
+
+	public void unlock() {
 		this.animationlock = false;
 	}
 }

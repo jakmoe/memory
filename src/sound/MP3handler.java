@@ -51,7 +51,8 @@ public class MP3handler {
 		try {
 			sound = new Media(url.toURI().toString());
 		} catch (URISyntaxException e) {
-			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Sound Error", "Something went wrong with the Sounds", "Oops");
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Sound Error",
+					"Something went wrong with the Sounds", "Oops");
 			exc.showdialog();
 		}
 		backgroundPlayer = new MediaPlayer(sound);

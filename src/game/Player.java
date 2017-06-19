@@ -11,7 +11,7 @@ public class Player {
 	private int attempts;
 	private String name;
 	private PlayerSave PlayerSafegame;
-	
+
 	public Player(double currenttime, int id, double mintime, int highscore, String name, int attempts) {
 		super();
 		this.currenttime = currenttime;

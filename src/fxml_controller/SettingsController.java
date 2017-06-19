@@ -1,23 +1,19 @@
 package fxml_controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import image.IMGhandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
-import sound.MP3handler;
 import start_MEMORY.Start;
 
 public class SettingsController implements Initializable {
@@ -35,7 +31,7 @@ public class SettingsController implements Initializable {
 
 	@FXML
 	ToggleGroup difficulty;
-	
+
 	@FXML
 	ToggleGroup theme;
 
@@ -71,8 +67,7 @@ public class SettingsController implements Initializable {
 				}
 			}
 		});
-		
-		
+
 		int difficulty_id = 1;
 		for (Toggle toggle : difficulty.getToggles()) {
 			if (Start.getJhdl().getModel().getInfo().getDifficulty() == difficulty_id) {
