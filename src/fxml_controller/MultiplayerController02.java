@@ -39,7 +39,6 @@ public class MultiplayerController02 implements Initializable {
 	Text errorTxt;
 	static int players = Start.getGamemode();
 	
-	
 	TextField newField1 = new TextField();
 	TextField newField2 = new TextField();
 	TextField newField3 = new TextField();
@@ -82,7 +81,6 @@ public class MultiplayerController02 implements Initializable {
 		}
 		if (players >= 3) {
 			if (!newField3.getText().isEmpty()) {
-				canWeStart = true;
 				GameMaster.setNames(newField3.getText());
 			}
 			else
@@ -90,21 +88,18 @@ public class MultiplayerController02 implements Initializable {
 		}
 		if (players == 4) {
 			if (!newField4.getText().isEmpty()) {
-				canWeStart = true;
 				GameMaster.setNames(newField4.getText());
 			}
 			else
 				canWeStart = false;
 		}
 		if (canWeStart == true) { 
-			//call method init_game()
 			init_game();
-			canWeStart = true;
 		}
 		else
 			errorTxt.setVisible(true);
 	}
-	//Copied from MenuController - doesn't work yet
+	
 	private void init_game() {
 		GameEventhandler.getTimer().stop();
 		GameEventhandler.getTimer().reset();

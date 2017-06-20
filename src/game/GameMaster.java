@@ -93,6 +93,8 @@ public class GameMaster {
 	public static void setNames(String name){
 		names[i] = name;
 		i++;
+		if (i == names.length)
+			i = 0;
 	}
 	
 	public static IntegerProperty getPlayeridproperty() {
