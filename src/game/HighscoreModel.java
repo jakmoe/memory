@@ -36,8 +36,12 @@ public class HighscoreModel {
 		return attempts.get();
 	}
 
-	public SimpleBooleanProperty getSp() {
-		return sp;
+	public String getSp() {
+		if (sp.get()) {
+			return "X";
+		} else {
+			return "";
+		}
 	}
  
 }
