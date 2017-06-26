@@ -144,6 +144,7 @@ public class GameController implements Initializable {
 	}
 
 	private void initTimer() {
+		timerlabel.setStyle("-fx-text-fill: white");
 		timerlabel.setScaleX(3.5);
 		timerlabel.setScaleY(3.5);
 		timerlabel.setLayoutX(1690);

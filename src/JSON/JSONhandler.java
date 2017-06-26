@@ -34,7 +34,11 @@ public class JSONhandler {
 	}
 
 	public void pull() {
-		try (Reader reader = new FileReader(s)) {
+		new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator
+				+ "Memory").mkdirs();
+		commit();
+		try (Reader reader = new FileReader(s)) {		
+
 			model = gson.fromJson(reader, JSONModel.class);
 		} catch (IOException e) {
 			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Read Error",

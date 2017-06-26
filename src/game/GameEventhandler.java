@@ -52,6 +52,7 @@ public class GameEventhandler {
 				if (Start.getGamemode() > 1) {
 					timer.stop();
 					timer.reset();
+					timer.start();
 				}
 				animation = flipBack(c1, c2);
 				c1.setTurned(false);

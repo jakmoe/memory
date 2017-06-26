@@ -27,7 +27,7 @@ public class GameMaster {
 					setPlayerInTurn(playerAL.get(0));
 				}
 			}
-			PlayerInTurn.setMintime(PlayerInTurn.getCurrenttime() + newtime);
+			PlayerInTurn.setMintime(PlayerInTurn.getMintime() + newtime);
 			PlayerInTurn.setAttempts(PlayerInTurn.getAttempts() + 1);
 			if (EndCheck <= 1) {
 				GameOver();

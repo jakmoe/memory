@@ -17,3 +17,13 @@
     -fx-font-size: 40px; /* 12 */
     -fx-text-fill: white;
 }
+
+.timer {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Julius Sans One", sans-serif;
+    -fx-font-size: 40px; /* 12 */
+    -fx-text-fill: white;
+}
