@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import start_MEMORY.Start;
+
 public class JSONModel {
 	private GameInfo gameInfo = new GameInfo();
 	private ArrayList<PlayerSave> players_very_easy = new ArrayList<>();
@@ -71,6 +73,7 @@ public class JSONModel {
 
 	public ArrayList<PlayerSave> getPlayers() {
 		int difficulty = gameInfo.getDifficulty();
+		
 		switch (difficulty) {
 		case 1:
 			return players_very_easy;
@@ -89,6 +92,7 @@ public class JSONModel {
 	}
 
 	public ArrayList<PlayerSave> getPlayers(int difficulty) throws Exception {
+		
 		switch (difficulty) {
 		case 1:
 			return players_very_easy;

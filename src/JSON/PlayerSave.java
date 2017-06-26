@@ -3,7 +3,7 @@ package JSON;
 public class PlayerSave {
 	@Override
 	public String toString() {
-		return "Name=" + name + ", Highscore=" + highscore + ", Mintime=" + mintime + ", Attempts=" + attempts;
+		return singleplayer + "Name=" + name + ", Highscore=" + highscore + ", Mintime=" + mintime + ", Attempts=" + attempts;
 	}
 
 	private String name;
@@ -11,6 +11,7 @@ public class PlayerSave {
 	private double mintime;
 	private int id;
 	private int attempts;
+	private boolean singleplayer;
 
 	public PlayerSave() {
 		mintime = 0;
@@ -18,12 +19,13 @@ public class PlayerSave {
 		name = "name";
 	}
 
-	public PlayerSave(int id, String name, int highscore, double mintime, int attempts) {
+	public PlayerSave(int id, String name, int highscore, double mintime, int attempts, boolean singleplayer) {
 		super();
 		this.name = name;
 		this.highscore = highscore;
 		this.mintime = mintime;
-		this.setAttempts(attempts);
+		this.attempts = attempts;
+		this.singleplayer = singleplayer;
 	}
 
 	public static PlayerSave getDummy(int dummy_id) {
@@ -32,6 +34,7 @@ public class PlayerSave {
 		dummy.setHighscore(0);
 		dummy.setMintime(0.0);
 		dummy.setName("name");
+		dummy.setSingleplayer(false);
 		return dummy;
 	}
 
@@ -73,6 +76,14 @@ public class PlayerSave {
 
 	public void setAttempts(int attempts) {
 		this.attempts = attempts;
+	}
+
+	public boolean isSingleplayer() {
+		return singleplayer;
+	}
+
+	public void setSingleplayer(boolean singleplayer) {
+		this.singleplayer = singleplayer;
 	}
 
 }

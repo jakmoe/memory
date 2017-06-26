@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+#AnchorPane {
+    -fx-background-size: cover;
+}
+.button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Raleway", Helvetica, Arial, sans-serif;
+    -fx-font-size: 30px; /* 12 */
+    -fx-text-fill: black;
+}
+.button:pressed {
+    -fx-background-color: grey;
+    -fx-text-fill: #828282;
+}
+.button:hover {
+    -fx-opacity: 0.5;
+    -fx-background-color:rgba(0, 0, 0, 0.5);
+}
+.radio-button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Julius Sans One", sans-serif;
+    -fx-text-fill: black;
+    
+    -fx-font-size: 24px; /* 12 */
+}
+.text-field {
+	-fx-font-size: 32px;
+	-fx-padding: 15px;
+    -fx-border-insets: 15px;
+    -fx-background-insets: 15px;
+    -fx-background-color: dimgrey;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}

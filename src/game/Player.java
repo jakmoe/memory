@@ -23,7 +23,11 @@ public class Player {
 	}
 
 	public void CommitSafe() {
-		PlayerSafegame = new PlayerSave(this.id, this.name, this.highscore, this.mintime, this.attempts);
+		boolean spcheck = false;
+		if (Start.getGamemode() == 1) {
+			spcheck = true;
+		}
+		PlayerSafegame = new PlayerSave(this.id, this.name, this.highscore, this.mintime, this.attempts, spcheck);
 		Start.getJhdl().writePlayerinfo(PlayerSafegame);
 	}
 

@@ -2,10 +2,15 @@ package fxml_controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import JSON.PlayerSave;
 import game.ExceptionHandler;
+import game.HighscoreModel;
+import image.IMGhandler;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +20,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import sound.MP3handler;
 import start_MEMORY.Start;
@@ -23,15 +32,25 @@ public class HighscoreController implements Initializable {
 	FXMLLoader loader = new FXMLLoader();
 
 	@FXML
-	private VBox veryeasy;
+	private TableView<HighscoreModel> veryeasy;
 	@FXML
-	private VBox easy;
+	private TableView<HighscoreModel> easy;
 	@FXML
-	private VBox medium;
+	private TableView<HighscoreModel> medium;
 	@FXML
-	private VBox hard;
+	private TableView<HighscoreModel> hard;
 	@FXML
-	private VBox veryhard;
+	private TableView<HighscoreModel> veryhard;
+
+	@FXML
+	ToggleGroup view;
+
+	@FXML
+	ToggleButton all;
+	@FXML
+	ToggleButton sp;
+	@FXML
+	ToggleButton mp;
 
 	@FXML
 	private Button back;
@@ -60,44 +79,63 @@ public class HighscoreController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
 			MP3handler.playbackground(1);
-			ObservableList<PlayerSave> list = FXCollections.observableArrayList(Start.getJhdl().getModel().getPlayers(1));
-			ListView<PlayerSave> tw = new ListView<PlayerSave>(list);
-			veryeasy.getChildren().add(tw);
-			veryeasy.setMinHeight(700);
-			veryeasy.setAlignment(Pos.TOP_CENTER);
-			tw.setMinHeight(700);
+			ObservableList<HighscoreModel> list = veryeasy.getItems();
+			createModel(Start.getJhdl().getModel().getPlayers(1), list);
 
-			ObservableList<PlayerSave> list2 = FXCollections.observableArrayList(Start.getJhdl().getModel().getPlayers(2));
-			ListView<PlayerSave> tw2 = new ListView<PlayerSave>(list2);
-			easy.getChildren().add(tw2);
-			easy.setMinHeight(700);
-			easy.setAlignment(Pos.TOP_CENTER);
-			tw2.setMinHeight(700);
+			ObservableList<HighscoreModel> list2 = easy.getItems();
+			createModel(Start.getJhdl().getModel().getPlayers(2), list2);
 
-			ObservableList<PlayerSave> list3 = FXCollections.observableArrayList(Start.getJhdl().getModel().getPlayers(3));
-			ListView<PlayerSave> tw3 = new ListView<PlayerSave>(list3);
-			medium.getChildren().add(tw3);
-			medium.setMinHeight(700);
-			medium.setAlignment(Pos.TOP_CENTER);
-			tw3.setMinHeight(700);
+			ObservableList<HighscoreModel> list3 = medium.getItems();
+			createModel(Start.getJhdl().getModel().getPlayers(3), list3);
 
-			ObservableList<PlayerSave> list4 = FXCollections.observableArrayList(Start.getJhdl().getModel().getPlayers(4));
-			ListView<PlayerSave> tw4 = new ListView<PlayerSave>(list4);
-			hard.getChildren().add(tw4);
-			hard.setMinHeight(700);
-			hard.setAlignment(Pos.TOP_CENTER);
-			tw4.setMinHeight(700);
+			ObservableList<HighscoreModel> list4 = hard.getItems();
+			createModel(Start.getJhdl().getModel().getPlayers(4), list4);
 
-			ObservableList<PlayerSave> list5 = FXCollections.observableArrayList(Start.getJhdl().getModel().getPlayers(5));
-			ListView<PlayerSave> tw5 = new ListView<PlayerSave>(list5);
-			veryhard.getChildren().add(tw5);
-			veryhard.setMinHeight(700);
-			veryhard.setAlignment(Pos.TOP_CENTER);
-			tw5.setMinHeight(700);
+			ObservableList<HighscoreModel> list5 = veryhard.getItems();
+			createModel(Start.getJhdl().getModel().getPlayers(5), list5);
+
+			view.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+				@Override
+				public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+					try {
+						if (view.getSelectedToggle() == all) {
+							setView(0);
+						} else if (view.getSelectedToggle() == sp) {
+							setView(1);
+						} else if (view.getSelectedToggle() == mp) {
+							setView(2);
+						}
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+				private void setView(int i) throws Exception {
+					switch (i) {
+					case 0:
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+					default:
+						break;
+					}
+				}
+			});
+
 		} catch (Exception e) {
 			ExceptionHandler exc = new ExceptionHandler(e, "Error", "HighscoreController Error",
 					"Something went wrong with reading out the List to the User Interface", "Oops");
 			exc.showdialog();
+		}
+	}
+
+	private void createModel(ArrayList<PlayerSave> players, ObservableList<HighscoreModel> data) {
+		for (PlayerSave playerSave : players) {
+			data.add(new HighscoreModel(playerSave.getName(), playerSave.getMintime(), playerSave.getHighscore(),
+					playerSave.getAttempts(), playerSave.isSingleplayer()));
 		}
 	}
 
