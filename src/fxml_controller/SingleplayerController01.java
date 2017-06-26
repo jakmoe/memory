@@ -32,6 +32,9 @@ public class SingleplayerController01 implements Initializable {
 	@FXML 
 	private Button start;
 
+
+	@FXML
+	private ToggleGroup difficulty;
 	
 	FXMLLoader loader = new FXMLLoader();
 	
@@ -71,7 +74,22 @@ public class SingleplayerController01 implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		int difficulty_id = 1;
+		for (Toggle toggle : difficulty.getToggles()) {
+			if (Start.getJhdl().getModel().getInfo().getDifficulty() == difficulty_id) {
+				difficulty.selectToggle(toggle);
+			}
+			toggle.setUserData(difficulty_id);
+			difficulty_id++;
+		}
+		difficulty.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			@Override
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+				if (difficulty.getSelectedToggle() != null) {
+					Start.getJhdl().getModel().getInfo().setDifficulty((int) new_toggle.getUserData());
+				}
+			}
+		});
 	}
 
 }
