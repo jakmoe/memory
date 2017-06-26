@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import game.ExceptionHandler;
 import game.GameMaster;
 import game.Player;
 import javafx.beans.value.ChangeListener;
@@ -40,16 +41,32 @@ public class SingleplayerController01 implements Initializable {
 		Start.setGamemode(1);
 		loadNextScene();
 	}
+	
+	@FXML
+	private void back() {
+		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
+		try {
+			MP3handler.stopbackground();
+			Parent root = loader.load();
+			Anchor.getScene().setRoot(root);
+		} catch (IOException e) {
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
+					"Something went wrong loading the next screen", "Oops");
+			exc.showdialog();
+		}
+	}
 		
 	private void loadNextScene() {
-		AnchorPane pane;
+		loader.setLocation(getClass().getResource("/fxml/Singleplayer/Singleplayer02.fxml"));
 		try {
-			pane = FXMLLoader.load(getClass().getResource("/fxml/Singleplayer/Singleplayer02.fxml"));
-			Anchor.getChildren().setAll(pane);
+			MP3handler.stopbackground();
+			Parent root = loader.load();
+			Anchor.getScene().setRoot(root);
 		} catch (IOException e) {
-			e.printStackTrace();
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
+					"Something went wrong loading the next screen", "Oops");
+			exc.showdialog();
 		}
-
 	}
 	
 	@Override

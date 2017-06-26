@@ -80,6 +80,6 @@
             <Button fx:id="four" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonFour" prefHeight="300.0" prefWidth="300.0" text="4" />
          </children>
       </HBox>
-      <Button layoutX="62.0" layoutY="60.0" mnemonicParsing="false" text="Zurück" />
+      <Button layoutX="62.0" layoutY="60.0" mnemonicParsing="false" text="Zurück" onAction="#back"/>
    </children>
 </AnchorPane>

@@ -65,7 +65,7 @@
             </RadioButton>
          </children>
       </HBox>
-      <Button layoutX="62.0" layoutY="60.0" mnemonicParsing="false" text="Zurück" />
+      <Button layoutX="62.0" layoutY="60.0" mnemonicParsing="false" text="Zurück" onAction="#back"/>
       <Button layoutX="907.0" layoutY="577.0" mnemonicParsing="false" text="Start" onAction="#handleButton"/>
    </children>
 </AnchorPane>
