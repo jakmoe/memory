@@ -80,47 +80,34 @@ public class HighscoreController implements Initializable {
 		try {
 			MP3handler.playbackground(1);
 			ObservableList<HighscoreModel> list = veryeasy.getItems();
-			createModel(Start.getJhdl().getModel().getPlayers(1), list);
+			createModel(Start.getJhdl().getModel().getPlayers(1), list, 0);
 
 			ObservableList<HighscoreModel> list2 = easy.getItems();
-			createModel(Start.getJhdl().getModel().getPlayers(2), list2);
+			createModel(Start.getJhdl().getModel().getPlayers(2), list2, 0);
 
 			ObservableList<HighscoreModel> list3 = medium.getItems();
-			createModel(Start.getJhdl().getModel().getPlayers(3), list3);
+			createModel(Start.getJhdl().getModel().getPlayers(3), list3, 0);
 
 			ObservableList<HighscoreModel> list4 = hard.getItems();
-			createModel(Start.getJhdl().getModel().getPlayers(4), list4);
+			createModel(Start.getJhdl().getModel().getPlayers(4), list4, 0);
 
 			ObservableList<HighscoreModel> list5 = veryhard.getItems();
-			createModel(Start.getJhdl().getModel().getPlayers(5), list5);
+			createModel(Start.getJhdl().getModel().getPlayers(5), list5, 0);
 
 			view.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 				@Override
 				public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
 					try {
 						if (view.getSelectedToggle() == all) {
-							setView(0);
+							createModel(Start.getJhdl().getModel().getPlayers(3), list3, 0);
 						} else if (view.getSelectedToggle() == sp) {
-							setView(1);
+							createModel(Start.getJhdl().getModel().getPlayers(3), list3, 1);
 						} else if (view.getSelectedToggle() == mp) {
-							setView(2);
+							createModel(Start.getJhdl().getModel().getPlayers(3), list3, 2);
 						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
-				}
-
-				private void setView(int i) throws Exception {
-					switch (i) {
-					case 0:
-						break;
-					case 1:
-						break;
-					case 2:
-						break;
-					default:
-						break;
 					}
 				}
 			});
@@ -132,10 +119,24 @@ public class HighscoreController implements Initializable {
 		}
 	}
 
-	private void createModel(ArrayList<PlayerSave> players, ObservableList<HighscoreModel> data) {
+	private void createModel(ArrayList<PlayerSave> players, ObservableList<HighscoreModel> data, int view) {
+		data.clear();
 		for (PlayerSave playerSave : players) {
-			data.add(new HighscoreModel(playerSave.getName(), playerSave.getMintime(), playerSave.getHighscore(),
-					playerSave.getAttempts(), playerSave.isSingleplayer()));
+			if (view == 0) {
+				data.add(new HighscoreModel(playerSave.getName(), playerSave.getMintime(), playerSave.getHighscore(),
+						playerSave.getAttempts(), playerSave.isSingleplayer()));				
+			} else if (view == 1) {
+				if (playerSave.isSingleplayer() == true) {
+					data.add(new HighscoreModel(playerSave.getName(), playerSave.getMintime(), playerSave.getHighscore(),
+							playerSave.getAttempts(), playerSave.isSingleplayer()));
+				}				
+			} else if (view == 2) {
+				if (playerSave.isSingleplayer() == false) {
+					data.add(new HighscoreModel(playerSave.getName(), playerSave.getMintime(), playerSave.getHighscore(),
+							playerSave.getAttempts(), playerSave.isSingleplayer()));
+				}	
+			}
+
 		}
 	}
 
