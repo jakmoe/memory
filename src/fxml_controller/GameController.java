@@ -19,6 +19,8 @@ import game.WinStack;
 import image.IMGhandler;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -72,7 +74,8 @@ public class GameController implements Initializable {
 
 	@FXML
 	private BoardPane gamepane;
-
+	
+	
 	private static boolean win_ind;
 
 	public static boolean isWin_ind() {
@@ -144,12 +147,22 @@ public class GameController implements Initializable {
 	}
 
 	private void initTimer() {
+		//timer to count the time you spent on your turn
 		timerlabel.setStyle("-fx-text-fill: white");
 		timerlabel.setScaleX(3.5);
 		timerlabel.setScaleY(3.5);
 		timerlabel.setLayoutX(1690);
 		timerlabel.setLayoutY(1040);
 		base.getChildren().add(timerlabel);
+		
+//		if (Start.getGamemode() > 1) {
+//			countdownlabel.setStyle("-fx-text-fill: white");
+//			countdownlabel.setScaleX(3.5);
+//			countdownlabel.setScaleY(3.5);
+//			countdownlabel.setLayoutX(1490);
+//			countdownlabel.setLayoutY(1040);
+//			base.getChildren().add(countdownlabel);		
+//		}
 	}
 
 	private void setupTimer() {
@@ -170,6 +183,14 @@ public class GameController implements Initializable {
 					winbase.setDisable(false);
 				}
 				// debug time
+//				if (Start.getGamemode() > 1) {
+//					if (GameEventhandler.getCountdown().get() == 0) {
+//						countdownlabel.setText("");
+//					} else {
+//						countdownlabel.setText(Integer.toString(GameEventhandler.getCountdown().get()));
+//					}					
+//				}
+
 				timerlabel.setText(Double.toString(Math.round(GameEventhandler.getTimer().getCurrent() * 10.0) / 10.0));
 			}
 		};

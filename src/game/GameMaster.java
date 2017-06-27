@@ -3,9 +3,12 @@ package game;
 import java.util.ArrayList;
 
 import fxml_controller.GameController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.util.Duration;
 import start_MEMORY.Start;
 
 public class GameMaster {
@@ -17,6 +20,8 @@ public class GameMaster {
 	private static int i = 0;
 
 	public static void doTurn(boolean scored, double newtime) {
+
+		
 		try {
 			if (scored) {
 				PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 1);

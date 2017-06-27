@@ -63,7 +63,7 @@ public class WinStack extends HBox {
 					highscore.getChildren().add(scorerec);
 					scorerec.toFront();
 				}
-				highscore.getChildren().add(new Label(Double.toString(playerSave.getMintime()) + " Sekunden"));
+				highscore.getChildren().add(new Label(Double.toString(Math.floor(playerSave.getMintime()*100)/100) + " Sekunden"));
 				highscore.getChildren().add(new Label(Integer.toString(playerSave.getAttempts()) + " Versuche"));
 			}
 		}

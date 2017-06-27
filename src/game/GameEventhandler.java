@@ -3,11 +3,13 @@ package game;
 import image.IMGhandler;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -23,7 +25,7 @@ public class GameEventhandler {
 	private static CustomAnimationTimer timer = new CustomAnimationTimer();
 	private static Card c1;
 	private static Card c2;
-
+	
 	public static void cardturn(Card c, BoardPane internalBoard) {
 		Transition animation = null;
 		if (c1 == null) {
@@ -55,6 +57,7 @@ public class GameEventhandler {
 					timer.start();
 				}
 				animation = flipBack(c1, c2);
+				
 				c1.setTurned(false);
 				c2.setTurned(false);
 

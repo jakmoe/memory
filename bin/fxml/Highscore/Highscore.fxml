@@ -18,9 +18,9 @@
 	<children>
 		<VBox prefHeight="1080.0" prefWidth="1920.0">
 			<children>
-				<TabPane prefHeight="968.0" prefWidth="1920.0" styleClass="button" tabClosingPolicy="UNAVAILABLE" tabMinHeight="100.0" tabMinWidth="300.0">
+				<TabPane prefHeight="968.0" prefWidth="1920.0" styleClass="tab" tabClosingPolicy="UNAVAILABLE" tabMinHeight="100.0" tabMinWidth="300.0">
 					<tabs>
-						<Tab text="Test">
+						<Tab text="Sehr Einfach">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 									<children>
@@ -223,14 +223,14 @@
 						<Button mnemonicParsing="false" onAction="#resetaction" text="Highscores Zurücksetzen" />
                   <HBox alignment="CENTER" prefHeight="128.0" prefWidth="868.0">
                      <children>
-                        <Label styleClass="button" text="Angezeigte Scores">
+                        <Label styleClass="label" text="Angezeigte Scores">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
                         <VBox prefHeight="200.0" prefWidth="300.0" spacing="5.0">
                            <children>
-                              <RadioButton fx:id="all" mnemonicParsing="false" text="All">
+                              <RadioButton selected="true" fx:id="all" mnemonicParsing="false" text="All">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="view" />
                                  </toggleGroup>
