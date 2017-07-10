@@ -11,7 +11,21 @@ public class Player {
 	private int attempts;
 	private String name;
 	private PlayerSave PlayerSafegame;
+	private CustomAnimationTimer timer = new CustomAnimationTimer();
 
+	public CustomAnimationTimer getTimer() {
+		return timer;
+	}
+	
+	public void start() {
+		timer.start();
+	}
+	public void stop() {
+		System.out.println(timer.getCurrent());
+		setMintime(timer.getCurrent());
+		timer.stop();
+	}
+	
 	public Player(double currenttime, int id, double mintime, int highscore, String name, int attempts) {
 		super();
 		this.currenttime = currenttime;
@@ -31,10 +45,6 @@ public class Player {
 		Start.getJhdl().writePlayerinfo(PlayerSafegame);
 	}
 
-	public double getCurrenttime() {
-		return currenttime;
-	}
-
 	public int getHighscore() {
 		return highscore;
 	}
@@ -49,10 +59,6 @@ public class Player {
 
 	public String getName() {
 		return name;
-	}
-
-	public void setCurrenttime(double currenttime) {
-		this.currenttime = currenttime;
 	}
 
 	public void setHighscore(int highscore) {

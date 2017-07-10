@@ -3,13 +3,11 @@ package game;
 import image.IMGhandler;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
-import javafx.animation.Timeline;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -22,7 +20,6 @@ import start_MEMORY.Start;
 
 public class GameEventhandler {
 	private static Point3D axis = new Point3D(5, 5, 0);
-	private static CustomAnimationTimer timer = new CustomAnimationTimer();
 	private static Card c1;
 	private static Card c2;
 	
@@ -32,17 +29,16 @@ public class GameEventhandler {
 			c1 = c;
 			c1.lock();
 			animation = flipCard(c1, 0);
-			if (timer.getCurrent() == 0) {
-				timer.start();
-			}
+			GameMaster.getPlayerInTurn().start();
 			c.setTurned(true);
 		} else if (c2 == null) {
 			c2 = c;
 			c2.lock();
 		}
 		if (c1 != null && c2 != null) {
+			GameMaster.getPlayerInTurn().setAttempts(GameMaster.getPlayerInTurn().getAttempts() + 1);
 			if (c1.getCard_Id() == c2.getCard_Id()) {
-				GameMaster.doTurn(true, timer.getCurrent());
+				GameMaster.doTurn(true);
 				animation = flipGrey(c1, c2);
 				match(c1, c2);
 
@@ -50,11 +46,8 @@ public class GameEventhandler {
 				c2 = null;
 			} else {
 
-				GameMaster.doTurn(false, timer.getCurrent());
+				GameMaster.doTurn(false);
 				if (Start.getGamemode() > 1) {
-					timer.stop();
-					timer.reset();
-					timer.start();
 				}
 				animation = flipBack(c1, c2);
 				
@@ -67,10 +60,6 @@ public class GameEventhandler {
 		}
 		animation.play();
 		MP3handler.play(1);
-	}
-
-	public static CustomAnimationTimer getTimer() {
-		return timer;
 	}
 
 	public static void reset(Node n) {
@@ -106,7 +95,6 @@ public class GameEventhandler {
 	static Transition flipBack(Card c1, Card c2) {
 		c1.lock();
 		c2.lock();
-		// TransitionRun TR = new TransitionRun();
 
 		RotateTransition c1turnAnimation = new RotateTransition(Duration.seconds(0.2), c1);
 		c1turnAnimation.setToAngle(90);

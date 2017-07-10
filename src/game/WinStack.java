@@ -46,7 +46,6 @@ public class WinStack extends HBox {
 			}
 		});
 
-		if (Start.getGamemode() > 1) {
 			int idx = 0;
 			for (Player playerSave : arrayList) {
 				idx++;
@@ -66,6 +65,5 @@ public class WinStack extends HBox {
 				highscore.getChildren().add(new Label(Double.toString(Math.floor(playerSave.getMintime()*100)/100) + " Sekunden"));
 				highscore.getChildren().add(new Label(Integer.toString(playerSave.getAttempts()) + " Versuche"));
 			}
-		}
 	}
 }

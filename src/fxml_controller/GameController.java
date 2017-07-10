@@ -11,7 +11,6 @@ import java.util.ResourceBundle;
 
 import game.BoardPane;
 import game.ExceptionHandler;
-import game.GameEventhandler;
 import game.GameMaster;
 import game.Player;
 import game.PlayerCircle;
@@ -19,8 +18,6 @@ import game.WinStack;
 import image.IMGhandler;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -47,6 +44,7 @@ import start_MEMORY.Start;
 
 /**
  * test
+ * 
  * @author D067928
  */
 public class GameController implements Initializable {
@@ -74,8 +72,9 @@ public class GameController implements Initializable {
 
 	@FXML
 	private BoardPane gamepane;
-	
-	
+
+	private ArrayList<PlayerCircle> circleList = new ArrayList<PlayerCircle>();
+
 	private static boolean win_ind;
 
 	public static boolean isWin_ind() {
@@ -147,22 +146,13 @@ public class GameController implements Initializable {
 	}
 
 	private void initTimer() {
-		//timer to count the time you spent on your turn
+		// timer to count the time you spent on your turn
 		timerlabel.setStyle("-fx-text-fill: white");
 		timerlabel.setScaleX(3.5);
 		timerlabel.setScaleY(3.5);
 		timerlabel.setLayoutX(1690);
 		timerlabel.setLayoutY(1040);
 		base.getChildren().add(timerlabel);
-		
-//		if (Start.getGamemode() > 1) {
-//			countdownlabel.setStyle("-fx-text-fill: white");
-//			countdownlabel.setScaleX(3.5);
-//			countdownlabel.setScaleY(3.5);
-//			countdownlabel.setLayoutX(1490);
-//			countdownlabel.setLayoutY(1040);
-//			base.getChildren().add(countdownlabel);		
-//		}
 	}
 
 	private void setupTimer() {
@@ -182,16 +172,12 @@ public class GameController implements Initializable {
 					fadein.play();
 					winbase.setDisable(false);
 				}
-				// debug time
-//				if (Start.getGamemode() > 1) {
-//					if (GameEventhandler.getCountdown().get() == 0) {
-//						countdownlabel.setText("");
-//					} else {
-//						countdownlabel.setText(Integer.toString(GameEventhandler.getCountdown().get()));
-//					}					
-//				}
-
-				timerlabel.setText(Double.toString(Math.round(GameEventhandler.getTimer().getCurrent() * 10.0) / 10.0));
+				for (int i = 0; i < circleList.size(); i++) {
+					GameMaster.getPlayerInTurn().setMintime(GameMaster.getPlayerInTurn().getTimer().getCurrent());
+					circleList.get(i).updateLabel();
+				}
+				timerlabel.setText(Double
+						.toString(Math.round(GameMaster.getPlayerInTurn().getTimer().getCurrent() * 10.0) / 10.0));
 			}
 		};
 		anitim.start();
@@ -213,8 +199,9 @@ public class GameController implements Initializable {
 		ArrayList<Player> playerAL = GameMaster.getPlayers();
 		for (Player player : playerAL) {
 			PlayerCircle pc = new PlayerCircle(player);
-			players.getChildren().add(pc);
+			circleList.add(pc);
 		}
+		players.getChildren().addAll(circleList);
 		players.setAlignment(Pos.CENTER);
 		players.setSpacing(10);
 

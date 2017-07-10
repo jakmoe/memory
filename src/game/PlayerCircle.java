@@ -32,14 +32,18 @@ public class PlayerCircle extends StackPane {
 
 	public void update() {
 		playerlabel.setText(player.getName() + "\nHighscore " + player.getHighscore() + "\nTime "
-				+ Math.floor(player.getMintime()*100)/100 + "\nAttempts " + player.getAttempts());
+				+ Math.floor(player.getMintime()*10)/10 + "\nAttempts " + player.getAttempts());
 
-		circle.setFill(IMGhandler.getPlayer(false));
 		if (player.getId() == GameMaster.getPlayerInTurn().getId()) {
 			circle.setFill(IMGhandler.getPlayer(true));
 		} else {
 			circle.setFill(IMGhandler.getPlayer(false));
 		}
+	}
+	
+	public void updateLabel() {
+		playerlabel.setText(player.getName() + "\nHighscore " + player.getHighscore() + "\nTime "
+				+ Math.floor(player.getMintime()*10)/10 + "\nAttempts " + player.getAttempts());
 	}
 
 	public Player getPlayer() {

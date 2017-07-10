@@ -36,14 +36,10 @@ public class JSONhandler {
 	public void pull() {
 		new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + File.separator
 				+ "Memory").mkdirs();
-		commit();
 		try (Reader reader = new FileReader(s)) {		
-
 			model = gson.fromJson(reader, JSONModel.class);
 		} catch (IOException e) {
-			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Read Error",
-					"Something went wrong reading the Save.", "Oops");
-			exc.showdialog();
+			commit();
 		}
 	}
 
@@ -52,7 +48,7 @@ public class JSONhandler {
 			gson.toJson(model, writer);
 		} catch (IOException e) {			
 			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Write Error",
-				"Something went wrong writing the Save.", "Oops");
+				"Something went wrong with reading or writing the Save.", "Oops");
 			exc.showdialog();
 		}
 	}

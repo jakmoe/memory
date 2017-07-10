@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import start_MEMORY.Start;
-
 public class JSONModel {
 	private GameInfo gameInfo = new GameInfo();
 	private ArrayList<PlayerSave> players_very_easy = new ArrayList<>();
@@ -23,7 +21,7 @@ public class JSONModel {
 	}
 
 	public void updateModel(PlayerSave ps) {
-		if (ps.getMintime() == 0) {
+		if (ps.getHighscore() == 0) {
 			return;
 		}
 		ps.setId(getPlayers().size() + 1);
@@ -51,7 +49,7 @@ public class JSONModel {
 				}
 			}
 		});
-		shrinkTo(getPlayers(), 10);
+		shrinkTo(getPlayers(), 25);
 	}
 
 	public static void shrinkTo(List<PlayerSave> list, int newSize) {

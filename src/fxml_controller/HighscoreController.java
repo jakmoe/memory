@@ -8,23 +8,18 @@ import java.util.ResourceBundle;
 import JSON.PlayerSave;
 import game.ExceptionHandler;
 import game.HighscoreModel;
-import image.IMGhandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.VBox;
 import sound.MP3handler;
 import start_MEMORY.Start;
 
@@ -99,11 +94,23 @@ public class HighscoreController implements Initializable {
 				public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
 					try {
 						if (view.getSelectedToggle() == all) {
+							createModel(Start.getJhdl().getModel().getPlayers(1), list, 0);
+							createModel(Start.getJhdl().getModel().getPlayers(2), list2, 0);
 							createModel(Start.getJhdl().getModel().getPlayers(3), list3, 0);
+							createModel(Start.getJhdl().getModel().getPlayers(4), list4, 0);
+							createModel(Start.getJhdl().getModel().getPlayers(5), list5, 0);
 						} else if (view.getSelectedToggle() == sp) {
+							createModel(Start.getJhdl().getModel().getPlayers(1), list, 1);
+							createModel(Start.getJhdl().getModel().getPlayers(2), list2, 1);
 							createModel(Start.getJhdl().getModel().getPlayers(3), list3, 1);
+							createModel(Start.getJhdl().getModel().getPlayers(4), list4, 1);
+							createModel(Start.getJhdl().getModel().getPlayers(5), list5, 1);
 						} else if (view.getSelectedToggle() == mp) {
+							createModel(Start.getJhdl().getModel().getPlayers(1), list, 2);
+							createModel(Start.getJhdl().getModel().getPlayers(2), list2, 2);
 							createModel(Start.getJhdl().getModel().getPlayers(3), list3, 2);
+							createModel(Start.getJhdl().getModel().getPlayers(4), list4, 2);
+							createModel(Start.getJhdl().getModel().getPlayers(5), list5, 2);
 						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block

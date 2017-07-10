@@ -3,12 +3,9 @@ package game;
 import java.util.ArrayList;
 
 import fxml_controller.GameController;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.util.Duration;
 import start_MEMORY.Start;
 
 public class GameMaster {
@@ -19,21 +16,20 @@ public class GameMaster {
 	private static String[] names = new String [Start.getGamemode()];
 	private static int i = 0;
 
-	public static void doTurn(boolean scored, double newtime) {
+	public static void doTurn(boolean scored) {
 
 		
 		try {
 			if (scored) {
 				PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 1);
 			} else {
+				PlayerInTurn.stop();
 				if (playerAL.indexOf(PlayerInTurn) <= playerAL.size() - 2) {
 					setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
 				} else {
 					setPlayerInTurn(playerAL.get(0));
 				}
 			}
-			PlayerInTurn.setMintime(PlayerInTurn.getMintime() + newtime);
-			PlayerInTurn.setAttempts(PlayerInTurn.getAttempts() + 1);
 			if (EndCheck <= 1) {
 				GameOver();
 			}
@@ -49,11 +45,10 @@ public class GameMaster {
 	}
 
 	public static void GameOver() {
-		GameEventhandler.getTimer().stop();
+		getPlayerInTurn().stop();
 		// still implementation for the final game with boardsize 9 needed
 		for (int i = 0; i < playerAL.size(); i++) {
 			System.out.println("Name" + playerAL.get(i).getName());
-			System.out.println("Time curr" + playerAL.get(i).getCurrenttime());
 			System.out.println("Highscore" + playerAL.get(i).getHighscore());
 			System.out.println("ID" + playerAL.get(i).getId());
 			System.out.println("Mintime" + playerAL.get(i).getMintime());
