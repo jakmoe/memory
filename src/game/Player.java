@@ -4,7 +4,6 @@ import JSON.PlayerSave;
 import start_MEMORY.Start;
 
 public class Player {
-	private double currenttime;
 	private int id;
 	private double mintime;
 	private int highscore;
@@ -28,7 +27,6 @@ public class Player {
 	
 	public Player(double currenttime, int id, double mintime, int highscore, String name, int attempts) {
 		super();
-		this.currenttime = currenttime;
 		this.id = id;
 		this.mintime = mintime;
 		this.highscore = highscore;
