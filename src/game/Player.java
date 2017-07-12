@@ -6,6 +6,7 @@ import start_MEMORY.Start;
 public class Player {
 	private int id;
 	private double mintime;
+	private double savedtime;
 	private int highscore;
 	private int attempts;
 	private String name;
@@ -21,7 +22,7 @@ public class Player {
 	}
 	public void stop() {
 		System.out.println(timer.getCurrent());
-		setMintime(timer.getCurrent());
+//		setMintime(mintime + timer.getCurrent());
 		timer.stop();
 	}
 	
@@ -81,6 +82,14 @@ public class Player {
 
 	public void setAttempts(int attempts) {
 		this.attempts = attempts;
+	}
+
+	public double getSavedtime() {
+		return savedtime;
+	}
+
+	public void setSavedtime(double savedtime) {
+		this.savedtime = savedtime;
 	}
 
 }

@@ -15,11 +15,11 @@ import start_MEMORY.Start;
 
 /**
  * @author D067928
- * This is the customized FlowPane used to manage the Cards. The Flowpane lays out the cards in one single "flow" cards, 
- * centering them automatically.
+ * Dies ist eine angepasste Flowpane die benutzt wird um die Karten zu verwalten. Das BoardPane ordnet die Karten bereits in einer
+ * festgelegten Größe an und verteilt sie entsprechend auf dem Board.
  */
 public class BoardPane extends FlowPane {
-	// this is the amount of pairs
+	// Anzahl Kartenpaare
 	private int cardPairs;
 	
 	//Bildgröße, dynamisch angepasst auf die Anzahl der Paare
@@ -34,7 +34,7 @@ public class BoardPane extends FlowPane {
 	//ArrayList mit Integerwerten, verwendet um Karten zu verwalten
 	private List<Integer> cardValues = new ArrayList<Integer>();
 
-	/**
+	/*
 	 *  Konstruktor, welcher Attribute wie Caching (Performance) und Alignment (Orientierung) setzt.
 	 *  Er ruft die Methode Initialize, welche das Board befüllt und spielbereit macht.
 	 */
@@ -56,7 +56,7 @@ public class BoardPane extends FlowPane {
 	}
 
 	/**
-	 * Initialisiert das Board
+	 * Initialisiert das Board mit anfänglichen Werten und festgelegter Anzahl Kartenpaare
 	 * @param cardPairs - nimmt die Kartenpaare entgegen
 	 */
 	public void Initialize(int cardPairs) {
@@ -66,41 +66,41 @@ public class BoardPane extends FlowPane {
 			cardValues.clear();
 		}
 		
-		//hier wird das cardPairs attribut gesetzt und in einer Schleife jeweils für jedes i zwei Mal i in cardValues
-		//eingefügt. Dies ist die Repräsentation von zwei gleichen Karten auf dem Board.
+		/*hier wird das cardPairs attribut gesetzt und in einer Schleife jeweils für jedes i zwei Mal i in cardValues
+		eingefügt. Dies ist die Repräsentation von zwei gleichen Karten auf dem Board.*/
 		BoardPane.this.setCardPairs(cardPairs);
 		for (int i = 1; i < BoardPane.this.getCardPairs() + 1; i++) {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
-		//die ArrayListe mit den Werten wird geshuffled, also gemischt (bei jedem Durchlauf anders - random)
-		// Anmerkung: NICHT komplett random, aber für diese Zwecke komplett ausreichend
+		/*die ArrayListe mit den Werten wird geshuffled, also gemischt (bei jedem Durchlauf anders - random)
+		 Anmerkung: NICHT komplett random, aber für diese Zwecke komplett ausreichend */
 		Collections.shuffle(cardValues);
-		//Es werden für jeden Wert neue Karten erstellt. Dabei wird val auf den zugehörigen Wert in cardValues gesetzt. Dies sorgt
-		//für je 2 gleiche Bilder beim selben Wert val. (immer genau 2 Karten)
+		/*Es werden für jeden Wert neue Karten erstellt. Dabei wird val auf den zugehörigen Wert in cardValues gesetzt. Dies sorgt
+		für je 2 gleiche Bilder beim selben Wert val. (immer genau 2 Karten) */
 		for (int val : cardValues) {
-			Card c = new Card(offset, offset, picSize, picSize);
+			Card cardInstance = new Card(offset, offset, picSize, picSize);
 			// Hier werden die Attribute für jede Karte gesetzt
-			c.setFill(IMGhandler.getImage_card(0));
-			c.setCacheHint(CacheHint.SPEED);
-			c.setDepthTest(DepthTest.INHERIT);
-			c.setCard_Id(val);
-			c.setArcHeight(20);
-			c.setArcWidth(20);
-			c.setCache(true);
-			//es wird ein Mouseclick handler gesetzt, der die Karte auf einen Klick reagieren lässt. Dies wird im
-			// GameEventhandler über cardturn abgewickelt.
-			c.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			cardInstance.setFill(IMGhandler.getImage_card(0));
+			cardInstance.setCacheHint(CacheHint.SPEED);
+			cardInstance.setDepthTest(DepthTest.INHERIT);
+			cardInstance.setCard_Id(val);
+			cardInstance.setArcHeight(20);
+			cardInstance.setArcWidth(20);
+			cardInstance.setCache(true);
+			/*es wird ein Mouseclick handler gesetzt, der die Karte auf einen Klick reagieren lässt. Dies wird im
+			GameEventhandler über cardturn abgewickelt.*/
+			cardInstance.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
-					// Ist die Karte bereits gepaart worden? Ist die Karte umgedreht worden? Ist die Karte gerade in keiner
-					// Animation?
-					if (!c.isMatched() & !c.isTurned() & !c.inAnimation()) {
-						GameEventhandler.cardturn(c, BoardPane.this);
+					/*Ist die Karte bereits gepaart worden? Ist die Karte umgedreht worden? Ist die Karte gerade in keiner
+					 Animation?*/
+					if (!cardInstance.isMatched() & !cardInstance.isTurned() & !cardInstance.inAnimation()) {
+						GameEventhandler.cardturn(cardInstance);
 					}
 				}
 			});
-			cardList.add(c);
+			cardList.add(cardInstance);
 		}
 		//Schließlich werden alle Karten aus der cardList auf das Board hinzugefügt.
 		BoardPane.this.getChildren().addAll(cardList);

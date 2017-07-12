@@ -23,7 +23,9 @@ public class GameMaster {
 			if (scored) {
 				PlayerInTurn.setHighscore(PlayerInTurn.getHighscore() + 1);
 			} else {
-				PlayerInTurn.stop();
+				if (Start.getGamemode() > 1) {
+					PlayerInTurn.stop();
+				}
 				if (playerAL.indexOf(PlayerInTurn) <= playerAL.size() - 2) {
 					setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
 				} else {

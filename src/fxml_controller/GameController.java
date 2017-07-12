@@ -173,7 +173,8 @@ public class GameController implements Initializable {
 					winbase.setDisable(false);
 				}
 				for (int i = 0; i < circleList.size(); i++) {
-					GameMaster.getPlayerInTurn().setMintime(GameMaster.getPlayerInTurn().getTimer().getCurrent());
+					GameMaster.getPlayerInTurn().setMintime(GameMaster.getPlayerInTurn().getSavedtime() + 
+															GameMaster.getPlayerInTurn().getTimer().getCurrent());
 					circleList.get(i).updateLabel();
 				}
 				timerlabel.setText(Double
