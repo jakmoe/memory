@@ -23,6 +23,9 @@ public class TransitionRun implements Runnable {
 		anim.play();
 	}
 
+	/**
+	 * @param anim - die Transition / Animation auf die die Interpolation angewendet werden soll.
+	 */
 	public void setAnim(Transition anim) {
 		this.anim = anim;
 	}

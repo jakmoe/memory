@@ -13,8 +13,23 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import start_MEMORY.Start;
 
+/**
+ * @author D067928
+ *	Das WinStack Objekt ist dafür verantwortlich, die Siegerdarstellung zu übernehmen, falls das Spiel zu Ende ist. Es nimmt
+ *	eine Sortierung der Spieler nach 1. Highscore, 2. Versuchen, 3. gebrauchter Zeit vor und bestimmt so den Sieger. Die Kartenpaare
+ *	werden über farbig addierte Balken dargestellt. Extended eine HBox (Horizontal Box), weil es die Spieler horizontal anordnen soll.
+ */
 public class WinStack extends HBox {
+	/**
+	 * Initialisiert den WinStack. Startparameter sowie Comparator sollen
+	 * gesetzt werden
+	 * 
+	 * @param arrayList
+	 *            - Die Spielerliste die für den WinScreen verarbeitet werden
+	 *            soll.
+	 */
 	public void initialize(ArrayList<Player> arrayList) {
+		// Setzt Startwerte für eine FullHD Auflösung
 		this.setPrefWidth(600);
 		this.setPrefHeight(500);
 		this.setSpacing(20);
@@ -22,6 +37,9 @@ public class WinStack extends HBox {
 		this.setLayoutY(325);
 		this.setAlignment(Pos.TOP_CENTER);
 
+		// Hier wird eine Anonyme Klasse verbaut, da der Comparator sonst nirgends gebraucht wird.
+		// Zuerst wird nach Highscore, dann nach Versuchen und dann nach Mintime Sortiert.
+		// Der höhere Highscore zuerst, weniger Versuche zuerst, weniger Zeit zuerst.
 		arrayList.sort(new Comparator<Player>() {
 			@Override
 			public int compare(Player o1, Player o2) {
@@ -45,25 +63,35 @@ public class WinStack extends HBox {
 				}
 			}
 		});
-
-			int idx = 0;
-			for (Player playerSave : arrayList) {
-				idx++;
-				VBox highscore = new VBox();
-				highscore.setSpacing(10);
-				this.getChildren().add(highscore);
-				highscore.getChildren().add(new ImageView(IMGhandler.getWinNumber(idx)));
-				highscore.setAlignment(Pos.TOP_CENTER);
-				highscore.getChildren().add(new Label(playerSave.getName()));
-				for (int i = 0; i < playerSave.getHighscore(); i++) {
-					Rectangle scorerec = new Rectangle(this.getPrefWidth() / Start.getGamemode(),
-							25 * 1 / Start.getJhdl().getModel().getInfo().getDifficulty());
-					scorerec.setFill(new ImagePattern(IMGhandler.getStack()));
-					highscore.getChildren().add(scorerec);
-					scorerec.toFront();
-				}
-				highscore.getChildren().add(new Label(Double.toString(Math.floor(playerSave.getMintime()*100)/100) + " Sekunden"));
-				highscore.getChildren().add(new Label(Integer.toString(playerSave.getAttempts()) + " Versuche"));
+		
+		//erstellt einen Index um die Spieler abzuarbeiten
+		int idx = 0;
+		for (Player player : arrayList) {
+			// für jeden Spieler wird der Index inkrementiert, alternativ wäre hier auch eine For-schleife verwednbar.
+			idx++;
+			// Eine neue VBox (Vertical Box) wird erstellt um die Informationen pro Spieler untereinander darzustellen
+			VBox highscore = new VBox();
+			highscore.setSpacing(10);
+			this.getChildren().add(highscore);
+			//Zunächst wird die Winnumber (1., 2., 3. oder 4. Platz) hinzugefügt
+			highscore.getChildren().add(new ImageView(IMGhandler.getWinNumber(idx)));
+			highscore.setAlignment(Pos.TOP_CENTER);
+			// Nun wird der Spielername hinzugefügt
+			highscore.getChildren().add(new Label(player.getName()));
+			
+			//In dieser Schleife wird für jedes erzielte Paar ein Balken hinzugefügt
+			//Die Balken sind je nach Schwierigkeitsstufe unterschieldich groß.
+			for (int i = 0; i < player.getHighscore(); i++) {
+				Rectangle scorerec = new Rectangle(this.getPrefWidth() / Start.getGamemode(),
+						25 * 1 / Start.getJhdl().getModel().getInfo().getDifficulty());
+				scorerec.setFill(new ImagePattern(IMGhandler.getStack()));
+				highscore.getChildren().add(scorerec);
+				scorerec.toFront();
 			}
+			//Nun werden noch die gebrauchten Versuche sowie die benötigte Zeit hinzugeschrieben.
+			highscore.getChildren()
+					.add(new Label(Double.toString(Math.floor(player.getMintime() * 100) / 100) + " Sekunden"));
+			highscore.getChildren().add(new Label(Integer.toString(player.getAttempts()) + " Versuche"));
+		}
 	}
 }
