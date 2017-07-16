@@ -44,6 +44,8 @@ public class SingleplayerController02 implements Initializable {
 	@FXML
 	private Button singleplayer;
 	@FXML
+	private Button gameStart;
+	@FXML
 	private AnchorPane AnchorPane;
 
 	private void AddTextFields() {
@@ -54,7 +56,8 @@ public class SingleplayerController02 implements Initializable {
 	private void checkNames(ActionEvent event) {
 		// Exception only String?
 		boolean canWeStart = false;
-		if (!newField.getText().isEmpty()) {
+		if (!newField.getText().replaceAll(" ","").isEmpty()) {
+			gameStart.setDisable(true);
 			GameMaster.setNames(newField.getText());
 			canWeStart = true;
 		}

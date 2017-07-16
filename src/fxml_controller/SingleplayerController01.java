@@ -25,7 +25,7 @@ public class SingleplayerController01 implements Initializable {
 	private AnchorPane Anchor;
 	
 	@FXML 
-	private Button start;
+	private Button StartButton;
 
 
 	@FXML
@@ -36,6 +36,7 @@ public class SingleplayerController01 implements Initializable {
 	//Set the number of players and redirect to the next scene
 	@FXML
 	private void handleButton (ActionEvent event) {
+		StartButton.setDisable(true);
 		Start.setGamemode(1);
 		loadNextScene();
 	}

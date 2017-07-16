@@ -32,6 +32,8 @@ import start_MEMORY.Start;
 public class MultiplayerController02 implements Initializable {
 	
 	@FXML
+	private Button gameStart;
+	@FXML
 	VBox textFieldArea;
 	@FXML
 	Text errorTxt;
@@ -69,7 +71,7 @@ public class MultiplayerController02 implements Initializable {
 		//Exception only String?
 		boolean canWeStart = false;
 		if (players >= 2) {
-			if (!newField1.getText().isEmpty() && !newField2.getText().isEmpty()) {
+			if (!newField1.getText().replaceAll(" ","").isEmpty() && !newField2.getText().replaceAll(" ","").isEmpty()) {
 				canWeStart = true;
 				GameMaster.setNames(newField1.getText());
 				GameMaster.setNames(newField2.getText());
@@ -78,20 +80,21 @@ public class MultiplayerController02 implements Initializable {
 				canWeStart = false;
 		}
 		if (players >= 3) {
-			if (!newField3.getText().isEmpty()) {
+			if (!newField3.getText().replaceAll(" ","").isEmpty()) {
 				GameMaster.setNames(newField3.getText());
 			}
 			else
 				canWeStart = false;
 		}
 		if (players == 4) {
-			if (!newField4.getText().isEmpty()) {
+			if (!newField4.getText().replaceAll(" ","").isEmpty()) {
 				GameMaster.setNames(newField4.getText());
 			}
 			else
 				canWeStart = false;
 		}
-		if (canWeStart == true) { 
+		if (canWeStart == true) {
+			gameStart.setDisable(true);
 			init_game();
 		}
 		else
