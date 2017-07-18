@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import game.ExceptionHandler;
 import game.GameMaster;
 import image.IMGhandler;
 import javafx.animation.AnimationTimer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -27,6 +30,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sound.MP3handler;
 import start_MEMORY.Start;
 
 public class MultiplayerController02 implements Initializable {
@@ -53,23 +57,29 @@ public class MultiplayerController02 implements Initializable {
 	private AnchorPane AnchorPane;
 	
 	private void AddTextFields() {	
-
+		newField1.setVisible(false);
+		newField2.setVisible(false);
+		newField3.setVisible(false);
+		newField4.setVisible(false);
+		
 		if (players >= 2) {
-			textFieldArea.getChildren().add(newField1);
-			textFieldArea.getChildren().add(newField2);
+			newField1.setVisible(true);
+			newField2.setVisible(true);
 		}
 		if (players >= 3) {
-			textFieldArea.getChildren().add(newField3);
+			newField3.setVisible(true);
 		}
 		if (players == 4) {
-			 textFieldArea.getChildren().add(newField4);
+			 newField4.setVisible(true);
 		}
+		System.out.println("zweiter test gut");
 	}
 	
 	@FXML
 	private void checkNames (ActionEvent event) {
 		//Exception only String?
 		boolean canWeStart = false;
+		
 		if (players >= 2) {
 			if (!newField1.getText().replaceAll(" ","").isEmpty() && !newField2.getText().replaceAll(" ","").isEmpty()) {
 				canWeStart = true;
@@ -166,10 +176,38 @@ public class MultiplayerController02 implements Initializable {
 			popupload.showAndWait();
 		}
 	}
-
+	@FXML
+	private void back (ActionEvent event) {
+		loader.setLocation(getClass().getResource("/fxml/Multiplayer/Multiplayer01.fxml"));
+		try {
+			MP3handler.stopbackground();
+			Parent root = loader.load();
+			AnchorPane.getScene().setRoot(root);
+		} catch (IOException e) {
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
+					"Something went wrong loading the next screen", "Oops");
+			exc.showdialog();
+		}
+	}
+	
+	public void refresh() {
+		textFieldArea.getChildren().clear();
+		System.out.println("refresh called");
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-			AddTextFields();
+		Start.getGamemodeProp().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				players = Start.getGamemode();
+				refresh();
+			}
+		});
+		textFieldArea.getChildren().add(newField1);
+		textFieldArea.getChildren().add(newField2);
+		textFieldArea.getChildren().add(newField3);
+		textFieldArea.getChildren().add(newField4);	
+		AddTextFields();
 	}
 }

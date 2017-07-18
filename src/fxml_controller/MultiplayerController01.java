@@ -64,11 +64,12 @@ public class MultiplayerController01 implements Initializable {
 	}
 		
 	private void loadNextScene() {
-		loader.setLocation(getClass().getResource("/fxml/Multiplayer/Multiplayer02.fxml"));
+		FXMLLoader loader2 = new FXMLLoader();
+		loader2.setLocation(getClass().getResource("/fxml/Multiplayer/Multiplayer02.fxml"));
 		try {
 			MP3handler.stopbackground();
-			Parent root = loader.load();
-			Anchor.getScene().setRoot(root);
+			Parent root2 = loader2.load();
+			Anchor.getScene().setRoot(root2);
 		} catch (IOException e) {
 			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
 					"Something went wrong loading the next screen", "Oops");

@@ -10,7 +10,7 @@ import start_MEMORY.Start;
 
 /**
  * @author D067928
- *	Der GameMaster ist dafür verantwortlich die Rundenverwaltung zu übernehmen. So wird hier der Spieler an der Reihe gepuffert.
+ *	Der GameMaster ist dafï¿½r verantwortlich die Rundenverwaltung zu ï¿½bernehmen. So wird hier der Spieler an der Reihe gepuffert.
  *	Auch sind hier alle Spieler in einer ArrayList vorhanden.
  */
 public class GameMaster {
@@ -22,7 +22,7 @@ public class GameMaster {
 	private static int i = 0;
 
 	/**
-	 * doTurn wird aufgerufen, falls eine Runde abgehandelt werden soll. Es kommt dann der nächste Spieler im Spielerarray an die Reihe.
+	 * doTurn wird aufgerufen, falls eine Runde abgehandelt werden soll. Es kommt dann der nï¿½chste Spieler im Spielerarray an die Reihe.
 	 * @param scored - Gibt an ob ein Paar erzielt wurde oder nicht.
 	 */
 	public static void doTurn(boolean scored) {
@@ -35,7 +35,7 @@ public class GameMaster {
 				if (Start.getGamemode() > 1) {
 					PlayerInTurn.stop();
 				}
-				// Falls der Spieler an der Reihe der letzte ist, wird statt dem (nichtvorhandenen) nächsten der 1. Spieler gewählt.
+				// Falls der Spieler an der Reihe der letzte ist, wird statt dem (nichtvorhandenen) nï¿½chsten der 1. Spieler gewï¿½hlt.
 				if (playerAL.indexOf(PlayerInTurn) <= playerAL.size() - 2) {
 					setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
 				} else {
@@ -52,7 +52,7 @@ public class GameMaster {
 			}
 			
 		} catch (Exception e) {
-			//Im Fall eines Fehlers durch falsches Befüllen des Arrays wird eine Exception geworfen.
+			//Im Fall eines Fehlers durch falsches Befï¿½llen des Arrays wird eine Exception geworfen.
 			ExceptionHandler exc = new ExceptionHandler(e, "Error", "GameMaster Error",
 					"Something went wrong in the GameMaster", "Oops");
 			exc.showdialog();
@@ -69,38 +69,35 @@ public class GameMaster {
 		for (int i = 0; i < playerAL.size(); i++) {
 			playerAL.get(i).CommitSafe();
 		}
-		// Der Win Indikator wird auf wahr gesetzt um im nächsten frame den WinScreen anzuzeigen
+		// Der Win Indikator wird auf wahr gesetzt um im nï¿½chsten frame den WinScreen anzuzeigen
 		GameController.setWin_ind(true);
 	}
 
 	/**
-	 * @return PlayerInTurn - Gibt den Spieler, der an der Reihe ist, als Objekt zurück.
+	 * @return PlayerInTurn - Gibt den Spieler, der an der Reihe ist, als Objekt zurï¿½ck.
 	 */
 	public static Player getPlayerInTurn() {
 		return PlayerInTurn;
 	}
 
 	/**
-	 * @return playerAL - gibt alle Spieler in der Spielreihenfolge als ArrayList zurück.
+	 * @return playerAL - gibt alle Spieler in der Spielreihenfolge als ArrayList zurï¿½ck.
 	 */
 	public static ArrayList<Player> getPlayers() {
 		return playerAL;
 	}
 
 	/**
-	 * setzt alle Spieler zurück, indem die Listen geleert werden.
+	 * setzt alle Spieler zurï¿½ck, indem die Listen geleert werden.
 	 */
 	public static void reset() {
 		playerAL.clear();
-		for (int i = 0; i < names.length; i++) {
-			names[i] = null;
-		}
 	}
 
 	/**
-	 * @param playerInTurn - Setzt den Spieler der an der Reihe ist, sowie seine idproperty. Diese wird benötigt um in Echtzeit
-	 * den richtigen Spieler auf dem User Interface zu updaten. (welcher über die idproperty gelesen werden kann). Properties
-	 * sind Wrapperklassen im JavaFX Umfeld, welche für bestimmte Echtzeitupdate-operationen verwendet werden
+	 * @param playerInTurn - Setzt den Spieler der an der Reihe ist, sowie seine idproperty. Diese wird benï¿½tigt um in Echtzeit
+	 * den richtigen Spieler auf dem User Interface zu updaten. (welcher ï¿½ber die idproperty gelesen werden kann). Properties
+	 * sind Wrapperklassen im JavaFX Umfeld, welche fï¿½r bestimmte Echtzeitupdate-operationen verwendet werden
 	 */
 	public static void setPlayerInTurn(Player playerInTurn) {
 		PlayerInTurn = playerInTurn;
@@ -110,19 +107,19 @@ public class GameMaster {
 	/**
 	 * Die Methode wird aufgerufen sobald das Spiel gestartet wird.
 	 * @param playercount - Anzahl der Spieler
-	 * @param boardsize - Größe des Boards
+	 * @param boardsize - Grï¿½ï¿½e des Boards
 	 */
 	public static void startGame(int playercount, int boardsize) {
 		reset();
-		// Addiert neue Spieler mit den Namen aus dem UI abhängig von der Spieleranzahl
+		// Addiert neue Spieler mit den Namen aus dem UI abhï¿½ngig von der Spieleranzahl
 		for (int i = 1; i <= playercount; i++) {
 			playerAL.add(new Player(0.0, i, 0.0, 0, names[i-1], 0));
 		}
 
-		// EndCheck wird auf BoardGröße gesetzt. Wenn alle Paare gefunden sind steht der EndCheck auf 0.
+		// EndCheck wird auf BoardGrï¿½ï¿½e gesetzt. Wenn alle Paare gefunden sind steht der EndCheck auf 0.
 		EndCheck = boardsize;
 
-		// Der erste Spieler fängt an.
+		// Der erste Spieler fï¿½ngt an.
 		PlayerInTurn = playerAL.get(0);
 	}
 	
@@ -138,15 +135,15 @@ public class GameMaster {
 	}
 	
 	/**
-	 * @return playeridproperty - Gibt die Property für die Spieler ID des PlayerInTurn zurück
+	 * @return playeridproperty - Gibt die Property fï¿½r die Spieler ID des PlayerInTurn zurï¿½ck
 	 */
 	public static IntegerProperty getPlayeridproperty() {
 		return playeridproperty;
 	}
 
 	/**
-	 * Hier kann der Property ein Listener hinzugefügt werden, welcher ein Verhalten auslöst sobald sich die property ändert.
-	 * So kann stets eine Logik ausgeführt werden wenn der PlayerInTurn gewechselt wird.
+	 * Hier kann der Property ein Listener hinzugefï¿½gt werden, welcher ein Verhalten auslï¿½st sobald sich die property ï¿½ndert.
+	 * So kann stets eine Logik ausgefï¿½hrt werden wenn der PlayerInTurn gewechselt wird.
 	 * @param changeListener - der zu addende Listener
 	 */
 	public static void setIdListener(ChangeListener<Number> changeListener) {
