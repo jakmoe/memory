@@ -18,7 +18,7 @@ public class GameMaster {
 	private static Player PlayerInTurn;
 	private static IntegerProperty playeridproperty = new SimpleIntegerProperty(0);
 	private static int EndCheck;
-	private static String[] names = new String [Start.getGamemode()];
+	private static ArrayList<String> names = new ArrayList<String>();
 	private static int i = 0;
 
 	/**
@@ -113,7 +113,7 @@ public class GameMaster {
 		reset();
 		// Addiert neue Spieler mit den Namen aus dem UI abh�ngig von der Spieleranzahl
 		for (int i = 1; i <= playercount; i++) {
-			playerAL.add(new Player(0.0, i, 0.0, 0, names[i-1], 0));
+			playerAL.add(new Player(0.0, i, 0.0, 0, names.get(i-1), 0));
 		}
 
 		// EndCheck wird auf BoardGr��e gesetzt. Wenn alle Paare gefunden sind steht der EndCheck auf 0.
@@ -128,9 +128,9 @@ public class GameMaster {
 	 * @param name - Name des Spielers
 	 */
 	public static void setNames(String name){
-		names[i] = name;
+		names.add(name);
 		i++;
-		if (i == names.length)
+		if (i == Start.getGamemode())
 			i = 0;
 	}
 	

@@ -72,7 +72,6 @@ public class MultiplayerController02 implements Initializable {
 		if (players == 4) {
 			 newField4.setVisible(true);
 		}
-		System.out.println("zweiter test gut");
 	}
 	
 	@FXML
@@ -192,7 +191,6 @@ public class MultiplayerController02 implements Initializable {
 	
 	public void refresh() {
 		textFieldArea.getChildren().clear();
-		System.out.println("refresh called");
 	}
 	
 	@Override
