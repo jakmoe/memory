@@ -47,10 +47,10 @@ public class Start extends Application {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		//Hier werden Attribute f�r die Stage gesetzt, welche unter anderem f�r den fensterlosen Fullscreen sorgen
-		stage.setFullScreen(false);
+		stage.setFullScreen(true);
 		stage.setFullScreenExitHint("");
-		stage.setResizable(true);
-//		stage.initStyle(StageStyle.UNDECORATED);
+		stage.setResizable(false);
+		stage.initStyle(StageStyle.UNDECORATED);
 		setStage(stage);
 		stage.show();
 		//Jetzt wird, wenn bereits vorhanden, das Savegame geladen.
