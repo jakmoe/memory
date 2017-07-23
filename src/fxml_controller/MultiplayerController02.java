@@ -33,6 +33,10 @@ import javafx.stage.StageStyle;
 import sound.MP3handler;
 import start_MEMORY.Start;
 
+/**
+ * @author D067928
+ * Die Klasse zuständig für den Spielstart im Mehrspieler. Fragt vorher die Namen ab.
+ */
 public class MultiplayerController02 implements Initializable {
 	
 	@FXML
@@ -41,6 +45,8 @@ public class MultiplayerController02 implements Initializable {
 	VBox textFieldArea;
 	@FXML
 	Text errorTxt;
+	
+	//setzt vorläufig die Spieleranzahl auf den Gamemode
 	static int players = Start.getGamemode();
 	
 	TextField newField1 = new TextField();
@@ -56,6 +62,9 @@ public class MultiplayerController02 implements Initializable {
 	@FXML
 	private AnchorPane AnchorPane;
 	
+	/**
+	 * Dies akzualisiert die Eingabefelder, je nachdem wieviele Spieler momentan involviert sind
+	 */
 	private void AddTextFields() {	
 		newField1.setVisible(false);
 		newField2.setVisible(false);
@@ -74,6 +83,9 @@ public class MultiplayerController02 implements Initializable {
 		}
 	}
 	
+	/**
+	 * Wenn ein Name eingegeben wird, wird Checknames ausgeführt, welche prüft ob die Namen nicht leer sind.
+	 */
 	@FXML
 	private void checkNames (ActionEvent event) {
 		//Exception only String?
@@ -110,15 +122,25 @@ public class MultiplayerController02 implements Initializable {
 			errorTxt.setVisible(true);
 	}
 	
+	/**
+	 * Hier wird das Spiel initialisiert. Das Laden wird in einen 2. Thread ausgelagert um den Ladebalken aktualisierbar
+	 * zu gestalten.
+	 */
 	private void init_game() {
+		//Zunächst wird der Ladebalken initialisiert.
 		ProgressBar progressBar = new ProgressBar(0);
 		progressBar.setPrefSize(400, 40);
+		//Es wird ein neuer Service erstellt, welcher dafür sorgt dass JavaFX die Berechnung nicht im UI-Thread übernimmt
+		//Ansonsten würde das UI bis zum fertiggeladenen Screen nicht mehr reagieren.
 		Service<Void> sv = new Service<Void>() {
 			@Override
 			protected Task<Void> createTask() {
+				//Dies lädt alle Bilder
 				return IMGhandler.initialize(Start.getJhdl().getModel().getInfo().getCardcount());
 			}
 		};
+		//es wird ein Echtzeitupdater initialisiert, der regelmäßig den Fortschritt im Ladebalken aktualisiert und bei fertigem
+		//Laden in die Spielszene switched
 		AnimationTimer anitim = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
@@ -136,6 +158,7 @@ public class MultiplayerController02 implements Initializable {
 				}
 			}
 		};
+		//Dies setzt einige Eigenschaften des Popups um den Ladebalken mit Infos an den User weiterzugeben
 		if (popupload == null) {
 			popupload = new Stage();
 			popupload.setWidth(400);
@@ -177,16 +200,8 @@ public class MultiplayerController02 implements Initializable {
 	}
 	@FXML
 	private void back (ActionEvent event) {
-		loader.setLocation(getClass().getResource("/fxml/Multiplayer/Multiplayer01.fxml"));
-		try {
-			MP3handler.stopbackground();
-			Parent root = loader.load();
-			AnchorPane.getScene().setRoot(root);
-		} catch (IOException e) {
-			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
-					"Something went wrong loading the next screen", "Oops");
-			exc.showdialog();
-		}
+		MenuHandler menhan = new MenuHandler();
+		menhan.setBase(AnchorPane);
 	}
 	
 	public void refresh() {

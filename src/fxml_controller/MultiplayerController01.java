@@ -19,6 +19,10 @@ import javafx.scene.layout.AnchorPane;
 import sound.MP3handler;
 import start_MEMORY.Start;
 
+/**
+ * @author D067928
+ *	Der MultiplayerController01 prüft hauptsächlich die Spieleranzahl
+ */
 public class MultiplayerController01 implements Initializable {
 	
 	@FXML
@@ -32,7 +36,7 @@ public class MultiplayerController01 implements Initializable {
 	
 	FXMLLoader loader = new FXMLLoader();
 	
-	//Set the number of players and redirect to the next scene
+	//Je nach Spieleranzahl wird der Gamemode anders gesetzt und die nächste Szene geladen
 	@FXML
 	private void handleButtonTwo (ActionEvent event) {
 		Start.setGamemode(2);
@@ -51,16 +55,8 @@ public class MultiplayerController01 implements Initializable {
 	
 	@FXML
 	private void back (ActionEvent event) {
-		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
-		try {
-			MP3handler.stopbackground();
-			Parent root = loader.load();
-			Anchor.getScene().setRoot(root);
-		} catch (IOException e) {
-			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
-					"Something went wrong loading the next screen", "Oops");
-			exc.showdialog();
-		}
+		MenuHandler menhan = new MenuHandler();
+		menhan.setBase(Anchor);
 	}
 		
 	private void loadNextScene() {

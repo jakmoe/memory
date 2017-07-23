@@ -43,16 +43,8 @@ public class SingleplayerController01 implements Initializable {
 	
 	@FXML
 	private void back() {
-		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
-		try {
-			MP3handler.stopbackground();
-			Parent root = loader.load();
-			Anchor.getScene().setRoot(root);
-		} catch (IOException e) {
-			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
-					"Something went wrong loading the next screen", "Oops");
-			exc.showdialog();
-		}
+		MenuHandler menhan = new MenuHandler();
+		menhan.setBase(Anchor);
 	}
 		
 	private void loadNextScene() {

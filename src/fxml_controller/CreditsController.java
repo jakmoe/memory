@@ -20,25 +20,23 @@ import sound.MP3handler;
 /**
  *
  * @author D067928
+ * Credits.fxml
+ * Dies ist der FXML Controller für den Creditsscreen. Er beinhält nur ein Bild (das bereits im fxml Dokument
+ * initialisiert wird. 
  */
 public class CreditsController implements Initializable {
 	FXMLLoader loader = new FXMLLoader();
 
 	@FXML
-	private Button back;
+	private Button back; //der Zurückbutton
 
+	/**
+	 * Ermöglicht die Rücknavigation ins Hauptmenü
+	 */
 	@FXML
 	private void backaction() {
-		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
-		try {
-			MP3handler.stopbackground();
-			Parent root = loader.load();
-			back.getScene().setRoot(root);
-		} catch (IOException e) {
-			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
-					"Something went wrong loading the next screen", "Oops");
-			exc.showdialog();
-		}
+		MenuHandler menhan = new MenuHandler();
+		menhan.setBase(back);
 	}
 
 	@Override

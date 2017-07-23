@@ -16,13 +16,17 @@ import javafx.stage.Stage;
 import sound.MP3handler;
 import start_MEMORY.Start;
 
+/**
+ * @author D067928
+ * Die Controller-Klasse für das Hauptmenü
+ */
 public class MenuController implements Initializable {
 	FXMLLoader loader = new FXMLLoader();
 
 	Stage popupload;
 
-	Alert multichoice;
 
+	//Buttons für die Navigation
 	@FXML
 	private AnchorPane anchor;
 	@FXML
@@ -38,12 +42,18 @@ public class MenuController implements Initializable {
 	@FXML
 	private Button end;
 
+	/**
+	 * Beendet das Programm.
+	 */
 	@FXML
 	private void endprogram(ActionEvent event) {
 		Start.getJhdl().commit();
 		System.exit(0);
 	}
 
+	/**
+	 * Lädt die Settingsszene von FXML in die Stage
+	 */
 	@FXML
 	private void gamesettings(ActionEvent event) {
 		loader.setLocation(getClass().getResource("/fxml/Settings/Settings.fxml"));
@@ -55,7 +65,9 @@ public class MenuController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Lädt die Highscoreszene von FXML in die Stage
+	 */
 	@FXML
 	private void highscores(ActionEvent event) {
 		loader.setLocation(getClass().getResource("/fxml/Highscore/Highscore.fxml"));
@@ -68,6 +80,9 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * Lädt die Creditsszene von FXML in die Stage
+	 */
 	@FXML
 	private void credits(ActionEvent event) {
 		loader.setLocation(getClass().getResource("/fxml/Credits/Credits.fxml"));
@@ -80,17 +95,26 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * Startet das Spiel im Einzelspielermodus
+	 */
 	@FXML
 	private void gamesingleplayer(ActionEvent event) {
 		Start.setGamemode(1);
 		init_game_sp();
 	}
 
+	/**
+	 * Startet das Spiel im Mehrspielermodus
+	 */
 	@FXML
 	private void gamemultiplayer(ActionEvent event) {
 		init_game_mp();
 	}
 
+	/**
+	 * Lädt die erste Mehrspielerszene
+	 */
 	private void init_game_mp() {
 		loader.setLocation(getClass().getResource("/fxml/Multiplayer/Multiplayer01.fxml"));
 		try {
@@ -102,6 +126,9 @@ public class MenuController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Lädt die erste Einzelspielerszene
+	 */
 	private void init_game_sp() {
 		loader.setLocation(getClass().getResource("/fxml/Singleplayer/Singleplayer01.fxml"));
 		try {
@@ -113,9 +140,12 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		MP3handler.playbackground(1);
+		MP3handler.playbackground(1); //startet die Musik
 	}
 
 }

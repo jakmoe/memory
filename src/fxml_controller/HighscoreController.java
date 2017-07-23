@@ -23,9 +23,14 @@ import javafx.scene.control.ToggleGroup;
 import sound.MP3handler;
 import start_MEMORY.Start;
 
+/**
+ * @author D067928
+ *	Dies ist die Controllerklasse für die Highscoretabelle.
+ */
 public class HighscoreController implements Initializable {
 	FXMLLoader loader = new FXMLLoader();
 
+	//5 TableView Elemente für jede Schwierigkeit
 	@FXML
 	private TableView<HighscoreModel> veryeasy;
 	@FXML
@@ -37,9 +42,11 @@ public class HighscoreController implements Initializable {
 	@FXML
 	private TableView<HighscoreModel> veryhard;
 
+	//eine ToggleGroup um zwischen Ansichten zu wechseln
 	@FXML
 	ToggleGroup view;
 
+	// ToggleButton um zu Selektieren ob man alle, nur Einzelspieler oder nur Mehrspieler Statistiken einsehen will.
 	@FXML
 	ToggleButton all;
 	@FXML
@@ -47,33 +54,39 @@ public class HighscoreController implements Initializable {
 	@FXML
 	ToggleButton mp;
 
+	//Der Zurückbutton fürs Menü
 	@FXML
 	private Button back;
-
+	
+	/**
+	 * Ermöglicht die Rücknavigation ins Hauptmenü
+	 */
 	@FXML
 	private void backaction() {
-		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
-		try {
-			MP3handler.stopbackground();
-			Parent root = loader.load();
-			back.getScene().setRoot(root);
-		} catch (IOException e) {
-			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
-					"Something went wrong loading the next screen", "Oops");
-			exc.showdialog();
-		}
+		MenuHandler menhan = new MenuHandler();
+		menhan.setBase(back);
 	}
 
+	/**
+	 * Setzt das Model zurück, falls man alle Savegames zurücksetzen möchte
+	 */
 	@FXML
 	private void resetaction() {
 		Start.getJhdl().getModel().resetModel();
 		Start.getJhdl().commit();
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
+			//spielt Musik ab
+			MP3handler.stopbackground();
 			MP3handler.playbackground(1);
+			
+			//Erstellt ein Model für jede Schwierigkeit
 			ObservableList<HighscoreModel> list = veryeasy.getItems();
 			createModel(Start.getJhdl().getModel().getPlayers(1), list, 0);
 
@@ -89,6 +102,8 @@ public class HighscoreController implements Initializable {
 			ObservableList<HighscoreModel> list5 = veryhard.getItems();
 			createModel(Start.getJhdl().getModel().getPlayers(5), list5, 0);
 
+			//bei einer Änderung in der view, also wenn neue Daten geladen werden muss das Modell neu erstellt
+			//werden. Dies ist nur mit dem UI gekoppelt, damit keine Performanceprobleme entstehen.
 			view.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 				@Override
 				public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
@@ -126,18 +141,19 @@ public class HighscoreController implements Initializable {
 		}
 	}
 
+	//Je nach view werden hier die Savegames ausgelesen und in die ObservableList (also das Sichtbare) geladen
 	private void createModel(ArrayList<PlayerSave> players, ObservableList<HighscoreModel> data, int view) {
 		data.clear();
 		for (PlayerSave playerSave : players) {
-			if (view == 0) {
+			if (view == 0) { //alle
 				data.add(new HighscoreModel(playerSave.getName(), playerSave.getMintime(), playerSave.getHighscore(),
 						playerSave.getAttempts(), playerSave.isSingleplayer()));				
-			} else if (view == 1) {
+			} else if (view == 1) { //nur Einzelspieler
 				if (playerSave.isSingleplayer() == true) {
 					data.add(new HighscoreModel(playerSave.getName(), playerSave.getMintime(), playerSave.getHighscore(),
 							playerSave.getAttempts(), playerSave.isSingleplayer()));
 				}				
-			} else if (view == 2) {
+			} else if (view == 2) { //nur Mehrspieller
 				if (playerSave.isSingleplayer() == false) {
 					data.add(new HighscoreModel(playerSave.getName(), playerSave.getMintime(), playerSave.getHighscore(),
 							playerSave.getAttempts(), playerSave.isSingleplayer()));

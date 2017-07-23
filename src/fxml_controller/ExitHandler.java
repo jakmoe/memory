@@ -11,6 +11,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 
+/**
+ * @author D067928
+ *	Der Exithandler sorgt dafür dass eine Abfrage gestartet wird, falls man das Spiel während einer laufenden
+ *	Runde beenden möchte. Es handelt sich um einen normalen MouseEvent Handler
+ */
 public class ExitHandler implements EventHandler<MouseEvent> {
 	private Node base;
 
