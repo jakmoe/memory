@@ -53,12 +53,18 @@ public class MultiplayerController01 implements Initializable {
 		loadNextScene();
 	}
 	
+	/**
+	 * Geht zurück zum Hauptmenü
+	 */
 	@FXML
 	private void back (ActionEvent event) {
 		MenuHandler menhan = new MenuHandler();
 		menhan.setBase(Anchor);
 	}
 		
+	/** 
+	 * Lädt die nächste Szene - Multiplayer02
+	 */
 	private void loadNextScene() {
 		FXMLLoader loader2 = new FXMLLoader();
 		loader2.setLocation(getClass().getResource("/fxml/Multiplayer/Multiplayer02.fxml"));
@@ -75,6 +81,8 @@ public class MultiplayerController01 implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		//die Schwierigkeit wird zunächst nach den gespeicherten Daten vorselektiert und dann verknüpft, sodass
+		//jede Änderung auch gespeichert wird.
 		int difficulty_id = 1;
 		for (Toggle toggle : difficulty.getToggles()) {
 			if (Start.getJhdl().getModel().getInfo().getDifficulty() == difficulty_id) {

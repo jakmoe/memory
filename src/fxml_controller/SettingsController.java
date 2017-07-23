@@ -16,6 +16,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import start_MEMORY.Start;
 
+/**
+ * @author D067928
+ * Dies ist die SettingsController Klasse um das Einstellungsmenü zu behandeln.
+ */
 public class SettingsController implements Initializable {
 
 	FXMLLoader loader = new FXMLLoader();
@@ -37,6 +41,7 @@ public class SettingsController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//Hier werden die Handler gesetzt um das UI mit den gespeicherten Daten zu verbinden und Anzeigen ermöglicht.
 		MenuHandler mh = new MenuHandler();
 		mh.setBase(buttonMenu);
 		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, mh);
@@ -51,6 +56,7 @@ public class SettingsController implements Initializable {
 		vcl2.setBg(false);
 		soundeffects.valueProperty().addListener(vcl2);
 
+		//Hier wird ermöglicht, dass auf jede Änderung durch einen Listener auch eine Änderung in gespeicherten Daten folgt.
 		int theme_id = 1;
 		for (Toggle toggle : theme.getToggles()) {
 			if (IMGhandler.getTheme() == theme_id) {

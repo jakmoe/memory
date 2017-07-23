@@ -41,12 +41,18 @@ public class SingleplayerController01 implements Initializable {
 		loadNextScene();
 	}
 	
+	/**
+	 * Ermöglicht Navigation zurück ins Hauptmenü
+	 */
 	@FXML
 	private void back() {
 		MenuHandler menhan = new MenuHandler();
 		menhan.setBase(Anchor);
 	}
 		
+	/**
+	 * Lädt die nächste Szene
+	 */
 	private void loadNextScene() {
 		loader.setLocation(getClass().getResource("/fxml/Singleplayer/Singleplayer02.fxml"));
 		try {
@@ -60,8 +66,12 @@ public class SingleplayerController01 implements Initializable {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		//Verbindet die Schwierigkeit mit den gespeicherten Daten um Änderungen anzuzeigen und zu übernehmen
 		int difficulty_id = 1;
 		for (Toggle toggle : difficulty.getToggles()) {
 			if (Start.getJhdl().getModel().getInfo().getDifficulty() == difficulty_id) {

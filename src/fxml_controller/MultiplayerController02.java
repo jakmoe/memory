@@ -198,18 +198,25 @@ public class MultiplayerController02 implements Initializable {
 			popupload.showAndWait();
 		}
 	}
+	/**
+	 * Navigiert zurück zum Hauptmenü
+	 */
 	@FXML
 	private void back (ActionEvent event) {
 		MenuHandler menhan = new MenuHandler();
 		menhan.setBase(AnchorPane);
 	}
 	
+	/**
+	 * Setzt die Textfelder zurück
+	 */
 	public void refresh() {
 		textFieldArea.getChildren().clear();
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//Falls sich der Gamemode ändert werden auch die Textfelder refreshed (andere Spieleranzahl)
 		Start.getGamemodeProp().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {

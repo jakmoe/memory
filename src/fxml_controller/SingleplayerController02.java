@@ -29,6 +29,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import start_MEMORY.Start;
 
+/**
+ * @author D067928
+ *	Diese Szene fragt nach dem Namen im Einzelspieler und startet dann das Spiel
+ */
 public class SingleplayerController02 implements Initializable {
 
 	@FXML
@@ -48,10 +52,16 @@ public class SingleplayerController02 implements Initializable {
 	@FXML
 	private AnchorPane AnchorPane;
 
+	/**
+	 * Fügt das Textfeld für den Namen hinzu
+	 */
 	private void AddTextFields() {
 		textFieldArea.getChildren().add(newField);
 	}
 
+	/**
+	 * Prüft ob der eingegebene Name leer ist
+	 */
 	@FXML
 	private void checkNames(ActionEvent event) {
 		// Exception only String?
@@ -68,6 +78,9 @@ public class SingleplayerController02 implements Initializable {
 			errorTxt.setVisible(true);
 	}
 
+	/**
+	 * Siehe MultiplayerController02 - init_game()	
+	 */
 	private void init_game() {
 		ProgressBar progressBar = new ProgressBar(0);
 		progressBar.setPrefSize(400, 40);
@@ -134,6 +147,9 @@ public class SingleplayerController02 implements Initializable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		AddTextFields();
