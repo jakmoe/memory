@@ -203,8 +203,16 @@ public class MultiplayerController02 implements Initializable {
 	 */
 	@FXML
 	private void back (ActionEvent event) {
-		MenuHandler menhan = new MenuHandler();
-		menhan.setBase(AnchorPane);
+		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
+		try {
+			MP3handler.stopbackground();
+			Parent root = loader.load();
+			AnchorPane.getScene().setRoot(root);
+		} catch (IOException e) {
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
+					"Something went wrong loading the next screen", "Oops");
+			exc.showdialog();
+		}
 	}
 	
 	/**

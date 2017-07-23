@@ -12,8 +12,8 @@ import sound.MP3handler;
 
 /**
  * @author D067928
- * Erstellt einen MenuHandler, verantwortlich um eine Navigation zurück zum Hauptmenü zu organisieren
- *
+ * Erstellt einen MenuHandler, verantwortlich um eine Navigation zurück zum Hauptmenü zu organisieren. Dieser ist verpackt
+ * in einem Handler
  */
 public class MenuHandler implements EventHandler<MouseEvent> {
 	private Node base;
