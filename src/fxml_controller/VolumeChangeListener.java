@@ -34,10 +34,10 @@ public class VolumeChangeListener implements ChangeListener<Number> {
 		//setzt die Lautstärke entsprechend auf den neu geänderten Wert.
 		double volume = newValue.doubleValue() / 100; // Werte werden anders gelesen als gespeichert.
 		if (bg) {
-			MP3handler.setVolumefx(volume);
+			MP3handler.setVolumebg(volume);
 			Start.getJhdl().getModel().getInfo().setVolume_effects(volume);
 		} else {
-			MP3handler.setVolumebg(volume);
+			MP3handler.setVolumefx(volume);
 			Start.getJhdl().getModel().getInfo().setVolume_music(volume);
 		}
 	}
