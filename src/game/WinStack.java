@@ -9,8 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import start_MEMORY.Start;
 
 /**
@@ -77,7 +79,10 @@ public class WinStack extends HBox {
 			highscore.getChildren().add(new ImageView(IMGhandler.getWinNumber(idx)));
 			highscore.setAlignment(Pos.TOP_CENTER);
 			// Nun wird der Spielername hinzugefügt
-			highscore.getChildren().add(new Label(player.getName()));
+			Label l = new Label(player.getName());
+			l.setTextFill(Color.WHITE);
+			l.setFont(new Font("Arial", 30));
+			highscore.getChildren().add(l);
 			
 			//In dieser Schleife wird für jedes erzielte Paar ein Balken hinzugefügt
 			//Die Balken sind je nach Schwierigkeitsstufe unterschieldich groß.
@@ -89,9 +94,15 @@ public class WinStack extends HBox {
 				scorerec.toFront();
 			}
 			//Nun werden noch die gebrauchten Versuche sowie die benötigte Zeit hinzugeschrieben.
+			Label l2 = new Label(Double.toString(Math.floor(player.getMintime() * 100) / 100) + " Sekunden");
+			l2.setTextFill(Color.WHITE);
+			l2.setFont(new Font("Arial", 30));
 			highscore.getChildren()
-					.add(new Label(Double.toString(Math.floor(player.getMintime() * 100) / 100) + " Sekunden"));
-			highscore.getChildren().add(new Label(Integer.toString(player.getAttempts()) + " Versuche"));
+					.add(l2);
+			Label l3 = new Label(Integer.toString(player.getAttempts()) + " Versuche");
+			l3.setTextFill(Color.WHITE);
+			l3.setFont(new Font("Arial", 30));
+			highscore.getChildren().add(l2);
 		}
 	}
 }

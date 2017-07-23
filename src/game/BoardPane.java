@@ -75,7 +75,7 @@ public class BoardPane extends FlowPane {
 		}
 		/*die ArrayListe mit den Werten wird geshuffled, also gemischt (bei jedem Durchlauf anders - random)
 		 Anmerkung: NICHT komplett random, aber für diese Zwecke komplett ausreichend */
-		Collections.shuffle(cardValues);
+//		Collections.shuffle(cardValues);
 		/*Es werden für jeden Wert neue Karten erstellt. Dabei wird val auf den zugehörigen Wert in cardValues gesetzt. Dies sorgt
 		für je 2 gleiche Bilder beim selben Wert val. (immer genau 2 Karten) */
 		for (int val : cardValues) {
