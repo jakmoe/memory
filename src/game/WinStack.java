@@ -102,7 +102,7 @@ public class WinStack extends HBox {
 			Label l3 = new Label(Integer.toString(player.getAttempts()) + " Versuche");
 			l3.setTextFill(Color.WHITE);
 			l3.setFont(new Font("Arial", 30));
-			highscore.getChildren().add(l2);
+			highscore.getChildren().add(l3);
 		}
 	}
 }
