@@ -27,7 +27,7 @@ public class HighscoreModel {
 	 */
 	public HighscoreModel( String name, double mintime, int highscore, int attempts, boolean sp) {
     	this.name = new SimpleStringProperty(name);
-    	this.mintime = new SimpleDoubleProperty(mintime);
+    	this.mintime = new SimpleDoubleProperty(Math.floor(mintime));
     	this.highscore = new SimpleIntegerProperty(highscore);
     	this.attempts = new SimpleIntegerProperty(attempts);
     	this.sp = new SimpleBooleanProperty(sp);
