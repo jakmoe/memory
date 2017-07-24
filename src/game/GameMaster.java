@@ -18,8 +18,7 @@ public class GameMaster {
 	private static Player PlayerInTurn;
 	private static IntegerProperty playeridproperty = new SimpleIntegerProperty(0);
 	private static int EndCheck;
-	private static ArrayList<String> names = new ArrayList<String>();
-	private static int i = 0;
+	private static String[] names = new String[4];
 
 	/**
 	 * doTurn wird aufgerufen, falls eine Runde abgehandelt werden soll. Es kommt dann der n�chste Spieler im Spielerarray an die Reihe.
@@ -37,7 +36,7 @@ public class GameMaster {
 				}
 				// Falls der Spieler an der Reihe der letzte ist, wird statt dem (nichtvorhandenen) n�chsten der 1. Spieler gew�hlt.
 				if (playerAL.indexOf(PlayerInTurn) <= playerAL.size() - 2) {
-					setPlayerInTurn(playerAL.get(playerAL.indexOf(PlayerInTurn) + 1));
+					setPlayerInTurn(playerAL.get(playerAL.lastIndexOf(PlayerInTurn)+1));
 				} else {
 					setPlayerInTurn(playerAL.get(0));
 				}
@@ -88,10 +87,13 @@ public class GameMaster {
 	}
 
 	/**
-	 * setzt alle Spieler zur�ck, indem die Listen geleert werden.
+	 * setzt alle Spieler zur�ck, indem die Liste neu initialisiert wird - "Fresh Start" Prinzip.
 	 */
 	public static void reset() {
 		playerAL.clear();
+		playerAL = new ArrayList<Player>();
+		playerAL.ensureCapacity(4);
+		System.gc();
 	}
 
 	/**
@@ -113,7 +115,7 @@ public class GameMaster {
 		reset();
 		// Addiert neue Spieler mit den Namen aus dem UI abh�ngig von der Spieleranzahl
 		for (int i = 1; i <= playercount; i++) {
-			playerAL.add(new Player(0.0, i, 0.0, 0, names.get(i-1), 0));
+			playerAL.add(new Player(0.0, i, 0.0, 0, names[i-1], 0));
 		}
 
 		// EndCheck wird auf BoardGr��e gesetzt. Wenn alle Paare gefunden sind steht der EndCheck auf 0.
@@ -127,11 +129,8 @@ public class GameMaster {
 	 * Hier werden nacheinander Namen hineingeschrieben
 	 * @param name - Name des Spielers
 	 */
-	public static void setNames(String name){
-		names.add(name);
-		i++;
-		if (i == Start.getGamemode())
-			i = 0;
+	public static void setNames(int idx, String name){
+		names[idx-1] = name;
 	}
 	
 	/**

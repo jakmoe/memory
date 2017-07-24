@@ -1,24 +1,28 @@
 package fxml_controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import game.ExceptionHandler;
 import image.IMGhandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import sound.MP3handler;
 import start_MEMORY.Start;
 
 /**
  * @author D067928
- * Dies ist die SettingsController Klasse um das Einstellungsmenü zu behandeln.
+ * Dies ist die SettingsController Klasse um das Einstellungsmenï¿½ zu behandeln.
  */
 public class SettingsController implements Initializable {
 
@@ -38,14 +42,25 @@ public class SettingsController implements Initializable {
 
 	@FXML
 	ToggleGroup theme;
+	
+	@FXML
+	public void back(){
+		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
+		try {
+			MP3handler.stopbackground();
+			Parent root = loader.load();
+			buttonMenu.getScene().setRoot(root);
+		} catch (IOException e) {
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
+					"Something went wrong loading the next screen", "Oops");
+			exc.showdialog();
+		}
+	}
 
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//Hier werden die Handler gesetzt um das UI mit den gespeicherten Daten zu verbinden und Anzeigen ermöglicht.
-		MenuHandler mh = new MenuHandler();
-		mh.setBase(buttonMenu);
-		buttonMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, mh);
-
+		//Hier werden die Handler gesetzt um das UI mit den gespeicherten Daten zu verbinden und Anzeigen ermï¿½glicht.
 		soundmusic.setValue(Start.getJhdl().getModel().getInfo().getVolume_music() * 100);
 		VolumeChangeListener vcl = new VolumeChangeListener();
 		vcl.setBg(true);
@@ -56,7 +71,7 @@ public class SettingsController implements Initializable {
 		vcl2.setBg(false);
 		soundeffects.valueProperty().addListener(vcl2);
 
-		//Hier wird ermöglicht, dass auf jede Änderung durch einen Listener auch eine Änderung in gespeicherten Daten folgt.
+		//Hier wird ermï¿½glicht, dass auf jede ï¿½nderung durch einen Listener auch eine ï¿½nderung in gespeicherten Daten folgt.
 		int theme_id = 1;
 		for (Toggle toggle : theme.getToggles()) {
 			if (IMGhandler.getTheme() == theme_id) {

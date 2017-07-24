@@ -35,7 +35,7 @@ import start_MEMORY.Start;
 
 /**
  * @author D067928
- * Die Klasse zuständig für den Spielstart im Mehrspieler. Fragt vorher die Namen ab.
+ * Die Klasse zustï¿½ndig fï¿½r den Spielstart im Mehrspieler. Fragt vorher die Namen ab.
  */
 public class MultiplayerController02 implements Initializable {
 	
@@ -46,7 +46,7 @@ public class MultiplayerController02 implements Initializable {
 	@FXML
 	Text errorTxt;
 	
-	//setzt vorläufig die Spieleranzahl auf den Gamemode
+	//setzt vorlï¿½ufig die Spieleranzahl auf den Gamemode
 	static int players = Start.getGamemode();
 	
 	TextField newField1 = new TextField();
@@ -84,7 +84,7 @@ public class MultiplayerController02 implements Initializable {
 	}
 	
 	/**
-	 * Wenn ein Name eingegeben wird, wird Checknames ausgeführt, welche prüft ob die Namen nicht leer sind.
+	 * Wenn ein Name eingegeben wird, wird Checknames ausgefï¿½hrt, welche prï¿½ft ob die Namen nicht leer sind.
 	 */
 	@FXML
 	private void checkNames (ActionEvent event) {
@@ -94,22 +94,22 @@ public class MultiplayerController02 implements Initializable {
 		if (players >= 2) {
 			if (!newField1.getText().replaceAll(" ","").isEmpty() && !newField2.getText().replaceAll(" ","").isEmpty()) {
 				canWeStart = true;
-				GameMaster.setNames(newField1.getText());
-				GameMaster.setNames(newField2.getText());
+				GameMaster.setNames(1, newField1.getText());
+				GameMaster.setNames(2, newField2.getText());
 			}
 			else
 				canWeStart = false;
 		}
 		if (players >= 3) {
 			if (!newField3.getText().replaceAll(" ","").isEmpty()) {
-				GameMaster.setNames(newField3.getText());
+				GameMaster.setNames(3, newField3.getText());
 			}
 			else
 				canWeStart = false;
 		}
 		if (players == 4) {
 			if (!newField4.getText().replaceAll(" ","").isEmpty()) {
-				GameMaster.setNames(newField4.getText());
+				GameMaster.setNames(4, newField4.getText());
 			}
 			else
 				canWeStart = false;
@@ -127,19 +127,19 @@ public class MultiplayerController02 implements Initializable {
 	 * zu gestalten.
 	 */
 	private void init_game() {
-		//Zunächst wird der Ladebalken initialisiert.
+		//Zunï¿½chst wird der Ladebalken initialisiert.
 		ProgressBar progressBar = new ProgressBar(0);
 		progressBar.setPrefSize(400, 40);
-		//Es wird ein neuer Service erstellt, welcher dafür sorgt dass JavaFX die Berechnung nicht im UI-Thread übernimmt
-		//Ansonsten würde das UI bis zum fertiggeladenen Screen nicht mehr reagieren.
+		//Es wird ein neuer Service erstellt, welcher dafï¿½r sorgt dass JavaFX die Berechnung nicht im UI-Thread ï¿½bernimmt
+		//Ansonsten wï¿½rde das UI bis zum fertiggeladenen Screen nicht mehr reagieren.
 		Service<Void> sv = new Service<Void>() {
 			@Override
 			protected Task<Void> createTask() {
-				//Dies lädt alle Bilder
+				//Dies lï¿½dt alle Bilder
 				return IMGhandler.initialize(Start.getJhdl().getModel().getInfo().getCardcount());
 			}
 		};
-		//es wird ein Echtzeitupdater initialisiert, der regelmäßig den Fortschritt im Ladebalken aktualisiert und bei fertigem
+		//es wird ein Echtzeitupdater initialisiert, der regelmï¿½ï¿½ig den Fortschritt im Ladebalken aktualisiert und bei fertigem
 		//Laden in die Spielszene switched
 		AnimationTimer anitim = new AnimationTimer() {
 			@Override
@@ -199,7 +199,7 @@ public class MultiplayerController02 implements Initializable {
 		}
 	}
 	/**
-	 * Navigiert zurück zum Hauptmenü
+	 * Navigiert zurï¿½ck zum Hauptmenï¿½
 	 */
 	@FXML
 	private void back (ActionEvent event) {
@@ -216,7 +216,7 @@ public class MultiplayerController02 implements Initializable {
 	}
 	
 	/**
-	 * Setzt die Textfelder zurück
+	 * Setzt die Textfelder zurï¿½ck
 	 */
 	public void refresh() {
 		textFieldArea.getChildren().clear();
@@ -224,7 +224,7 @@ public class MultiplayerController02 implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//Falls sich der Gamemode ändert werden auch die Textfelder refreshed (andere Spieleranzahl)
+		//Falls sich der Gamemode ï¿½ndert werden auch die Textfelder refreshed (andere Spieleranzahl)
 		Start.getGamemodeProp().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {

@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import image.IMGhandler;
@@ -15,19 +16,19 @@ import start_MEMORY.Start;
 /**
  * @author D067928
  * Dies ist eine angepasste Flowpane die benutzt wird um die Karten zu verwalten. Das BoardPane ordnet die Karten bereits in einer
- * festgelegten Größe an und verteilt sie entsprechend auf dem Board.
+ * festgelegten Grï¿½ï¿½e an und verteilt sie entsprechend auf dem Board.
  */
 public class BoardPane extends FlowPane {
 	// Anzahl Kartenpaare
 	private int cardPairs;
 	
-	//Bildgröße, dynamisch angepasst auf die Anzahl der Paare
+	//Bildgrï¿½ï¿½e, dynamisch angepasst auf die Anzahl der Paare
 	private double picSize = adjustSize(this.getPrefWidth(), this.getPrefHeight());
 	
-	//offset für debugging
+	//offset fï¿½r debugging
 	private double offset;
 	
-	//ArrayList mit Card's dynamisch gefüllt
+	//ArrayList mit Card's dynamisch gefï¿½llt
 	private List<Card> cardList = new ArrayList<Card>();
 	
 	//ArrayList mit Integerwerten, verwendet um Karten zu verwalten
@@ -35,7 +36,7 @@ public class BoardPane extends FlowPane {
 
 	/*
 	 *  Konstruktor, welcher Attribute wie Caching (Performance) und Alignment (Orientierung) setzt.
-	 *  Er ruft die Methode Initialize, welche das Board befüllt und spielbereit macht.
+	 *  Er ruft die Methode Initialize, welche das Board befï¿½llt und spielbereit macht.
 	 */
 	public BoardPane() {
 		super();
@@ -55,31 +56,31 @@ public class BoardPane extends FlowPane {
 	}
 
 	/**
-	 * Initialisiert das Board mit anfänglichen Werten und festgelegter Anzahl Kartenpaare
+	 * Initialisiert das Board mit anfï¿½nglichen Werten und festgelegter Anzahl Kartenpaare
 	 * @param cardPairs - nimmt die Kartenpaare entgegen
 	 */
 	public void Initialize(int cardPairs) {
-		// falls das Array der Karten nicht leer ist, wird zurückgesetzt
+		// falls das Array der Karten nicht leer ist, wird zurï¿½ckgesetzt
 		if (!cardValues.isEmpty()) {
 			cardList.clear();
 			cardValues.clear();
 		}
 		
-		/*hier wird das cardPairs attribut gesetzt und in einer Schleife jeweils für jedes i zwei Mal i in cardValues
-		eingefügt. Dies ist die Repräsentation von zwei gleichen Karten auf dem Board.*/
+		/*hier wird das cardPairs attribut gesetzt und in einer Schleife jeweils fï¿½r jedes i zwei Mal i in cardValues
+		eingefï¿½gt. Dies ist die Reprï¿½sentation von zwei gleichen Karten auf dem Board.*/
 		BoardPane.this.setCardPairs(cardPairs);
 		for (int i = 1; i < BoardPane.this.getCardPairs() + 1; i++) {
 			cardValues.add(i);
 			cardValues.add(i);
 		}
 		/*die ArrayListe mit den Werten wird geshuffled, also gemischt (bei jedem Durchlauf anders - random)
-		 Anmerkung: NICHT komplett random, aber für diese Zwecke komplett ausreichend */
-//		Collections.shuffle(cardValues);
-		/*Es werden für jeden Wert neue Karten erstellt. Dabei wird val auf den zugehörigen Wert in cardValues gesetzt. Dies sorgt
-		für je 2 gleiche Bilder beim selben Wert val. (immer genau 2 Karten) */
+		 Anmerkung: NICHT komplett random, aber fï¿½r diese Zwecke komplett ausreichend */
+		Collections.shuffle(cardValues);
+		/*Es werden fï¿½r jeden Wert neue Karten erstellt. Dabei wird val auf den zugehï¿½rigen Wert in cardValues gesetzt. Dies sorgt
+		fï¿½r je 2 gleiche Bilder beim selben Wert val. (immer genau 2 Karten) */
 		for (int val : cardValues) {
 			Card cardInstance = new Card(offset, offset, picSize, picSize);
-			// Hier werden die Attribute für jede Karte gesetzt
+			// Hier werden die Attribute fï¿½r jede Karte gesetzt
 			cardInstance.setFill(IMGhandler.getImage_card(0));
 			cardInstance.setCacheHint(CacheHint.SPEED);
 			cardInstance.setDepthTest(DepthTest.INHERIT);
@@ -87,8 +88,8 @@ public class BoardPane extends FlowPane {
 			cardInstance.setArcHeight(20);
 			cardInstance.setArcWidth(20);
 			cardInstance.setCache(true);
-			/*es wird ein Mouseclick handler gesetzt, der die Karte auf einen Klick reagieren lässt. Dies wird im
-			GameEventhandler über cardturn abgewickelt.*/
+			/*es wird ein Mouseclick handler gesetzt, der die Karte auf einen Klick reagieren lï¿½sst. Dies wird im
+			GameEventhandler ï¿½ber cardturn abgewickelt.*/
 			cardInstance.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent t) {
@@ -101,7 +102,7 @@ public class BoardPane extends FlowPane {
 			});
 			cardList.add(cardInstance);
 		}
-		//Schließlich werden alle Karten aus der cardList auf das Board hinzugefügt.
+		//Schlieï¿½lich werden alle Karten aus der cardList auf das Board hinzugefï¿½gt.
 		BoardPane.this.getChildren().addAll(cardList);
 	}
 	
@@ -114,13 +115,13 @@ public class BoardPane extends FlowPane {
 	}
 
 	/**
-	 * Passt die Kartengröße abhängig von der Schwierigkeit an, da diese an die Kartenpaare gekoppelt sind.
-	 * Die Werte sind angepasst für ein Full HD Kartenboard mit den Themes die ausgeliefert sind.
-	 * Die Werte sind hardcodiert, da keine feste Rechenvorschrift durch das Flowpane möglich ist. 
+	 * Passt die Kartengrï¿½ï¿½e abhï¿½ngig von der Schwierigkeit an, da diese an die Kartenpaare gekoppelt sind.
+	 * Die Werte sind angepasst fï¿½r ein Full HD Kartenboard mit den Themes die ausgeliefert sind.
+	 * Die Werte sind hardcodiert, da keine feste Rechenvorschrift durch das Flowpane mï¿½glich ist. 
 	 * 
 	 * @param width - Die weite des Bildes / Karte
-	 * @param height - die Höhe des Bildes / Karte
-	 * @return Bildgröße / Kartengröße
+	 * @param height - die Hï¿½he des Bildes / Karte
+	 * @return Bildgrï¿½ï¿½e / Kartengrï¿½ï¿½e
 	 */
 	public double adjustSize(double width, double height) {
 		switch (Start.getJhdl().getModel().getInfo().getDifficulty()) {

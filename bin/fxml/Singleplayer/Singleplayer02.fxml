@@ -23,7 +23,7 @@
             </Text>
          </children>
       </VBox>
-      <Button layoutX="62.0" layoutY="60.0" mnemonicParsing="false" text="Zurück" />
+      <Button layoutX="62.0" layoutY="60.0" mnemonicParsing="false" onAction="#back" text="Zurück" />
       <VBox fx:id="textFieldArea" layoutX="672.0" layoutY="673.0" prefHeight="392.0" prefWidth="1820.0" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="400.0" />
    </children>
 </AnchorPane>

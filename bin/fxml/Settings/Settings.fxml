@@ -130,8 +130,7 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="51.0" prefWidth="920.0" spacing="50.0">
                <children>
-            				<Button fx:id="buttonMenu" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" text="Menu" />
-      				<Button fx:id="resetscore" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" text="Highscores zurücksetzen" />
+            		<Button fx:id="buttonMenu" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" onAction="#back" style="-fx-background-color: rgba(0, 0, 0, 0.5);" text="Menu" />
                </children>
             </HBox>
 			</children>

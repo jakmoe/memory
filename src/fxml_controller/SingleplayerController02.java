@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import game.ExceptionHandler;
 import game.GameMaster;
 import image.IMGhandler;
 import javafx.animation.AnimationTimer;
@@ -27,6 +28,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sound.MP3handler;
 import start_MEMORY.Start;
 
 /**
@@ -53,14 +55,14 @@ public class SingleplayerController02 implements Initializable {
 	private AnchorPane AnchorPane;
 
 	/**
-	 * Fügt das Textfeld für den Namen hinzu
+	 * Fï¿½gt das Textfeld fï¿½r den Namen hinzu
 	 */
 	private void AddTextFields() {
 		textFieldArea.getChildren().add(newField);
 	}
 
 	/**
-	 * Prüft ob der eingegebene Name leer ist
+	 * Prï¿½ft ob der eingegebene Name leer ist
 	 */
 	@FXML
 	private void checkNames(ActionEvent event) {
@@ -68,7 +70,7 @@ public class SingleplayerController02 implements Initializable {
 		boolean canWeStart = false;
 		if (!newField.getText().replaceAll(" ","").isEmpty()) {
 			gameStart.setDisable(true);
-			GameMaster.setNames(newField.getText());
+			GameMaster.setNames(1, newField.getText());
 			canWeStart = true;
 		}
 		
@@ -144,6 +146,20 @@ public class SingleplayerController02 implements Initializable {
 				}
 			});
 			popupload.showAndWait();
+		}
+	}
+	
+	@FXML
+	private void back (ActionEvent event) {
+		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
+		try {
+			MP3handler.stopbackground();
+			Parent root = loader.load();
+			AnchorPane.getScene().setRoot(root);
+		} catch (IOException e) {
+			ExceptionHandler exc = new ExceptionHandler(e, "Error", "Load Error",
+					"Something went wrong loading the next screen", "Oops");
+			exc.showdialog();
 		}
 	}
 
