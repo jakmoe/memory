@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import sound.MP3handler;
 import start_MEMORY.Start;
 
@@ -47,6 +46,7 @@ public class SettingsController implements Initializable {
 	public void back(){
 		loader.setLocation(getClass().getResource("/fxml/MainMenu/Menu.fxml"));
 		try {
+			Start.getJhdl().commit();
 			MP3handler.stopbackground();
 			Parent root = loader.load();
 			buttonMenu.getScene().setRoot(root);

@@ -43,8 +43,8 @@ import sound.MP3handler;
 import start_MEMORY.Start;
 
 /**
- * Der GameController ist die Schnittstelle vom User Interface zum Spiel. Es beinhält die Elemente des UI's
- * die zum Spielen benötigt werden und über diesen Screen wird das Spiel gespielt
+ * Der GameController ist die Schnittstelle vom User Interface zum Spiel. Es beinhï¿½lt die Elemente des UI's
+ * die zum Spielen benï¿½tigt werden und ï¿½ber diesen Screen wird das Spiel gespielt
  * 
  * @author D067928
  */
@@ -57,7 +57,7 @@ public class GameController implements Initializable {
 	private Label timerlabel = new Label("-");
 
 	@FXML
-	private WinStack winstack; //Der winstack ist für die Anzeige beim Gewinnen vom Spiel zuständig
+	private WinStack winstack; //Der winstack ist fï¿½r die Anzeige beim Gewinnen vom Spiel zustï¿½ndig
 
 	@FXML
 	private Button rematch, remenu;
@@ -69,7 +69,7 @@ public class GameController implements Initializable {
 	private VBox players; //Die Spieler
 
 	@FXML
-	private HBox menu; //Das Dropdown Menü
+	private HBox menu; //Das Dropdown Menï¿½
 
 	@FXML
 	private BoardPane gamepane; //Das Spielbrett
@@ -79,14 +79,14 @@ public class GameController implements Initializable {
 	private static boolean win_ind;
 
 	/**
-	 * @return win_ind - Prüfung ob die Wincondition erfüllt wurde
+	 * @return win_ind - Prï¿½fung ob die Wincondition erfï¿½llt wurde
 	 */
 	public static boolean isWin_ind() {
 		return win_ind; 
 	}
 
 	/**
-	 * @param win_ind - Check der Wincondition. wird jedes Frame abgerufen und geprüft, called den WinStack
+	 * @param win_ind - Check der Wincondition. wird jedes Frame abgerufen und geprï¿½ft, called den WinStack
 	 */
 	public static void setWin_ind(boolean win_ind) {
 		GameController.win_ind = win_ind;
@@ -110,11 +110,11 @@ public class GameController implements Initializable {
 		GameMaster.startGame(Start.getGamemode(), Start.getJhdl().getModel().getInfo().getCardcount());
 		//erstellt die Spieler
 		initPlayers();
-		//erstellt das DropDownMenü
+		//erstellt das DropDownMenï¿½
 		initMenu();
 		//erstellt den Timer, der jedes Frame gerufen wird
 		initTimer();
-		//erstellt die Settings für das DropDownMenü
+		//erstellt die Settings fï¿½r das DropDownMenï¿½
 		initSettings();
 		//setzt den Timer entsprechend auf
 		setupTimer();
@@ -126,7 +126,7 @@ public class GameController implements Initializable {
 	}
 
 	/**
-	 * Erstellt Slider die wie in den Menüsettings an Hintergrund und Effektlautstärke gebunden sind
+	 * Erstellt Slider die wie in den Menï¿½settings an Hintergrund und Effektlautstï¿½rke gebunden sind
 	 */
 	private void initSettings() {
 		//erstellt 2 neue Slider
@@ -138,7 +138,7 @@ public class GameController implements Initializable {
 		//Erstellt CustomMenuItems um die Slider ins DropDown zu packen
 		CustomMenuItem volumefx = new CustomMenuItem(volfx);
 		CustomMenuItem volumebg = new CustomMenuItem(volbg);
-		//das Menü verschwindet nicht bei Interaktion
+		//das Menï¿½ verschwindet nicht bei Interaktion
 		volumefx.setHideOnClick(false);
 		volumebg.setHideOnClick(false);
 
@@ -153,7 +153,7 @@ public class GameController implements Initializable {
 		mb.setGraphic(new ImageView(IMGhandler.getSettings()));
 		mb.setBackground(Background.EMPTY);
 
-		//setzt 2 ChangeListener um die Lautstärke zu kontrollieren
+		//setzt 2 ChangeListener um die Lautstï¿½rke zu kontrollieren
 		VolumeChangeListener vcl = new VolumeChangeListener();
 		bg.setValue(Start.getJhdl().getModel().getInfo().getVolume_music() * 100);
 		vcl.setBg(true);
@@ -181,7 +181,7 @@ public class GameController implements Initializable {
 	}
 
 	/**
-	 * Setzt den Framecheck auf. Jedes Frame wird darin die Methode handle(long now) abgerufen. Es ermöglicht
+	 * Setzt den Framecheck auf. Jedes Frame wird darin die Methode handle(long now) abgerufen. Es ermï¿½glicht
 	 * "Echtzeit"Updates auf dem UI
 	 */
 	private void setupTimer() {
@@ -202,22 +202,22 @@ public class GameController implements Initializable {
 					fadein.play();
 					winbase.setDisable(false);
 				}
-				//Hier wird für alle Inhalte in circleList eine Updatemethode gerufen um die Timer zu refreshen.
+				//Hier wird fï¿½r alle Inhalte in circleList eine Updatemethode gerufen um die Timer zu refreshen.
 				for (int i = 0; i < circleList.size(); i++) {
 					GameMaster.getPlayerInTurn().setMintime(GameMaster.getPlayerInTurn().getSavedtime() + 
 															GameMaster.getPlayerInTurn().getTimer().getCurrent());
 					circleList.get(i).updateLabel();
 				}
-				timerlabel.setText(Double
-						.toString(Math.round(GameMaster.getPlayerInTurn().getTimer().getCurrent() * 10.0) / 10.0));
+
+				timerlabel.setText(GameMaster.getPlayerInTurn().getName());
 			}
 		};
-		//startet den Framecheck. Ab hier läuft jedes Frame die Methode
+		//startet den Framecheck. Ab hier lï¿½uft jedes Frame die Methode
 		anitim.start();
 	}
 
 	/**
-	 * Gibt die 2 Button Interaktionen für den Menübutton und den Exitbutton im Dropdownmenü
+	 * Gibt die 2 Button Interaktionen fï¿½r den Menï¿½button und den Exitbutton im Dropdownmenï¿½
 	 */
 	public void initMenu() {
 		MenuHandler mh = new MenuHandler();
@@ -233,10 +233,10 @@ public class GameController implements Initializable {
 
 	/**
 	 * Initialisiert die Spieler und gibt ihnen einen ChangeListener mit, der ein Update des Hintergrundes,
-	 * also leuchtend oder nicht leuchtend, ermöglicht.
+	 * also leuchtend oder nicht leuchtend, ermï¿½glicht.
 	 */
 	public void initPlayers() {
-		// Es werden für alle Spieler PlayerCircle als UI Repräsentation erstellt und der circleList angehängt
+		// Es werden fï¿½r alle Spieler PlayerCircle als UI Reprï¿½sentation erstellt und der circleList angehï¿½ngt
 		ArrayList<Player> playerAL = GameMaster.getPlayers();
 		for (Player player : playerAL) {
 			PlayerCircle pc = new PlayerCircle(player);
@@ -252,11 +252,11 @@ public class GameController implements Initializable {
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				//Es muss durch alle Nodes durchgegangen werden, weil keine Pufferung existiert
 				for (Node n : base.getChildren()) {
-					//Es wird geprüft ob das Objekt eine VBox ist und dem entsprechenden player-Objekt entspricht
+					//Es wird geprï¿½ft ob das Objekt eine VBox ist und dem entsprechenden player-Objekt entspricht
 					if (n.getClass() == VBox.class && n.getId() == players.getId()) {
 						try {
 							//Falls der Spieler der Letzte ist wird der Erste wieder an die Reihe gesetzt
-							//Ansonsten kommt immer der nächste Spieler dran
+							//Ansonsten kommt immer der nï¿½chste Spieler dran
 							if (((VBox) n).getChildren().size() > 1 & playerAL.size() > 1) {
 								if (oldValue.intValue() <= playerAL.size()) {
 									if (oldValue.intValue() == 0) {

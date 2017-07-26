@@ -7,20 +7,20 @@ import start_MEMORY.Start;
 
 /**
  * @author D067928
- *	Ermöglicht das Verbinden der Lautstärke mit den UI-Slidern
+ *	Ermï¿½glicht das Verbinden der Lautstï¿½rke mit den UI-Slidern
  */
 public class VolumeChangeListener implements ChangeListener<Number> {
 	boolean bg;
 
 	/**
-	 * @return bg - Ist es Hintergrundmusik? Wenn nein ist es Effektlautstärke
+	 * @return bg - Ist es Hintergrundmusik? Wenn nein ist es Effektlautstï¿½rke
 	 */
 	public boolean isBg() {
 		return bg;
 	}
 
 	/**
-	 * @param bg - Ist es Hintergrundmusik? Wenn nein ist es Effektlautstärke
+	 * @param bg - Ist es Hintergrundmusik? Wenn nein ist es Effektlautstï¿½rke
 	 */
 	public void setBg(boolean bg) {
 		this.bg = bg;
@@ -31,14 +31,14 @@ public class VolumeChangeListener implements ChangeListener<Number> {
 	 */
 	@Override
 	public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-		//setzt die Lautstärke entsprechend auf den neu geänderten Wert.
+		//setzt die Lautstï¿½rke entsprechend auf den neu geï¿½nderten Wert.
 		double volume = newValue.doubleValue() / 100; // Werte werden anders gelesen als gespeichert.
 		if (bg) {
 			MP3handler.setVolumebg(volume);
-			Start.getJhdl().getModel().getInfo().setVolume_effects(volume);
+			Start.getJhdl().getModel().getInfo().setVolume_music(volume);
 		} else {
 			MP3handler.setVolumefx(volume);
-			Start.getJhdl().getModel().getInfo().setVolume_music(volume);
+			Start.getJhdl().getModel().getInfo().setVolume_effects(volume);
 		}
 	}
 
